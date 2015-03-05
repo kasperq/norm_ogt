@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGridEh, DBCtrls, ComCtrls, StdCtrls, ExtCtrls, Spin,
   ImgList, ToolWin,RxMemDS,SplshWnd,DateUtils, IBCustomDataSet, IBUpdateSQL,
-  IBUpdSQLW, DB, IBQuery, RxIBQuery,Utilr, DBGrids,FileUtil;
+  IBUpdSQLW, DB, IBQuery, RxIBQuery,Utilr, DBGrids,FileUtil, kbmmemTable;
 
 type
   TFViborGrPrep = class(TForm)
@@ -468,7 +468,7 @@ begin
                   DM1.rashif_s.Post;
                   DM1.rashif_s.Next;
                 end;
-                dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, 0, lmAppend);
+                dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, [mtcpoAppend]);
                 dm1.p_rashif.Active := True;
               end
             end
@@ -505,7 +505,7 @@ begin
                   DM1.rashif_s.Post;
                   DM1.rashif_s.Next;
                 end;
-                dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, 0, lmAppend);
+                dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, [mtcpoAppend]);
                 dm1.p_rashif.Active := True;
               end;
             end;
@@ -539,7 +539,7 @@ begin
                 DM1.rashif_s.Post;
                 DM1.rashif_s.Next;
               end;
-              dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, 0, lmAppend);
+              dm1.p_rashif.LoadFromDataSet(DM1.rashif_s, [mtcpoAppend]);
               dm1.p_rashif.Active := True;
             end;
           end;
@@ -607,7 +607,7 @@ begin
           DM1.IBRabNORM.First;
           IF (not DM1.IBRabNORM.eof) THEN
           begin
-            dm1.p_rashif.LoadFromDataSet(DM1.IBRabnorm, 0, lmAppend);
+            dm1.p_rashif.LoadFromDataSet(DM1.IBRabnorm, [mtcpoAppend]);
             dm1.p_rashif.Active := True;
           end;
         end;
@@ -833,8 +833,8 @@ begin
       end
       else
       begin// нормы
-        DM1.FrReport1.LoadFromFile(reportPath + 'P_normg.frf');
-        DM1.FrReport1.ShowReport;
+        dm1.frxReport1.LoadFromFile(reportPath + 'P_normg.fr3');
+        dm1.frxReport1.ShowReport;
       end;
     end else begin
       MessageDlg('Нет данных для печати!', mtWarning, [mbOK], 0);

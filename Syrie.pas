@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGridEh, StdCtrls, DBCtrls, ExtCtrls, Spin, ImgList,
   ComCtrls, ToolWin, Buttons, ActnList, FindDlgEh, UtilRIB,RxStrUtils,VCLUtils,
-  DateUtils,SplshWnd, DB, RxMemDS,Utilr;
+  DateUtils,SplshWnd, DB, RxMemDS,Utilr, kbmMemTable;
 
 type
   TFSyrie = class(TForm)
@@ -71,13 +71,13 @@ type
     SpeedButton6: TSpeedButton;
     Edit11: TEdit;
     Label22: TLabel;
-    Spis_Rashif: TRxMemoryData;
     ComboBox1: TComboBox;
     DBNavigator1: TDBNavigator;
-    Spis_Rashifkodp: TFloatField;
-    Spis_RashifSTRUK_ID: TIntegerField;
     planCB: TCheckBox;
     potrebCB: TCheckBox;
+    Spis_Rashif: TkbmMemTable;
+    Spis_Rashifkodp: TFloatField;
+    Spis_RashifSTRUK_ID: TIntegerField;
     procedure SpeedButton2Click(Sender: TObject);
     procedure Edit1Click(Sender: TObject);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1120,8 +1120,6 @@ begin
 
 
   dm1.frxReport1.ShowReport;
-//  DM1.FrReport1.LoadFromFile(reportPath + 'P_syr.frf');
-//  DM1.FrReport1.ShowReport;
   while (DM1.NormSy.ControlsDisabled) do
    	DM1.NormSy.EnableControls;
 end;

@@ -64,7 +64,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 93
       Top = 0
       Width = 133
-      Height = 13
+      Height = 30
       Margins.Bottom = 0
       Caption = '      '#1055#1077#1088#1080#1086#1076' '#1087#1088#1086#1089#1084#1086#1090#1088#1072'  '#1089':  '
       Layout = tlCenter
@@ -322,7 +322,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 364
       Top = 7
       Width = 59
-      Height = 19
+      Height = 22
       Color = clWhite
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
@@ -340,7 +340,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 48
       Top = 7
       Width = 57
-      Height = 19
+      Height = 22
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -357,7 +357,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 104
       Top = 7
       Width = 125
-      Height = 19
+      Height = 22
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -372,7 +372,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 48
       Top = 33
       Width = 29
-      Height = 19
+      Height = 20
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -389,7 +389,7 @@ object FSyrie_Period: TFSyrie_Period
       Left = 75
       Top = 33
       Width = 154
-      Height = 19
+      Height = 20
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -588,7 +588,6 @@ object FSyrie_Period: TFSyrie_Period
       object Series1: TLineSeries
         Marks.Callout.Brush.Color = clBlack
         Marks.Visible = True
-        DataSource = Grafik_Prep
         ShowInLegend = False
         InvertedStairs = True
         LinePen.Width = 3
@@ -614,7 +613,7 @@ object FSyrie_Period: TFSyrie_Period
     Left = 536
     Top = 36
     Bitmap = {
-      494C01010D000F00040018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D000F000C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       000000000000000000000000000000000000000000000000000000000000A87D
       7800B7818300B7818300B7818300B7818300B7818300B7818300B7818300B781
@@ -1827,111 +1826,70 @@ object FSyrie_Period: TFSyrie_Period
     Left = 296
     Top = 288
   end
-  object Syr_Period: TRxMemoryData
-    FieldDefs = <
-      item
-        Name = 'Kraz'
-        DataType = ftInteger
-      end
-      item
-        Name = 'struk_id'
-        DataType = ftInteger
-      end
-      item
-        Name = 'Stname'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'kod_Prod'
-        DataType = ftString
-        Size = 30
-      end
-      item
-        Name = 'kodp'
-        DataType = ftInteger
-      end
-      item
-        Name = 'Nmat'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'Neis'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Norm_1'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_2'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_3'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_4'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_5'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_6'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_7'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_8'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_9'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_10'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_11'
-        DataType = ftFloat
-      end
-      item
-        Name = 'Norm_12'
-        DataType = ftFloat
-      end
-      item
-        Name = 'plnorm'
-        DataType = ftFloat
-      end
-      item
-        Name = 'mes_begin'
-        DataType = ftInteger
-      end
-      item
-        Name = 'mes_end'
-        DataType = ftInteger
-      end
-      item
-        Name = 'god_begin'
-        DataType = ftInteger
-      end
-      item
-        Name = 'god_end'
-        DataType = ftInteger
-      end>
-    AfterScroll = Syr_PeriodAfterScroll
+  object DSGrafik_Prep: TDataSource
+    DataSet = Grafik_Prep
+    Left = 368
+    Top = 296
+  end
+  object FormStorage1: TFormStorage
+    UseRegistry = True
+    StoredProps.Strings = (
+      'Panel2.Height'
+      'DBGridEh1.Height')
+    StoredValues = <>
+    Left = 384
+    Top = 184
+  end
+  object PrintDBGridEh1: TPrintDBGridEh
+    DBGridEh = DBGridEh1
+    Options = [pghFitGridToPageWidth, pghColored, pghRowAutoStretch, pghOptimalColWidths]
+    Page.BottomMargin = 1.000000000000000000
+    Page.LeftMargin = 1.000000000000000000
+    Page.RightMargin = 1.000000000000000000
+    Page.TopMargin = 1.000000000000000000
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'Tahoma'
+    PageFooter.Font.Style = []
+    PageFooter.RightText.Strings = (
+      #1044#1086#1082#1091#1084#1077#1085#1090' '#1089#1092#1086#1088#1084#1080#1088#1086#1074#1072#1085' '#1087#1088#1086#1075#1088#1072#1084#1084#1085#1099#1084' '#1086#1073#1077#1089#1087#1077#1095#1077#1085#1080#1077#1084' '#1054#1040#1057#1059)
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -11
+    PageHeader.Font.Name = 'Tahoma'
+    PageHeader.Font.Style = []
+    Title.Strings = (
+      ' ')
+    Units = MM
+    Left = 488
+    Top = 176
+  end
+  object Syr_Period: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
+    CommaTextOptions = [mtfSaveData]
+    CSVQuote = '"'
+    CSVFieldDelimiter = ','
+    CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
+    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    FilterOptions = []
+    Version = '2.53g'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 224
-    Top = 220
+    Top = 192
     object Syr_PeriodKraz: TIntegerField
       FieldName = 'Kraz'
     end
@@ -2008,37 +1966,31 @@ object FSyrie_Period: TFSyrie_Period
       FieldName = 'god_begin'
     end
   end
-  object Grafik_Prep: TRxMemoryData
-    FieldDefs = <
-      item
-        Name = 'kod_prod'
-        DataType = ftString
-        Size = 18
-      end
-      item
-        Name = 'plnorm'
-        DataType = ftFloat
-      end
-      item
-        Name = 'mes'
-        DataType = ftInteger
-      end
-      item
-        Name = 'Nmat'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'mes_god'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Dat_Period'
-        DataType = ftDateTime
-      end>
+  object Grafik_Prep: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
+    CommaTextOptions = [mtfSaveData]
+    CSVQuote = '"'
+    CSVFieldDelimiter = ','
+    CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
+    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    FilterOptions = []
+    Version = '2.53g'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 304
-    Top = 220
+    Top = 184
     object Grafik_Prepkod_prod: TStringField
       FieldName = 'kod_prod'
       Size = 18
@@ -2059,44 +2011,5 @@ object FSyrie_Period: TFSyrie_Period
     object Grafik_PrepDat_Period: TDateTimeField
       FieldName = 'Dat_Period'
     end
-  end
-  object DSGrafik_Prep: TDataSource
-    DataSet = Grafik_Prep
-    Left = 368
-    Top = 296
-  end
-  object FormStorage1: TFormStorage
-    UseRegistry = True
-    StoredProps.Strings = (
-      'Panel2.Height'
-      'DBGridEh1.Height')
-    StoredValues = <>
-    Left = 384
-    Top = 184
-  end
-  object PrintDBGridEh1: TPrintDBGridEh
-    DBGridEh = DBGridEh1
-    Options = [pghFitGridToPageWidth, pghColored, pghRowAutoStretch, pghOptimalColWidths]
-    Page.BottomMargin = 1.000000000000000000
-    Page.LeftMargin = 1.000000000000000000
-    Page.RightMargin = 1.000000000000000000
-    Page.TopMargin = 1.000000000000000000
-    PageFooter.Font.Charset = DEFAULT_CHARSET
-    PageFooter.Font.Color = clWindowText
-    PageFooter.Font.Height = -11
-    PageFooter.Font.Name = 'Tahoma'
-    PageFooter.Font.Style = []
-    PageFooter.RightText.Strings = (
-      #1044#1086#1082#1091#1084#1077#1085#1090' '#1089#1092#1086#1088#1084#1080#1088#1086#1074#1072#1085' '#1087#1088#1086#1075#1088#1072#1084#1084#1085#1099#1084' '#1086#1073#1077#1089#1087#1077#1095#1077#1085#1080#1077#1084' '#1054#1040#1057#1059)
-    PageHeader.Font.Charset = DEFAULT_CHARSET
-    PageHeader.Font.Color = clWindowText
-    PageHeader.Font.Height = -11
-    PageHeader.Font.Name = 'Tahoma'
-    PageHeader.Font.Style = []
-    Title.Strings = (
-      ' ')
-    Units = MM
-    Left = 488
-    Top = 176
   end
 end

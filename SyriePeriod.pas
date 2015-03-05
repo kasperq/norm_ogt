@@ -7,7 +7,7 @@ uses
   Dialogs, Mask, ToolEdit, FindDlgEh, ImgList, Grids, DBGridEh, StdCtrls,
   Buttons, ExtCtrls, ComCtrls, ToolWin, DB, RxMemDS,RxStrUtils,DateUtils,
   SplshWnd,UtilRIB, TeEngine, Series, TeeProcs, Chart, DbChart, DBGrids,
-  Placemnt, PrnDbgeh, DBTables;
+  Placemnt, PrnDbgeh, DBTables, kbmMemTable;
 
 type
   TFSyrie_Period = class(TForm)
@@ -45,7 +45,14 @@ type
     DateEdit2: TDateEdit;
     Panel2: TPanel;
     DSyr_Period: TDataSource;
-    Syr_Period: TRxMemoryData;
+    DBChart1: TDBChart;
+    DSGrafik_Prep: TDataSource;
+    Series1: TLineSeries;
+    FormStorage1: TFormStorage;
+    Splitter1: TSplitter;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Syr_Period: TkbmMemTable;
+    Grafik_Prep: TkbmMemTable;
     Syr_PeriodKraz: TIntegerField;
     Syr_Periodstruk_id: TIntegerField;
     Syr_Periodkod_Prod: TStringField;
@@ -65,24 +72,17 @@ type
     Syr_PeriodNorm_11: TFloatField;
     Syr_PeriodNorm_12: TFloatField;
     Syr_Periodplnorm: TFloatField;
-    DBChart1: TDBChart;
-    Grafik_Prep: TRxMemoryData;
-    DSGrafik_Prep: TDataSource;
     Syr_PeriodStname: TStringField;
     Syr_Periodmes_begin: TIntegerField;
     Syr_Periodmes_end: TIntegerField;
     Syr_Periodgod_end: TIntegerField;
     Syr_Periodgod_begin: TIntegerField;
-    Series1: TLineSeries;
     Grafik_Prepkod_prod: TStringField;
     Grafik_Prepplnorm: TFloatField;
     Grafik_Prepmes: TIntegerField;
     Grafik_PrepNmat: TStringField;
     Grafik_Prepmes_god: TStringField;
     Grafik_PrepDat_Period: TDateTimeField;
-    FormStorage1: TFormStorage;
-    Splitter1: TSplitter;
-    PrintDBGridEh1: TPrintDBGridEh;
     procedure SyriePeriodSost;
     procedure Edit4Click(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

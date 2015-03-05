@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, DBCtrls, ToolWin, ComCtrls, DBGrids, StdCtrls, Grids,
-  DBGridEh, Mask, Spin, Buttons, ImgList,RxStrUtils,VCLUtils,DateUtils,RxMemDS, DB;
+  DBGridEh, Mask, Spin, Buttons, ImgList,RxStrUtils,VCLUtils,DateUtils,RxMemDS,
+  DB, kbmMemTable;
 
 type
   TFNorm = class(TForm)
@@ -51,12 +52,12 @@ type
     ComboBox1: TComboBox;
     Label2: TLabel;
     Label5: TLabel;
-    normMem: TRxMemoryData;
-    normSTRUK_ID: TSmallintField;
+    normMem: TkbmMemTable;
     normMemDOC_ID: TIntegerField;
     normMemTIP_OP_ID: TSmallintField;
     normMemSPROD_ID: TIntegerField;
     normMemRAZDEL_ID: TSmallintField;
+    normMemSTRUK_ID: TSmallintField;
     normMemKSM_ID: TIntegerField;
     normMemKEI_ID: TIntegerField;
     procedure SpeedButton2Click(Sender: TObject);
@@ -96,7 +97,7 @@ function TFNorm.checkDoubleRecords() : boolean;
 begin
   result := false;
   dm1.norm.DisableControls;
-  normMem.LoadFromDataSet(dm1.norm, 0, lmAppend);
+  normMem.LoadFromDataSet(dm1.norm, [mtcpoAppend]);
   normMem.Open;
   dm1.norm.First;
   while (not dm1.norm.Eof) do
@@ -563,11 +564,11 @@ begin
     if (dm1.p_rashif.Active) then
        dm1.p_rashif.Close;
     dm1.p_rashif.EmptyTable;
-    dm1.p_rashif.LoadFromDataSet(DM1.norm, 0, lmAppend);
+    dm1.p_rashif.LoadFromDataSet(DM1.norm, [mtcpoAppend]);
     dm1.p_rashif.Active := True;
     dm1.p_rashif.First;
-    DM1.FrReport1.LoadFromFile(reportPath + 'P_normg.frf');
-    DM1.FrReport1.ShowReport;
+    dm1.frxReport1.LoadFromFile(reportPath + 'P_normg.fr3');
+    dm1.frxReport1.ShowReport;
     while (DM1.Norm.ControlsDisabled) do
       DM1.Norm.EnableControls;
   end;

@@ -692,7 +692,7 @@ object FNorm: TFNorm
     Left = 792
     Top = 4
     Bitmap = {
-      494C01010B000D00180018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D001C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1590,10 +1590,31 @@ object FNorm: TFNorm
       03F803FFE1FFFFFFFFFFFFE007F007FF00000000000000000000000000000000
       000000000000}
   end
-  object normMem: TRxMemoryData
+  object normMem: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
+    CommaTextOptions = [mtfSaveData]
+    CSVQuote = '"'
+    CSVFieldDelimiter = ','
+    CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
+    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    FilterOptions = []
+    Version = '2.53g'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 392
-    Top = 264
+    Top = 304
     object normMemDOC_ID: TIntegerField
       FieldName = 'DOC_ID'
       Origin = '"NORMN"."DOC_ID"'
@@ -1612,7 +1633,7 @@ object FNorm: TFNorm
       Origin = '"RAZDEL"."RAZDEL_ID"'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object normSTRUK_ID: TSmallintField
+    object normMemSTRUK_ID: TSmallintField
       FieldName = 'STRUK_ID'
       Origin = '"NORMN"."STRUK_ID"'
     end

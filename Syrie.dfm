@@ -125,7 +125,7 @@ object FSyrie: TFSyrie
       Height = 21
       Ctl3D = False
       DropDownCount = 12
-      ItemHeight = 0
+      ItemHeight = 13
       ParentCtl3D = False
       TabOrder = 1
       OnChange = ComboBox1Change
@@ -1034,7 +1034,7 @@ object FSyrie: TFSyrie
     Left = 512
     Top = 4
     Bitmap = {
-      494C01010D000F00100018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D000F00180018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       000000000000000000000000000000000000000000000000000000000000A87D
       7800B7818300B7818300B7818300B7818300B7818300B7818300B7818300B781
@@ -2242,18 +2242,31 @@ object FSyrie: TFSyrie
     Left = 512
     Top = 312
   end
-  object Spis_Rashif: TRxMemoryData
-    FieldDefs = <
-      item
-        Name = 'kodp'
-        DataType = ftFloat
-      end
-      item
-        Name = 'STRUK_ID'
-        DataType = ftInteger
-      end>
+  object Spis_Rashif: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
+    CommaTextOptions = [mtfSaveData]
+    CSVQuote = '"'
+    CSVFieldDelimiter = ','
+    CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
+    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    FilterOptions = []
+    Version = '2.53g'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 200
-    Top = 280
+    Top = 320
     object Spis_Rashifkodp: TFloatField
       FieldName = 'kodp'
     end

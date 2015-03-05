@@ -538,7 +538,7 @@ begin
     if (dm1.p_rashif.Active) then
       dm1.p_rashif.Close;
     dm1.p_rashif.EmptyTable;
-    dm1.p_rashif.LoadFromDataSet(DM1.rashif, 0, lmAppend);
+    dm1.p_rashif.LoadFromDataSet(DM1.rashif, [mtcpoAppend]);
     dm1.p_rashif.Active := True;
     dm1.p_rashif.First;
     if (RadioGroup2.ItemIndex = 0) then
@@ -754,7 +754,7 @@ begin
     if (dm1.p_rashif.Active) then
       dm1.p_rashif.Close;
     dm1.p_rashif.EmptyTable;
-    dm1.p_rashif.LoadFromDataSet(DM1.rashif, 0, lmAppend);
+    dm1.p_rashif.LoadFromDataSet(DM1.rashif, [mtcpoAppend]);
     dm1.p_rashif.Active := True;
     dm1.p_rashif.First;
     if (RadioGroup2.ItemIndex = 0) then
