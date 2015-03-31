@@ -223,7 +223,7 @@ object FRashif: TFRashif
         Width = 101
         Height = 21
         DropDownCount = 12
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox1Change
         Items.Strings = (
@@ -836,6 +836,12 @@ object FRashif: TFRashif
         FieldName = 'PRIX_REG'
         Footers = <>
         Title.Caption = #1057#1090#1088#1072#1085#1072' '#1087#1088#1080#1093'.'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DAT_PRIX'
+        Footers = <>
+        Visible = False
       end>
   end
   object Panel3: TPanel
@@ -1033,7 +1039,7 @@ object FRashif: TFRashif
     Left = 544
     Top = 36
     Bitmap = {
-      494C01010F003400440018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F003400480018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000000000002A9226FF2D99

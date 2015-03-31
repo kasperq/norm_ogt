@@ -526,6 +526,7 @@ type
     mem_sumRashRazdSUMCENNORM_NDS: TFloatField;
     mem_sumRashRazdNAMRAZ: TStringField;
     mem_sumRashRazdKODRAZ2: TStringField;
+    RashifDAT_PRIX: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure normNewRecord(DataSet: TDataSet);
     procedure normBeforePost(DataSet: TDataSet);
@@ -1398,10 +1399,9 @@ begin
   q_prix.Open;
 
   dm1.Rashif.Edit;
-  if ((q_prixVC.AsInteger <= 1) or (q_prix.Eof) or (q_prix.RecordCount = 0)
-      or (q_prixPR_REG.AsInteger = 1)) and (not forceCalc) then
+  if ((q_prix.Eof) or (q_prix.RecordCount = 0)) and (not forceCalc) then
   begin
-    dm1.RashifVC.AsInteger := 1;
+    dm1.RashifVC.AsInteger := 0;
   end
   else
   begin
@@ -1411,6 +1411,7 @@ begin
   dm1.RashifPRIX_REG.AsString := q_prixSTRANA.AsString;
   dm1.RashifPR_REG.AsInteger := q_prixPR_REG.AsInteger;
   dm1.RashifPRIX_KEIID.AsInteger := q_prixKEI_ID.AsInteger;
+  dm1.RashifDAT_PRIX.AsDateTime := q_prixDATA_PR.AsDateTime;
   dm1.Rashif.Post;
 end;
 

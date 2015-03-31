@@ -178,7 +178,7 @@ end;
 procedure TFRashif.DBGridEh3DrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
 begin
-  if (dm1.RashifVC.AsInteger > 1) and (dm1.kurs) then
+  if (dm1.RashifVC.AsInteger > 0) and (dm1.kurs) then
     DBGridEh3.Canvas.Brush.Color := clMoneyGreen;
   DBGridEh3.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
