@@ -3,14 +3,11 @@ unit GlMenu_Ogt;
 interface
 
 uses
-//  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-//  Dialogs, Menus,  ExtCtrls, RXCtrls, StdCtrls, ToolWin, ComCtrls,ExtCtrls,
-//  DateUtils;
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, Menus, RxGIF, ImgList, ComCtrls, ToolWin, jpeg,
-  StdCtrls,DateUtils, RXCtrls, DBCtrls, Grids, DBGridEh, DBGrids,
-  RxMemDS, DBTables, IBCustomDataSet, IBQuery,SplshWnd, Buttons,UtilRIB,FileUtil,IniFiles,
-  ActnList, BDEConfig;
+  Dialogs, ExtCtrls, Menus, RxGIF, ImgList, ComCtrls, ToolWin, jpeg, StdCtrls,
+  DateUtils, RXCtrls, DBCtrls, Grids, DBGridEh, DBGrids, RxMemDS, DBTables,
+  IBCustomDataSet, IBQuery, rxSplshWnd, Buttons, UtilRIB, rxFileUtil, IniFiles,
+  ActnList, BDEConfig, System.Actions;
 type
   TFGlmenu_ogt = class(TForm)
     MainMenu1: TMainMenu;
@@ -38,7 +35,6 @@ type
     ToolBar1: TToolBar;
     Label1: TLabel;
     Label3: TLabel;
-    Label5: TLabel;
     Label2: TLabel;
     ActionList1: TActionList;
     SprPrep: TAction;
@@ -48,6 +44,7 @@ type
     SprStr: TAction;
     N11: TMenuItem;
     N22: TMenuItem;
+    Label5: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -71,7 +68,6 @@ type
     procedure N15Click(Sender: TObject);
     procedure N13Click(Sender: TObject);
     procedure N18Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure N11Click(Sender: TObject);
     procedure N22Click(Sender: TObject);
   private
@@ -84,7 +80,7 @@ var
   FGlmenu_ogt: TFGlmenu_ogt;
   ActiveForm: TForm;
 implementation
-  uses dm, PerNorm, Norm, PerNovMes, Syrie, Find_Spprod, Find_Matrop, Find_Struk,
+  uses dm, Splach_norm, PerNorm, Norm, PerNovMes, Syrie, Find_Spprod, Find_Matrop, Find_Struk,
   Decode_Spprod, Decode_Matrop, ediz, razdel, Rashif, SyriePeriod, Podpis,
   ViborGrPrep, Razdel_vvod, Ediz_vvod, Koefpr_vvod, BasSyr_vvod, OtxSpirt_vvod;
 {$R *.dfm}
@@ -141,25 +137,20 @@ end;
 
 procedure TFGlmenu_ogt.FormActivate(Sender: TObject);
 begin
-if ActiveForm <> nil then
-    if ActiveForm.Visible and ActiveForm.Enabled then
+  if (ActiveForm <> nil) then
+    if (ActiveForm.Visible) and (ActiveForm.Enabled) then
       ActiveForm.SetFocus;
-end;
-
-procedure TFGlmenu_ogt.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-// BDEConfig1.Active:=False;
 end;
 
 procedure TFGlmenu_ogt.FormCreate(Sender: TObject);
 begin
- Label2.Caption:='';
- Label5.Caption:='';
+  Label2.Caption := '';
+  Label5.Caption := '';
 end;
 
 procedure TFGlmenu_ogt.FormResize(Sender: TObject);
 begin
- if ActiveForm <> nil then
+   if (ActiveForm <> nil) then
   begin
     ActiveForm.Width  := Main_Panel.Width;
     ActiveForm.Height := Main_Panel.Height;
@@ -168,40 +159,42 @@ end;
 
 procedure TFGlmenu_ogt.FormShow(Sender: TObject);
 begin
-// BDEConfig1.Active:=true;
- Label1.Caption:='';
- OldCursor:=Screen.Cursor;
- Screen.Cursor:=crHourGlass;
- try
-  DM1.ConfigUMC.MacroByName('USL').AsString:='STRUK_ID = -32';
-  DM1.ConfigUMC.Open;
-  if (MonthOf(Date())=DM1.ConfigUMCMES.AsInteger) and (YearOf(Date())=DM1.ConfigUMCGOD.AsInteger) then
-  begin
-    MODE:=0;
-  end
-  else
-   if ((MonthOf(Date())=DM1.ConfigUMCMES.AsInteger-1) and (YearOf(Date())=DM1.ConfigUMCGOD.AsInteger)) or ((YearOf(Date())=DM1.ConfigUMCGOD.AsInteger-1) and (MonthOf(Date())=12) and (DM1.ConfigUMCMES.AsInteger=1))then
-   begin
+  if (FSplash_Norm <> nil) then
+    FreeAndNil(FSPlash_Norm);
+  Label1.Caption := '';
+  OldCursor := Screen.Cursor;
+  Screen.Cursor := crHourGlass;
+  try
+    DM1.ConfigUMC.MacroByName('USL').AsString := 'STRUK_ID = -32';
+    DM1.ConfigUMC.Open;
+    if (MonthOf(Date()) = DM1.ConfigUMCMES.AsInteger) and (YearOf(Date()) = DM1.ConfigUMCGOD.AsInteger) then
+    begin
+      MODE := 0;
+    end
+    else
+      if ((MonthOf(Date()) = DM1.ConfigUMCMES.AsInteger - 1) and (YearOf(Date()) = DM1.ConfigUMCGOD.AsInteger))
+         or ((YearOf(Date()) = DM1.ConfigUMCGOD.AsInteger - 1) and (MonthOf(Date()) = 12) and (DM1.ConfigUMCMES.AsInteger = 1))then
+      begin
 //     Label5.Caption:='(Прошлый месяц)';
-    MODE:=1;
-   end
-   else
-   begin
+        MODE := 1;
+      end
+      else
+      begin
 //      Label5.Caption:='(Только просмотр)';
-     MODE:=2;
-   end;
-   Label2.Caption:=FormatDateTime('mmmm',EncodeDate(DM1.ConfigUMCGOD.AsInteger,DM1.ConfigUMCMES.AsInteger,1));
-   MES:=DM1.ConfigUMCMES.AsInteger;
-   GOD:=DM1.ConfigUMCGOD.AsInteger;
+        MODE := 2;
+      end;
+    Label2.Caption := FormatDateTime('mmmm', EncodeDate(DM1.ConfigUMCGOD.AsInteger, DM1.ConfigUMCMES.AsInteger, 1));
+    MES := DM1.ConfigUMCMES.AsInteger;
+    GOD := DM1.ConfigUMCGOD.AsInteger;
 //   IF MES<10 THEN S_MES:='0'+INTTOSTR(MES) ELSE S_MES:=INTTOSTR(MES);
 //   S_DAT1:='01.'+S_MES+'.'+INTTOSTR(GOD);
 //   S_DAT2:=datetostr(IncMonth(strtodate(s_dat1),1)-1);
-   Label5.Caption:=FormatDateTime('yyyy',EncodeDate(DM1.ConfigUMCGOD.AsInteger,DM1.ConfigUMCMES.AsInteger,1))+'г.';
-   vSTRUK_ID:=DM1.ConfigUMCSTRUK_ID.AsInteger;
-   DM1.ConfigUMC.Close;
+    Label5.Caption := FormatDateTime('yyyy', EncodeDate(DM1.ConfigUMCGOD.AsInteger, DM1.ConfigUMCMES.AsInteger, 1)) + 'г.';
+    vSTRUK_ID := DM1.ConfigUMCSTRUK_ID.AsInteger;
+    DM1.ConfigUMC.Close;
   finally
-  Screen.Cursor:=OldCursor;
- end;
+    Screen.Cursor := OldCursor;
+  end;
 
   N1.Visible := not dm1.kurs;
   N3.Visible := not dm1.kurs;

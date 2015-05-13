@@ -28,7 +28,7 @@ object FNorm: TFNorm
     Left = 0
     Top = 0
     Width = 918
-    Height = 29
+    Height = 30
     ButtonHeight = 30
     ButtonWidth = 31
     Caption = 'ToolBar1'
@@ -95,6 +95,7 @@ object FNorm: TFNorm
       Width = 173
       Height = 30
       Caption = #1053#1086#1088#1084#1099
+      Color = clBtnFace
       Columns = 2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
@@ -105,6 +106,8 @@ object FNorm: TFNorm
       Items.Strings = (
         #1087#1083#1072#1085#1086#1074#1099#1077
         #1074#1088#1077#1084#1077#1085#1085#1099#1077)
+      ParentBackground = False
+      ParentColor = False
       ParentFont = False
       TabOrder = 0
     end
@@ -114,11 +117,14 @@ object FNorm: TFNorm
       Width = 282
       Height = 30
       Caption = #1044#1072#1090#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072
+      Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
+      ParentBackground = False
+      ParentColor = False
       ParentFont = False
       TabOrder = 1
       object Label1: TLabel
@@ -151,7 +157,7 @@ object FNorm: TFNorm
       end
       object SpinEdit2: TSpinEdit
         Left = 230
-        Top = 5
+        Top = 6
         Width = 50
         Height = 22
         Ctl3D = True
@@ -174,7 +180,6 @@ object FNorm: TFNorm
         Width = 101
         Height = 21
         DropDownCount = 12
-        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox1Change
         Items.Strings = (
@@ -195,7 +200,7 @@ object FNorm: TFNorm
   end
   object Panel1: TPanel
     Left = 0
-    Top = 29
+    Top = 30
     Width = 918
     Height = 116
     Align = alTop
@@ -553,39 +558,32 @@ object FNorm: TFNorm
   end
   object DBGridEh3: TDBGridEh
     Left = 0
-    Top = 145
+    Top = 146
     Width = 918
-    Height = 402
+    Height = 401
     Align = alClient
     AutoFitColWidths = True
     DataSource = DM1.DSNORM
+    DynProps = <>
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clNavy
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = [fsBold]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghRowHighlight, dghRecordMoving]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghRowHighlight, dghRecordMoving, dghColumnResize, dghColumnMove]
     ParentFont = False
     TabOrder = 3
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleHeight = 25
-    UseMultiTitle = True
-    VertScrollBar.Tracking = True
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 25
     OnEditButtonClick = DBGridEh3EditButtonClick
     Columns = <
       item
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PR_OV'
         Footers = <>
@@ -600,6 +598,9 @@ object FNorm: TFNorm
       end
       item
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KRAZ'
         Footers = <>
@@ -609,6 +610,9 @@ object FNorm: TFNorm
       end
       item
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KSM_ID'
         Footers = <>
@@ -616,6 +620,7 @@ object FNorm: TFNorm
         Width = 59
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NMAT'
         Footers = <>
@@ -624,6 +629,9 @@ object FNorm: TFNorm
       end
       item
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KEI_ID'
         Footers = <>
@@ -632,6 +640,8 @@ object FNorm: TFNorm
       end
       item
         ButtonStyle = cbsNone
+        DynProps = <>
+        EditButton.Visible = False
         EditButtons = <>
         FieldName = 'NEIS'
         Footers = <>
@@ -640,6 +650,7 @@ object FNorm: TFNorm
       end
       item
         DisplayFormat = '######0.000000####'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PLNORM'
         Footers = <>
@@ -647,6 +658,7 @@ object FNorm: TFNorm
         Width = 76
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'GOST'
         Footers = <>
@@ -654,6 +666,7 @@ object FNorm: TFNorm
         Width = 92
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'XARKT'
         Footers = <>
@@ -662,6 +675,7 @@ object FNorm: TFNorm
       end
       item
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PRPF'
         Footers = <>
@@ -674,6 +688,7 @@ object FNorm: TFNorm
         Width = 33
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KOD_PROD_KSM'
         Footers = <>
@@ -681,10 +696,13 @@ object FNorm: TFNorm
         Width = 110
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'ZNACH'
         Footers = <>
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object ImageList1: TImageList
     Height = 24
@@ -692,7 +710,7 @@ object FNorm: TFNorm
     Left = 792
     Top = 4
     Bitmap = {
-      494C01010B000D001C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00280018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1597,18 +1615,12 @@ object FNorm: TFNorm
     FieldDefs = <>
     IndexDefs = <>
     SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
     FilterOptions = []
-    Version = '2.53g'
+    Version = '7.64.00 Standard Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1

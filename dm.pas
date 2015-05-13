@@ -4,13 +4,13 @@ interface
 
 uses
   Windows,SysUtils, Classes, IBCustomDataSet, IBUpdateSQL, RxMemDS, IBTable,
-  FR_DSet, FR_DBSet, FR_Class, IBSQL, DB, RxIBQuery, IBQuery, IBStoredProc,
-  IBDatabase, IBUpdSQLW,Dialogs,Controls,Variants,IB,Forms,FindDlgEh, Menus, ImgList, Grids, DBGridEh, ComCtrls,
-  StdCtrls, Mask, DBCtrls, DBCtrlsEh,ToolWin,Graphics, Messages,ExtCtrls, DBGrids, 
-  DBLookupEh, BDEUtils, UtilR, UtilRIB,SplshWnd,IniFiles,Math, frxClass,
-  frxDMPExport, frxDBSet, DBTables, frOLEExl, FR_E_TXT, FR_E_RTF, frRtfExp,
-  frXMLExl,RxStrUtils, frxExportXLS, frxExportRTF, frxExportHTML, frxExportXML,
-  frxExportPDF, frxDCtrl, FR_E_HTML2, frexpimg, kbmMemTable, frxExportImage;
+  IBSQL, DB, RxIBQuery, IBQuery, IBStoredProc, IBDatabase, IBUpdSQLW, Dialogs,
+  Controls, Variants, IB, Forms, FindDlgEh, Menus, ImgList, Grids, DBGridEh, ComCtrls,
+  StdCtrls, Mask, DBCtrls, DBCtrlsEh, ToolWin, Graphics, Messages, ExtCtrls, DBGrids,
+  DBLookupEh, rxBDEUtils, UtilR, UtilRIB, rxSplshWnd, IniFiles, Math, frxClass,
+  frxDMPExport, frxDBSet, DBTables, RxStrUtils, frxExportXLS, frxExportRTF,
+  frxExportHTML, frxExportXML, frxExportPDF, frxDCtrl, kbmMemTable, frxExportImage,
+  System.UITypes;
 type
   TDM1 = class(TDataModule)
     BELMED: TIBDatabase;
@@ -726,7 +726,7 @@ begin
 //  MatrPr := IniOGT.ReadString('Config', 'MatrPr', '02');
 //  YesSeria := IniOGT.ReadBool('Config', 'YesSeria', True);
   MODE:=0;
-  UserName := AnsiUpperCase(GetCurrentUserName);
+  UserName := AnsiUpperCase(GetCurrentUserNameWindows);
   vZadacha_Id := 'OGT_NORM';
   DM1.BELMED.Close;
   DM1.BELMED.Params.Clear;

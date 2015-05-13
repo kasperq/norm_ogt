@@ -25,30 +25,26 @@ object FRashifCols: TFRashifCols
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSRashifCols
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'Tahoma'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    IndicatorOptions = [gioShowRowIndicatorEh]
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
     OnMouseUp = DBGridEh1MouseUp
     Columns = <
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAME'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'VISIBLE'
         Footers = <>
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object DSRashifCols: TDataSource
     DataSet = mem_rashifCols
@@ -62,18 +58,12 @@ object FRashifCols: TFRashifCols
     FieldDefs = <>
     IndexDefs = <>
     SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
     FilterOptions = []
-    Version = '2.53g'
+    Version = '7.64.00 Standard Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1

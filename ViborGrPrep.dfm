@@ -104,7 +104,6 @@ object FViborGrPrep: TFViborGrPrep
       Top = 4
       Width = 101
       Height = 21
-      ItemHeight = 13
       TabOrder = 1
       OnChange = ComboBox1Change
       Items.Strings = (
@@ -162,33 +161,26 @@ object FViborGrPrep: TFViborGrPrep
     Align = alClient
     AutoFitColWidths = True
     DataSource = DM1.DSR_SPROD
+    DynProps = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clNavy
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = [fsBold]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab, dghColumnResize, dghColumnMove]
     ParentFont = False
     STFilter.Visible = True
     TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleHeight = 25
-    UseMultiTitle = True
-    VertScrollBar.Tracking = True
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 25
     OnEditButtonClick = DBGridEh1EditButtonClick
     Columns = <
       item
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'VIB'
         Footers = <>
@@ -201,6 +193,9 @@ object FViborGrPrep: TFViborGrPrep
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'LEKKOD'
         Footers = <>
@@ -209,6 +204,7 @@ object FViborGrPrep: TFViborGrPrep
         Width = 129
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NMAT'
         Footers = <>
@@ -217,6 +213,7 @@ object FViborGrPrep: TFViborGrPrep
         Width = 280
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'GOST'
         Footers = <>
@@ -224,6 +221,7 @@ object FViborGrPrep: TFViborGrPrep
         Width = 116
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'XARKT'
         Footers = <>
@@ -231,6 +229,7 @@ object FViborGrPrep: TFViborGrPrep
         Width = 164
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'STNAME'
         Footers = <>
@@ -243,6 +242,7 @@ object FViborGrPrep: TFViborGrPrep
       end
       item
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'VID'
         Footers = <>
@@ -251,6 +251,8 @@ object FViborGrPrep: TFViborGrPrep
           '0')
         Title.Caption = #1042#1088#1077#1084#1077#1085#1085#1099#1077' '#1085#1086#1088#1084#1099
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Panel2: TPanel
     Left = 0
@@ -580,7 +582,7 @@ object FViborGrPrep: TFViborGrPrep
     Left = 624
     Top = 4
     Bitmap = {
-      494C01010B000D00140018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00180018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1482,7 +1484,9 @@ object FViborGrPrep: TFViborGrPrep
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       
         'select distinct  spprod.kod_prod lekkod,spprod.ksm_id, spprod.nm' +
@@ -1648,6 +1652,9 @@ object FViborGrPrep: TFViborGrPrep
   object R_SPPF: TIBQuery
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       
         'select distinct  spprod.kod_prod lekkod,spprod.ksm_id, spprod.nm' +

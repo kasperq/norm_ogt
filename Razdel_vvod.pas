@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, IBCustomDataSet, IBUpdateSQL, IBUpdSQLW, IBQuery, RxIBQuery,
   Menus, FindDlgEh, ImgList, ComCtrls, ExtCtrls, DBCtrls, ToolWin, Grids,
-  DBGridEh,UtilRIB;
+  DBGridEh, UtilRIB, System.UITypes, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFRazdel_vvod = class(TForm)

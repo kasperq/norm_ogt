@@ -5,8 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGridEh, DBCtrls, ComCtrls, StdCtrls, ExtCtrls, Spin,
-  ImgList, ToolWin,RxMemDS,SplshWnd,DateUtils, IBCustomDataSet, IBUpdateSQL,
-  IBUpdSQLW, DB, IBQuery, RxIBQuery,Utilr, DBGrids,FileUtil, kbmmemTable;
+  ImgList, ToolWin, RxMemDS, rxSplshWnd, DateUtils, IBCustomDataSet, IBUpdateSQL,
+  IBUpdSQLW, DB, IBQuery, RxIBQuery,Utilr, DBGrids, rxFileUtil, kbmmemTable,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, System.UITypes;
 
 type
   TFViborGrPrep = class(TForm)

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ImgList, DB, IBCustomDataSet, IBUpdateSQL, IBUpdSQLW, IBQuery,
   RxIBQuery, ComCtrls, ExtCtrls, DBCtrls, ToolWin, Grids, DBGridEh, Buttons,
-  StdCtrls,UtilRIB,RxStrUtils;
+  StdCtrls, UtilRIB, RxStrUtils, ToolCtrlsEh, DBGridEhGrouping,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, System.UITypes;
 
 type
   TFOtxSpirt_vvod = class(TForm)

@@ -106,7 +106,7 @@ object FSyrie: TFSyrie
     object Label1: TLabel
       Left = 313
       Top = 0
-      Width = 54
+      Width = 48
       Height = 30
       Margins.Bottom = 0
       Caption = '   '#1052#1077#1089':'#1103#1094':  '
@@ -119,13 +119,12 @@ object FSyrie: TFSyrie
       Layout = tlCenter
     end
     object ComboBox1: TComboBox
-      Left = 367
+      Left = 361
       Top = 4
-      Width = 101
+      Width = 106
       Height = 21
       Ctl3D = False
       DropDownCount = 12
-      ItemHeight = 13
       ParentCtl3D = False
       TabOrder = 1
       OnChange = ComboBox1Change
@@ -144,7 +143,7 @@ object FSyrie: TFSyrie
         ' '#1076#1077#1082#1072#1073#1088#1100)
     end
     object Label3: TLabel
-      Left = 468
+      Left = 467
       Top = 0
       Width = 30
       Height = 30
@@ -159,7 +158,7 @@ object FSyrie: TFSyrie
       Layout = tlCenter
     end
     object SpinEdit2: TSpinEdit
-      Left = 498
+      Left = 497
       Top = 0
       Width = 50
       Height = 30
@@ -349,15 +348,13 @@ object FSyrie: TFSyrie
       Width = 22
       Height = 22
       Glyph.Data = {
-        16010000424D5601000000000000B6000000280000000A000000040000000100
-        200000000000A000000000000000000000001000000000000000000000000000
-        80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+        D6000000424D160100000000000076000000280000000A000000040000000100
+        200000000000A000000000000000000000001000000000000000FFFFFF00FFFF
         FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
         0000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
       OnClick = SpeedButton3Click
     end
     object Label6: TLabel
@@ -484,36 +481,29 @@ object FSyrie: TFSyrie
     Align = alClient
     AutoFitColWidths = True
     DataSource = DM1.DSNormSyr
+    DynProps = <>
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clNavy
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = [fsBold]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab, dghRowHighlight]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab, dghRowHighlight, dghColumnResize, dghColumnMove]
     ParentFont = False
     STFilter.Visible = True
     TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleHeight = 25
-    UseMultiTitle = True
-    VertScrollBar.Tracking = True
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 25
     OnEditButtonClick = DBGridEh1EditButtonClick
     OnSortMarkingChanged = DBGridEh1SortMarkingChanged
     Columns = <
       item
         Alignment = taCenter
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'VIB'
         Footers = <>
@@ -527,6 +517,9 @@ object FSyrie: TFSyrie
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KOD_PROD'
         Footers = <>
@@ -534,6 +527,7 @@ object FSyrie: TFSyrie
         Title.TitleButton = True
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NMAT'
         Footers = <>
@@ -542,6 +536,7 @@ object FSyrie: TFSyrie
         Width = 230
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAM'
         Footers = <>
@@ -550,6 +545,7 @@ object FSyrie: TFSyrie
       end
       item
         DisplayFormat = '#####0.0000000'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PLNORM'
         Footers = <>
@@ -559,6 +555,7 @@ object FSyrie: TFSyrie
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NEIS'
         Footers = <>
@@ -567,6 +564,7 @@ object FSyrie: TFSyrie
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KRAZ'
         Footers = <>
@@ -577,6 +575,7 @@ object FSyrie: TFSyrie
       item
         Alignment = taCenter
         Checkboxes = True
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PRPF'
         Footers = <>
@@ -587,6 +586,7 @@ object FSyrie: TFSyrie
         Width = 32
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'STNAME'
         Footers = <>
@@ -598,24 +598,28 @@ object FSyrie: TFSyrie
         Width = 88
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KSM_ID'
         Footers = <>
         Title.Caption = #1050#1086#1076' '#1089#1099#1088#1100#1103
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NORM_ID'
         Footers = <>
         Visible = False
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'VIB1'
         Footers = <>
         Visible = False
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PLAN'
         Footers = <>
@@ -623,12 +627,15 @@ object FSyrie: TFSyrie
         Visible = False
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'POTREB'
         Footers = <>
         Title.Caption = #1055#1086#1090#1088#1077#1073'.'
         Visible = False
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Panel2: TPanel
     Left = 0
@@ -1034,7 +1041,7 @@ object FSyrie: TFSyrie
     Left = 512
     Top = 4
     Bitmap = {
-      494C01010D000F00180018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D000F00200018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       000000000000000000000000000000000000000000000000000000000000A87D
       7800B7818300B7818300B7818300B7818300B7818300B7818300B7818300B781
@@ -2249,18 +2256,12 @@ object FSyrie: TFSyrie
     FieldDefs = <>
     IndexDefs = <>
     SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
     FilterOptions = []
-    Version = '2.53g'
+    Version = '7.64.00 Standard Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1

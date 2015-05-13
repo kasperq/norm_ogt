@@ -14,7 +14,6 @@ object FGlmenu_ogt: TFGlmenu_ogt
   OldCreateOrder = False
   WindowState = wsMaximized
   OnActivate = FormActivate
-  OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
@@ -824,6 +823,7 @@ object FGlmenu_ogt: TFGlmenu_ogt
     ButtonHeight = 21
     Caption = 'ToolBar1'
     Color = clActiveBorder
+    GradientDrawingOptions = []
     ParentColor = False
     TabOrder = 1
     object Label1: TLabel
@@ -881,7 +881,7 @@ object FGlmenu_ogt: TFGlmenu_ogt
     object Label5: TLabel
       Left = 686
       Top = 0
-      Width = 86
+      Width = 115
       Height = 21
       Margins.Bottom = 0
       Alignment = taCenter
@@ -1014,7 +1014,7 @@ object FGlmenu_ogt: TFGlmenu_ogt
     Left = 496
     Top = 36
     Bitmap = {
-      494C01010B000D00140018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00280018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

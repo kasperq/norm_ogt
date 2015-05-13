@@ -274,10 +274,8 @@ object FSyrie_Period: TFSyrie_Period
       Width = 22
       Height = 22
       Glyph.Data = {
-        16010000424D5601000000000000B6000000280000000A000000040000000100
-        200000000000A000000000000000000000001000000000000000000000000000
-        80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFF00FFFF
+        D6000000424D160100000000000076000000280000000A000000040000000100
+        200000000000A000000000000000000000001000000000000000FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF000000000000000000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
         FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
@@ -409,33 +407,26 @@ object FSyrie_Period: TFSyrie_Period
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSyr_Period
+    DynProps = <>
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clNavy
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = [fsBold]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghEnterAsTab, dghColumnResize, dghColumnMove]
     ParentFont = False
     STFilter.Visible = True
     TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleHeight = 25
-    UseMultiTitle = True
-    VertScrollBar.Tracking = True
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 25
     Columns = <
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Kraz'
         Footers = <>
@@ -444,6 +435,7 @@ object FSyrie_Period: TFSyrie_Period
         Width = 35
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Stname'
         Footers = <>
@@ -457,6 +449,9 @@ object FSyrie_Period: TFSyrie_Period
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'kod_Prod'
         Footers = <>
@@ -465,6 +460,7 @@ object FSyrie_Period: TFSyrie_Period
         Width = 78
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Nmat'
         Footers = <>
@@ -473,6 +469,7 @@ object FSyrie_Period: TFSyrie_Period
         Width = 179
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Neis'
         Footers = <>
@@ -480,65 +477,79 @@ object FSyrie_Period: TFSyrie_Period
         Width = 42
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_1'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_2'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_3'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_4'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_5'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_6'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_7'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_8'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_9'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_10'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_11'
         Footers = <>
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'Norm_12'
         Footers = <>
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Panel2: TPanel
     Left = 0
@@ -552,7 +563,6 @@ object FSyrie_Period: TFSyrie_Period
       Top = 1
       Width = 883
       Height = 202
-      BackWall.Brush.Color = clWhite
       BackWall.Brush.Style = bsClear
       Gradient.EndColor = clWhite
       Gradient.StartColor = clSilver
@@ -585,10 +595,13 @@ object FSyrie_Period: TFSyrie_Period
       BorderWidth = 1
       Color = clWhite
       TabOrder = 0
+      DefaultCanvas = 'TGDIPlusCanvas'
+      ColorPaletteIndex = 13
       object Series1: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
+        Legend.Visible = False
         Marks.Visible = True
         ShowInLegend = False
+        Brush.BackColor = clDefault
         InvertedStairs = True
         LinePen.Width = 3
         Pointer.Brush.Color = clRed
@@ -613,7 +626,7 @@ object FSyrie_Period: TFSyrie_Period
     Left = 536
     Top = 36
     Bitmap = {
-      494C01010D000F000C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D000F00100018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       000000000000000000000000000000000000000000000000000000000000A87D
       7800B7818300B7818300B7818300B7818300B7818300B7818300B7818300B781
@@ -1872,18 +1885,12 @@ object FSyrie_Period: TFSyrie_Period
     FieldDefs = <>
     IndexDefs = <>
     SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
     FilterOptions = []
-    Version = '2.53g'
+    Version = '7.64.00 Standard Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1
@@ -1973,18 +1980,12 @@ object FSyrie_Period: TFSyrie_Period
     FieldDefs = <>
     IndexDefs = <>
     SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
     FilterOptions = []
-    Version = '2.53g'
+    Version = '7.64.00 Standard Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1

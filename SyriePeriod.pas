@@ -4,10 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Mask, ToolEdit, FindDlgEh, ImgList, Grids, DBGridEh, StdCtrls,
+  Dialogs, Mask, rxToolEdit, FindDlgEh, ImgList, Grids, DBGridEh, StdCtrls,
   Buttons, ExtCtrls, ComCtrls, ToolWin, DB, RxMemDS,RxStrUtils,DateUtils,
-  SplshWnd,UtilRIB, TeEngine, Series, TeeProcs, Chart, DbChart, DBGrids,
-  Placemnt, PrnDbgeh, DBTables, kbmMemTable;
+  rxSplshWnd,UtilRIB, TeEngine, Series, TeeProcs, Chart, DbChart, DBGrids,
+  rxPlacemnt, PrnDbgeh, DBTables, kbmMemTable, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, VclTee.TeeGDIPlus, EhLibVCL, GridsEh,
+  DBAxisGridsEh, System.UITypes;
 
 type
   TFSyrie_Period = class(TForm)

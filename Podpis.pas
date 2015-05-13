@@ -5,8 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, IBCustomDataSet, IBQuery, StdCtrls, DBCtrls, ImgList, ComCtrls,
-  ToolWin, Buttons, Grids, DBGridEh, ExtCtrls, Mask, DBCtrlsEh, DBLookupEh,UtilRIB
-  ,RxStrUtils;
+  ToolWin, Buttons, Grids, DBGridEh, ExtCtrls, Mask, DBCtrlsEh, DBLookupEh,
+  UtilRIB, RxStrUtils, System.UITypes, GridsEh, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, DBAxisGridsEh;
 type
   TFPodpis = class(TForm)
     ToolBar1: TToolBar;
