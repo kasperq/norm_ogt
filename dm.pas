@@ -560,6 +560,7 @@ type
     procedure Rashif_sCalcFields(DataSet: TDataSet);
     procedure NormSyrAfterOpen(DataSet: TDataSet);
     procedure sumRash_RazdAfterOpen(DataSet: TDataSet);
+    procedure normAfterDelete(DataSet: TDataSet);
 
   private
          //
@@ -1432,6 +1433,12 @@ begin
  vITOGI_Id := DM1.Add_NORMDok.Params.Items[0].AsInteger;}
 end;
 
+procedure TDM1.normAfterDelete(DataSet: TDataSet);
+begin
+  if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) then
+    DM1.Document.Delete;
+end;
+
 procedure TDM1.normAfterScroll(DataSet: TDataSet);
 begin
   s_ksm_spr := dm1.normKsm_id.AsInteger;
@@ -1613,10 +1620,12 @@ procedure TDM1.ApplyUpdatesNorm;
 begin
   startRWTranss;
   try
-    if (DM1.Document.UpdatesPending) then
+    if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount > 0) then
       DM1.Document.ApplyUpdates;
     if (DM1.Norm.UpdatesPending) then
       DM1.Norm.ApplyUpdates;
+    if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount = 0) then
+      DM1.Document.ApplyUpdates;
     DM1.IBT_WRITE.Commit;
     DM1.IBT_READ.CommitRetaining;
   except

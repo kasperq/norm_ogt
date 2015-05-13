@@ -466,14 +466,7 @@ begin
       DM1.Norm.Active := true;
       DM1.Norm.First;
       while (not DM1.Norm.Eof) do
-      BEGIN
         DM1.Norm.Delete;
-      end;
-      if (not DM1.Document.Eof) then
-      BEGIN
-        if (dm1.Document.Locate('doc_id', DM1.NormDoc_id.AsInteger, [])) then
-          DM1.Document.Delete;
-      end;
     except
       On E : Exception do
       begin
@@ -497,7 +490,7 @@ var
   dd : integer;
 begin
   if (dm1.norm.Modified) or (dm1.norm.State = dsEdit)
-    or (dm1.norm.State = dsInsert) then
+     or (dm1.norm.State = dsInsert) then
     dm1.norm.Post;
   DM1.ApplyUpdatesNorm;
   dm1.norm.First;

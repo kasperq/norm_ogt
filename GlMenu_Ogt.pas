@@ -86,7 +86,8 @@ var
 implementation
   uses dm, PerNorm, Norm, PerNovMes, Syrie, Find_Spprod, Find_Matrop, Find_Struk,
   Decode_Spprod, Decode_Matrop, ediz, razdel, Rashif, SyriePeriod, Podpis,
-  ViborGrPrep, Razdel_vvod, Ediz_vvod, Koefpr_vvod, BasSyr_vvod, OtxSpirt_vvod;
+  ViborGrPrep, Razdel_vvod, Ediz_vvod, Koefpr_vvod, BasSyr_vvod, OtxSpirt_vvod,
+  Splach_norm;
 {$R *.dfm}
 
 procedure TFGlmenu_ogt.SprPrepExecute(Sender: TObject);
@@ -168,6 +169,7 @@ end;
 
 procedure TFGlmenu_ogt.FormShow(Sender: TObject);
 begin
+  FSPlash_Norm.Free;
 // BDEConfig1.Active:=true;
  Label1.Caption:='';
  OldCursor:=Screen.Cursor;
