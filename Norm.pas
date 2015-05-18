@@ -371,46 +371,47 @@ end;
 
 procedure TFNorm.SpeedButton2Click(Sender: TObject);
 begin
- if FindSpprod=nil then FindSpprod:=TfindSpprod.Create(Application);
- FindSpprod.DataBaseName:=dm1.BELMED;
- FindSpprod.ReadOnly:=true;
- FindSpprod.ShowModal;
- if FindSpprod.ModalResult > 50 then
- begin
-  EDIT1.OnChange:=nil;
-  edit1.text:=FindSpprod.IBSpprodKod_Prod.Asstring;
-  EDIT1.OnChange:=Edit1Change;
-  s_kodp:=FindSpprod.ModalResult-50;
-  s_sprod:=FindSpprod.IBSpprod.FieldByName('sprod_ID').AsInteger;
-  s_gost:=FindSpprod.IBSpprodGOST.AsString;
-  s_xarkt:=FindSpprod.IBSpprodXARKT.AsString;
-  s_nmat:=FindSpprod.IBSpprodNMAT.AsString;
-  s_kei:=FindSpprod.IBSpprodKEI_ID.VALUE;
-  s_korg:=FindSpprod.IBSpprodKORG.VALUE;
-  s_kodProd:=FindSpprod.IBSpprodKOD_PROD.AsString;
-  s_namorg:=FindSpprod.IBSpprodNAME_ORG.AsString;
-  s_neiz:=FindSpprod.IBSpprodNEIS.AsString;
-  s_reg:=FindSpprod.IBSpprod.FieldByName('Name_Reg').AsString;
-  s_pr_syr:=FindSpprod.IBSpprod.FieldByName('Namspsr').AsString;
-  s_vid_isp:=FindSpprod.IBSpprod.FieldByName('Namevis').AsString;
-  s_stname:= FindSpprod.IBSpprod.FieldByName('STNAME').AsString;
-  struk:=FindSpprod.IBSpprod.FieldByName('struk_ID').AsInteger;
-  if FindSpprod.IBSpprod.FieldByName('ACTIVP').Asinteger=1 then
-    Label5.caption:='Действующие'
-  else
-    label5.caption:='Недействующие';
-  label19.caption:=s_NMAT;
-  label8.caption:=s_stname;
-  label29.caption:=s_namorg;
-  label21.caption:=s_Neiz;
-  label22.caption:=s_GOST;
-  label41.caption:=s_Xarkt;
-  label27.caption:=s_vid_isp;
-  label34.caption:=s_pr_syr;
-  label43.caption:=s_reg;
-  DM1.VoprosWriteNorm;
-  ProsmNorm;
- end;
+  if (FindSpprod = nil) then
+    FindSpprod := TfindSpprod.Create(Application);
+  FindSpprod.DataBaseName := dm1.BELMED;
+  FindSpprod.ReadOnly := true;
+  FindSpprod.ShowModal;
+  if (FindSpprod.ModalResult > 50) then
+  begin
+    EDIT1.OnChange := nil;
+    edit1.text := FindSpprod.IBSpprodKod_Prod.Asstring;
+    EDIT1.OnChange := Edit1Change;
+    s_kodp := FindSpprod.ModalResult - 50;
+    s_sprod := FindSpprod.IBSpprod.FieldByName('sprod_ID').AsInteger;
+    s_gost := FindSpprod.IBSpprodGOST.AsString;
+    s_xarkt := FindSpprod.IBSpprodXARKT.AsString;
+    s_nmat := FindSpprod.IBSpprodNMAT.AsString;
+    s_kei := FindSpprod.IBSpprodKEI_ID.VALUE;
+    s_korg := FindSpprod.IBSpprodKORG.VALUE;
+    s_kodProd := FindSpprod.IBSpprodKOD_PROD.AsString;
+    s_namorg := FindSpprod.IBSpprodNAME_ORG.AsString;
+    s_neiz := FindSpprod.IBSpprodNEIS.AsString;
+    s_reg := FindSpprod.IBSpprod.FieldByName('Name_Reg').AsString;
+    s_pr_syr := FindSpprod.IBSpprod.FieldByName('Namspsr').AsString;
+    s_vid_isp := FindSpprod.IBSpprod.FieldByName('Namevis').AsString;
+    s_stname := FindSpprod.IBSpprod.FieldByName('STNAME').AsString;
+    struk := FindSpprod.IBSpprod.FieldByName('struk_ID').AsInteger;
+    if (FindSpprod.IBSpprod.FieldByName('ACTIVP').Asinteger = 1) then
+      Label5.caption := 'Действующие'
+    else
+      label5.caption := 'Недействующие';
+    label19.caption := s_NMAT;
+    label8.caption := s_stname;
+    label29.caption := s_namorg;
+    label21.caption := s_Neiz;
+    label22.caption := s_GOST;
+    label41.caption := s_Xarkt;
+    label27.caption := s_vid_isp;
+    label34.caption := s_pr_syr;
+    label43.caption := s_reg;
+    DM1.VoprosWriteNorm;
+    ProsmNorm;
+  end;
 end;
 
 procedure TFNorm.SpinEdit2Change(Sender: TObject);

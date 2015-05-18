@@ -1276,7 +1276,8 @@ begin
   begin
     vDocument_id := dm1.NormDoc_id.AsInteger;
     while (not dm1.norm.eof) do
-      dm1.norm.Delete
+      dm1.norm.Delete;
+    vDocument_Id := 0;
   end;
   if (vDocument_Id = 0) then
   begin
