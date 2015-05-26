@@ -527,6 +527,85 @@ type
     mem_sumRashRazdNAMRAZ: TStringField;
     mem_sumRashRazdKODRAZ2: TStringField;
     RashifDAT_PRIX: TDateField;
+    q_spprod: TRxIBQuery;
+    q_spprodSPROD_ID: TIntegerField;
+    q_spprodKSM_ID: TIntegerField;
+    q_spprodSPKSM: TIBStringField;
+    q_spprodSPPRN: TSmallintField;
+    q_spprodSPVIS: TSmallintField;
+    q_spprodNMAT: TIBStringField;
+    q_spprodPROD_ID: TIntegerField;
+    q_spprodKEI_ID: TSmallintField;
+    q_spprodLEK_ID: TSmallintField;
+    q_spprodMOD_ID: TSmallintField;
+    q_spprodSPRODS: TSmallintField;
+    q_spprodSPSR: TSmallintField;
+    q_spprodVOL_ID: TSmallintField;
+    q_spprodUMN: TSmallintField;
+    q_spprodEAN13: TSmallintField;
+    q_spprodSPRIZ: TSmallintField;
+    q_spprodSTRUK_ID: TSmallintField;
+    q_spprodREG: TSmallintField;
+    q_spprodKORG: TIntegerField;
+    q_spprodSPFS: TIBStringField;
+    q_spprodSPFV: TSmallintField;
+    q_spprodSPVU: TSmallintField;
+    q_spprodSPTIP: TSmallintField;
+    q_spprodSPSPIS: TSmallintField;
+    q_spprodDOLPO: TIBBCDField;
+    q_spprodSTAT: TSmallintField;
+    q_spprodPUP: TSmallintField;
+    q_spprodNMATS: TIBStringField;
+    q_spprodGOST: TIBStringField;
+    q_spprodGR: TIBStringField;
+    q_spprodPGR: TIBStringField;
+    q_spprodXARKT: TIBStringField;
+    q_spprodACTIVP: TSmallintField;
+    q_spprodACTIVF: TSmallintField;
+    q_spprodREGISTR_ID: TIntegerField;
+    q_spprodVOLUMF: TFMTBCDField;
+    q_spprodVOL_OV: TFMTBCDField;
+    q_spprodKOD_PROD: TIBStringField;
+    q_spprodMAIN_SPROD_ID: TIntegerField;
+    q_spprodVES_UP: TIBBCDField;
+    q_spprodINOV: TSmallintField;
+    q_spprodDATEI_1: TDateField;
+    q_spprodDATEI_2: TDateField;
+    q_spprodREGLS_ID: TIntegerField;
+    q_spprodSERTIFIED: TSmallintField;
+    q_matrop: TRxIBQuery;
+    q_matropKSM_ID: TIntegerField;
+    q_matropNMAT: TIBStringField;
+    q_matropPRMAT: TIBStringField;
+    q_matropGR: TIBStringField;
+    q_matropPGR: TIBStringField;
+    q_matropKEI_ID: TSmallintField;
+    q_matropACCOUNT: TIBStringField;
+    q_matropSPSR: TSmallintField;
+    q_matropNMATS: TIBStringField;
+    q_matropGOST: TIBStringField;
+    q_matropXARKT: TIBStringField;
+    q_matropPROCS: TIBBCDField;
+    q_matropCENA: TIBBCDField;
+    q_matropRENOM: TIBStringField;
+    q_matropPROTK: TSmallintField;
+    q_matropTNVED: TIBStringField;
+    q_matropKSM: TIBStringField;
+    q_matropPROC: TIBBCDField;
+    q_matropKEI: TIBStringField;
+    q_matropDM: TSmallintField;
+    q_matropKORG: TIntegerField;
+    q_matropCENANDS: TIBBCDField;
+    q_matropDATCEN: TDateField;
+    q_matropPRIZCEN: TSmallintField;
+    q_matropREG: TSmallintField;
+    q_matropKSM_BS: TIntegerField;
+    q_matropSPIS_A: TSmallintField;
+    q_matropMEDEND: TSmallintField;
+    q_matropPRMAT_ID: TSmallintField;
+    q_matropGR_ID: TSmallintField;
+    q_matropPGR_ID: TSmallintField;
+    q_matropSPEC: TSmallintField;
     procedure DataModuleCreate(Sender: TObject);
     procedure normNewRecord(DataSet: TDataSet);
     procedure normBeforePost(DataSet: TDataSet);
@@ -578,6 +657,8 @@ type
                          namRaz : string);
     procedure openNormSyr(ksmId, year, month, strukId : integer; usl, sort : string);
     procedure calcKursRashifRecord;
+    function getKodProd(ksmId : integer) : string;
+    function findMatrop(ksmId : integer) : boolean;
 
   end;
 
@@ -697,8 +778,30 @@ var
   programPath : string;
 
 implementation
-  uses Razdel,SYRIE;
+
+uses Razdel, SYRIE;
 {$R *.dfm}
+
+function TDM1.findMatrop(ksmId : integer) : boolean;
+begin
+  result := false;
+  q_matrop.Close;
+  q_matrop.MacroByName('usl').AsString := ' matrop.ksm_id = ' + IntToStr(ksmId) + ' ';
+  q_matrop.Open;
+  if (q_matrop.RecordCount > 0) then
+    result := true;
+end;
+
+function TDM1.getKodProd(ksmId : integer) : string;
+begin
+  result := '';
+  q_spprod.Close;
+  q_spprod.MacroByName('usl').AsString := ' spprod.ksm_id = ' + IntToStr(ksmId) + ' ';
+  q_spprod.Open;
+  if (q_spprod.RecordCount > 0) then
+    result := q_spprodKOD_PROD.AsString;
+end;
+
 function TDM1.MesName_1(Mes: integer): string;
 begin
   case Mes of
@@ -1277,7 +1380,7 @@ begin
     vDocument_id := dm1.NormDoc_id.AsInteger;
     while (not dm1.norm.eof) do
       dm1.norm.Delete;
-    vDocument_Id := 0;
+//    vDocument_Id := 0;
   end;
   if (vDocument_Id = 0) then
   begin
@@ -1436,8 +1539,8 @@ end;
 
 procedure TDM1.normAfterDelete(DataSet: TDataSet);
 begin
-  if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) then
-    DM1.Document.Delete;
+//  if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) then
+//    DM1.Document.Delete;
 end;
 
 procedure TDM1.normAfterScroll(DataSet: TDataSet);
@@ -1621,6 +1724,8 @@ procedure TDM1.ApplyUpdatesNorm;
 begin
   startRWTranss;
   try
+    if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) then
+      DM1.Document.Delete;
     if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount > 0) then
       DM1.Document.ApplyUpdates;
     if (DM1.Norm.UpdatesPending) then
