@@ -883,22 +883,22 @@ end;
 
 procedure TDM1.DocumentBeforeInsert(DataSet: TDataSet);
 begin
- DM1.Add_NormDok.StoredProcName := 'ADD_DOCUMENT';
- DM1.Add_NormDok.ExecProc;
- vDocument_Id := DM1.Add_NormDok.Params.Items[0].AsInteger;
+  DM1.Add_NormDok.StoredProcName := 'ADD_DOCUMENT';
+  DM1.Add_NormDok.ExecProc;
+  vDocument_Id := DM1.Add_NormDok.Params.Items[0].AsInteger;
 end;
 
 procedure TDM1.DocumentNewRecord(DataSet: TDataSet);
 begin
 	DM1.Document.FieldByName('Doc_Id').AsInteger := vDocument_Id;
 	DM1.Document.FieldByName('Tip_Op_Id').AsInteger := vTip_Op_Id;
- DM1.Document.FieldByName('Struk_Id').AsInteger := vStruk_Id;
- DM1.Document.FieldByName('Tip_Dok_Id').AsInteger := v_Tip_Dok;
- DM1.Document.FieldByName('NDok').AsString := vNDoc;
- DM1.Document.FieldByName('Klient_Id').AsInteger := s_Kodp;
- DM1.Document.FieldByName('Date_Dok').AsDateTime :=Date;
- DM1.Document.FieldByName('Date_Op').AsDateTime :=vDat_op;
- DM1.Document.FieldByName('Zadacha_Id').AsString := vZadacha_Id;
+  DM1.Document.FieldByName('Struk_Id').AsInteger := vStruk_Id;
+  DM1.Document.FieldByName('Tip_Dok_Id').AsInteger := v_Tip_Dok;
+  DM1.Document.FieldByName('NDok').AsString := vNDoc;
+  DM1.Document.FieldByName('Klient_Id').AsInteger := s_Kodp;
+  DM1.Document.FieldByName('Date_Dok').AsDateTime := Date;
+  DM1.Document.FieldByName('Date_Op').AsDateTime := vDat_op;
+  DM1.Document.FieldByName('Zadacha_Id').AsString := vZadacha_Id;
 end;
 
 procedure TDM1.frReport1GetValue(const ParName: string; var ParValue: Variant);
@@ -1642,16 +1642,16 @@ begin
    dm1.NormSyrStruk_id.AsInteger:=DM1.IBQuery1.FieldByName('Struk_id').AsInteger;
    dm1.NormSyrSprod_id.AsInteger:=DM1.IBQuery1.FieldByName('Sprod_id').AsInteger;
    dm1.NormSyrNam.AsString:=DM1.IBQuery1.FieldByName('NaM').AsString;
-   dm1.NormSyrKraz.AsInteger:=strtoint(FSYRIE.edit6.text);
+   dm1.NormSyrKraz.AsInteger:=strtoint(FSYRIE.edt_kraz.text);
    dm1.NormSyrRazdel_id.AsInteger:=s_raz;
-   dm1.NormSyrksm_id.AsInteger:=s_ksmz;
+   dm1.NormSyrksm_id.AsInteger:=ksmIdAdd;
    dm1.NormSyrNeis.AsString:=FSYRIE.edit9.text;
    dm1.NormSyrKei_id.AsInteger:=s_keiz;
    dm1.NormSyrPrpf.AsInteger:=s_prpf;
    dm1.NormSyrVib.AsInteger:=1;
-   if FSYRIE.edit3.text='' then dm1.NormSyrPlnorm.AsFloat:=0
+   if FSYRIE.edt_plNorm.text='' then dm1.NormSyrPlnorm.AsFloat:=0
    else
-    dm1.NormSyrPlnorm.AsFloat:=strtoFloat(replacestr(FSYRIE.edit3.text,'.',','));
+    dm1.NormSyrPlnorm.AsFloat:=strtoFloat(replacestr(FSYRIE.edt_plNorm.text,'.',','));
    dm1.NormSyrStname.AsString:=DM1.IBQuery1.FieldByName('STNAME').AsString;
    dm1.NormSyr.Post;
   end;
