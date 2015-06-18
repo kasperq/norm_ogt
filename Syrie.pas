@@ -15,8 +15,8 @@ type
     ToolBar1: TToolBar;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
-    ToolButton1: TToolButton;
-    ToolButton2: TToolButton;
+    btn_changeData: TToolButton;
+    btn_delMaterial: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ImageList1: TImageList;
@@ -50,22 +50,22 @@ type
     Label21: TLabel;
     Label24: TLabel;
     Label25: TLabel;
-    Edit2: TEdit;
+    edt_ksmId: TEdit;
     Label26: TLabel;
-    Edit3: TEdit;
+    edt_plNorm: TEdit;
     RadioGroup2: TRadioGroup;
     FindDlgEh1: TFindDlgEh;
     Label27: TLabel;
     Edit4: TEdit;
     Edit5: TEdit;
     SpeedButton3: TSpeedButton;
-    ToolButton7: TToolButton;
+    btn_addMaterial: TToolButton;
     Label28: TLabel;
-    Edit6: TEdit;
-    CheckBox1: TCheckBox;
+    edt_kRaz: TEdit;
+    cbx_isPf: TCheckBox;
     SpeedButton4: TSpeedButton;
     Edit7: TEdit;
-    Edit8: TEdit;
+    edt_keiId: TEdit;
     Edit9: TEdit;
     SpeedButton5: TSpeedButton;
     Label6: TLabel;
@@ -86,11 +86,11 @@ type
     procedure DBGridEh1SortMarkingChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpinEdit2Change(Sender: TObject);
-    procedure ToolButton7Click(Sender: TObject);
+    procedure btn_addMaterialClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup2Click(Sender: TObject);
-    procedure Edit2Click(Sender: TObject);
-    procedure Edit2KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edt_ksmIdClick(Sender: TObject);
+    procedure edt_ksmIdKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ToolButton5MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButton6MouseDown(Sender: TObject; Button: TMouseButton;
@@ -99,17 +99,17 @@ type
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Edit4Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure Edit3Click(Sender: TObject);
-    procedure ToolButton1Click(Sender: TObject);
-    procedure ToolButton2Click(Sender: TObject);
+    procedure edt_plNormClick(Sender: TObject);
+    procedure btn_changeDataClick(Sender: TObject);
+    procedure btn_delMaterialClick(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
-    procedure Edit6Click(Sender: TObject);
+    procedure edt_kRazClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure Edit6KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure CheckBox1Click(Sender: TObject);
+    procedure edt_kRazKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure cbx_isPfClick(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure Edit8Click(Sender: TObject);
-    procedure Edit8KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edt_keiIdClick(Sender: TObject);
+    procedure edt_keiIdKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SpeedButton6Click(Sender: TObject);
     procedure Edit10Click(Sender: TObject);
     procedure Edit10KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -120,29 +120,38 @@ type
     procedure potrebCBClick(Sender: TObject);
   private
     { Private declarations }
+    procedure setNormSyRecord(ksmPrep, sprodId, ksmId, year, month, strukId,
+                              kRaz, razdelId, vib1, keiId : integer; stName,
+                              kodProd, namRegion, nMat, neis : string;
+                              plNorm : double; dateNorm : TDate);
+    procedure changeNormSyVib1ToVib;
+    procedure insertNormDocument;
+    function findNorms(kodProd, dateNorm : string) : boolean;
+    function isRecDeletedOrInsertedToNorms() : boolean;
+
   public
     { Public declarations }
   end;
 
 var
-  Splash: TForm;
-  AniBmp1: TBitmap;
-  FSyrie: TFSyrie;
-  s_ksmz:integer;
-  s_keiz: integer;
-  kod_z:string;
-  struk_z: integer;
-  s_prpf: integer;
-  Pr_ins_del:integer;
+  Splash : TForm;
+  AniBmp1 : TBitmap;
+  FSyrie : TFSyrie;
+  ksmIdAdd : integer;
+  s_keiz : integer;
+  kod_z : string;
+  struk_z : integer;
+  s_prpf : integer;
+  Pr_ins_del : integer;
 
 implementation
-  uses dm,Find_Spprod, Find_Matrop,Decode_Spprod,Decode_Matrop,ediz,razdel,
-  glmenu_ogt,Find_Struk;
+  uses dm, Find_Spprod, Find_Matrop, Decode_Spprod, Decode_Matrop, ediz,razdel,
+  glmenu_ogt, Find_Struk;
 {$R *.dfm}
 
-procedure TFSyrie.CheckBox1Click(Sender: TObject);
+procedure TFSyrie.cbx_isPfClick(Sender: TObject);
 begin
- if checkBox1.Checked=false then
+ if cbx_isPf.Checked=false then
   s_prpf:=0
  else
   s_prpf:=1;
@@ -190,16 +199,16 @@ begin
    dm1.NormSyNam.AsString:=FindSpprod.IBSpprodNaMe_reg.AsString;
    dm1.NormSyStruk_id.AsInteger:=FindSpprod.IBSpprodStruk_id.AsInteger;
    dm1.NormSySprod_id.AsInteger:=FindSpprod.IBSpprodSprod_id.AsInteger;
-   dm1.NormSyKraz.AsInteger:=strtoint(edit6.text);
+   dm1.NormSyKraz.AsInteger:=strtoint(edt_kRaz.text);
    dm1.NormSyRazdel_id.AsInteger:=s_raz;
-   dm1.NormSyksm_id.AsInteger:=s_ksmz;
+   dm1.NormSyksm_id.AsInteger:=ksmIdAdd;
    dm1.NormSyNeis.AsString:=edit9.text;
    dm1.NormSyKei_id.AsInteger:=s_keiz;
    dm1.NormSyPrpf.AsInteger:=s_prpf;
    dm1.NormSyVib.AsInteger:=1;
-   if edit3.text='' then dm1.NormSyPlnorm.AsFloat:=0
+   if edt_plNorm.text='' then dm1.NormSyPlnorm.AsFloat:=0
    else
-    dm1.NormSyPlnorm.AsFloat:=strtoFloat(replacestr(edit3.text,'.',','));
+    dm1.NormSyPlnorm.AsFloat:=strtoFloat(replacestr(edt_plNorm.text,'.',','));
    dm1.NormSyStname.AsString:=FindSpprod.IBSpprod.FieldByName('STNAME').AsString;
    dm1.NormSy.Post;
   end;
@@ -228,7 +237,7 @@ begin
  begin
   Sort := Copy(Sort,1,Length(Sort)-2);
   StartWait;
-  IF EDIT1.Text='' THEN S_KSM:=S_KSMZ;
+  IF EDIT1.Text='' THEN S_KSM:=ksmIdAdd;
   dm1.openNormSyr(s_ksm, god, mes, struk, usl, sort);
   StopWait;
  end;
@@ -283,8 +292,8 @@ begin
  LABEL24.Caption:='';
  LABEL25.Caption:='';
  edit1.text:='';
- Edit2.Text:='';
- Edit3.Text:='';
+ edt_ksmId.Text:='';
+ edt_plNorm.Text:='';
 
 end;
 
@@ -321,12 +330,12 @@ begin
      if DM1.NormSyPrpf.AsInteger=1 then
      begin
       s_prpf:=1;
-      checkBox1.Checked:=true;
+      cbx_isPf.Checked:=true;
      end
      else
      begin
       s_prpf:=0;
-      checkBox1.Checked:=false;
+      cbx_isPf.Checked:=false;
      end;
      StopWait;
     end
@@ -336,53 +345,53 @@ begin
  end;
 end;
 
-procedure TFSyrie.Edit2Click(Sender: TObject);
+procedure TFSyrie.edt_ksmIdClick(Sender: TObject);
 begin
- LABEL18.Caption:=' ';
- LABEL20.Caption:='';
- LABEL21.Caption:='';
- LABEL24.Caption:='';
- LABEL25.Caption:='';
- Edit2.Text:='';
- Edit3.Text:='';
- s_ksmz:=0;
+  LABEL18.Caption := ' ';
+  LABEL20.Caption := '';
+  LABEL21.Caption := '';
+  LABEL24.Caption := '';
+  LABEL25.Caption := '';
+  edt_ksmId.Text := '';
+  edt_plNorm.Text := '';
+  ksmIdAdd := 0;
 end;
 
-procedure TFSyrie.Edit2KeyDown(Sender: TObject; var Key: Word;
+procedure TFSyrie.edt_ksmIdKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-if key=vk_return then
- begin
-   if edit2.text<>''  then
-   begin
-    dM1.Matrop.Active:=false;
-    dM1.Matrop.ParamByName('ksm').AsInteger:=strtoint(edit2.text);
-    dM1.Matrop.Active:=TRUE;
-    if not dm1.Matrop.eof then
+  if (key = vk_return) then
+  begin
+    if (edt_ksmId.text <> '')  then
     begin
-     s_ksmz:=strtoint(edit2.text);
-     Label20.Caption :=dm1.Matrop.FieldByName('Xarkt').AsString;
-     Label21.Caption :=dm1.Matrop.FieldByName('Gost').AsString;
-     Label24.Caption :=dm1.MatropNamspsr.AsString;
-     Label25.Caption :=dm1.MatropNam.AsString;
-     Label18.Caption:=dm1.Matrop.FieldByName('Nmat').AsString;
-    end
-    else
-     showMessage('Нет такого кода! Воспользуйтесь справочником!');
-   end;
- end;
+      dM1.Matrop.Close;
+      dM1.Matrop.ParamByName('ksm').AsInteger := strtoint(edt_ksmId.text);
+      dM1.Matrop.Active := TRUE;
+      if (not dm1.Matrop.eof) then
+      begin
+        ksmIdAdd := strtoint(edt_ksmId.text);
+        Label20.Caption := dm1.Matrop.FieldByName('Xarkt').AsString;
+        Label21.Caption := dm1.Matrop.FieldByName('Gost').AsString;
+        Label24.Caption := dm1.MatropNamspsr.AsString;
+        Label25.Caption := dm1.MatropNam.AsString;
+        Label18.Caption := dm1.Matrop.FieldByName('Nmat').AsString;
+      end
+      else
+        showMessage('Нет такого кода! Воспользуйтесь справочником!');
+    end;
+  end;
 end;
 
-procedure TFSyrie.Edit3Click(Sender: TObject);
+procedure TFSyrie.edt_plNormClick(Sender: TObject);
 begin
- Edit3.Text:='';
+  edt_plNorm.Text := '';
 end;
 
 procedure TFSyrie.Edit4Click(Sender: TObject);
 begin
- Edit4.Text:='';
- Edit5.Text:='';
- struk:=0;
+  Edit4.Text := '';
+  Edit5.Text := '';
+  struk := 0;
 end;
 
 procedure TFSyrie.Edit4KeyDown(Sender: TObject; var Key: Word;
@@ -415,55 +424,57 @@ procedure TFSyrie.Edit4KeyDown(Sender: TObject; var Key: Word;
  end;
 end;
 
-procedure TFSyrie.Edit6Click(Sender: TObject);
+procedure TFSyrie.edt_kRazClick(Sender: TObject);
 begin
-Edit6.Text:='';
-Edit7.Text:='';
-usl:=' 0=0';
+  edt_kRaz.Text := '';
+  Edit7.Text := '';
+  usl := ' 0=0';
 end;
 
-procedure TFSyrie.Edit6KeyDown(Sender: TObject; var Key: Word;
+procedure TFSyrie.edt_kRazKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-if key=vk_return then
- begin
-   if edit6.text<>''  then
-   begin
-    if FRazdel=nil then FRazdel:=TFRazdel.Create(Application);
-    FRazdel.razdel.Active:=true;
-    if FRazdel.Razdel.Locate('kraz',strtoint(edit6.Text),[]) then
+  if (key = vk_return) then
+  begin
+    if (edt_kRaz.text <> '')  then
     begin
-     s_raz:=FRazdel.RazdelRazdel_id.AsInteger;
-     Edit7.Text:=FRazdel.RazdelNamraz.AsString;
-     Edit6.Text:=inttostr(FRazdel.RazdelKraz.AsInteger);
-     if usl<>'0=0' then
-      usl:=usl+' or norm.kraz='+inttostr(FRazdel.RazdelKraz.AsInteger);
+      if (FRazdel = nil) then
+        FRazdel := TFRazdel.Create(Application);
+      FRazdel.razdel.Active:=true;
+      if (FRazdel.Razdel.Locate('kraz', strtoint(edt_kRaz.Text), [])) then
+      begin
+        s_raz := FRazdel.RazdelRazdel_id.AsInteger;
+        Edit7.Text := FRazdel.RazdelNamraz.AsString;
+        edt_kRaz.Text := inttostr(FRazdel.RazdelKraz.AsInteger);
+        if (usl <> '0=0') then
+          usl := usl + ' or norm.kraz=' + inttostr(FRazdel.RazdelKraz.AsInteger);
+      end
+      else
+        showMessage('Нет такого кода! Воспользуйтесь справочником!');
     end
     else
-     showMessage('Нет такого кода! Воспользуйтесь справочником!');
-   end
-   else usl:=' 0=0';;
- end;
+      usl := ' 0=0';;
+  end;
 end;
 
-procedure TFSyrie.Edit8Click(Sender: TObject);
+procedure TFSyrie.edt_keiIdClick(Sender: TObject);
 begin
- edit8.Text:='';
- edit9.Text:='';
+  edt_keiId.Text := '';
+  edit9.Text := '';
 end;
 
-procedure TFSyrie.Edit8KeyDown(Sender: TObject; var Key: Word;
+procedure TFSyrie.edt_keiIdKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
  if key=vk_return then
  begin
-   if edit8.text<>''  then
+   if edt_keiId.text<>''  then
    begin
     if Find_Ediz=nil then Find_Ediz:=TFind_Ediz.Create(Application);
     Find_ediz.Ediz.Active:=true;
-    if Find_ediz.Ediz.Locate('kei_id',strtoint(edit8.Text),[]) then
+    if Find_ediz.Ediz.Locate('kei_id',strtoint(edt_keiId.Text),[]) then
     begin
-     Edit8.Text:=inttostr(Find_ediz.EdizKei_id.asinteger);
+     edt_keiId.Text:=inttostr(Find_ediz.EdizKei_id.asinteger);
      Edit9.Text:=Find_ediz.EdizNeis.AsString;
      s_keiz:=Find_ediz.EdizKei_id.asinteger;
     end
@@ -496,11 +507,11 @@ begin
  LABEL21.Caption:='';
  LABEL24.Caption:='';
  LABEL25.Caption:='';
- Edit2.Text:='';
- Edit3.Text:='';
+ edt_ksmId.Text:='';
+ edt_plNorm.Text:='';
  Edit4.Text:='';
  Edit5.Text:='';
- Edit6.Text:='';
+ edt_kRaz.Text:='';
  usl:='0=0';
  Pr_ins_del:=0;
 end;
@@ -555,12 +566,12 @@ begin
    if DM1.NormSyPrpf.AsInteger=1 then
    begin
     s_prpf:=1;
-    checkBox1.Checked:=true;
+    cbx_isPf.Checked:=true;
    end
    else
    begin
     s_prpf:=0;
-    checkBox1.Checked:=false;
+    cbx_isPf.Checked:=false;
    end;
   end;
  end;
@@ -603,8 +614,8 @@ begin
  FindMatrop.ShowModal;
  if FindMatrop.ModalResult > 50 then
  begin
-  s_ksmz:=FindMatrop.ModalResult-50;
-  edit2.Text:=inttostr(FindMatrop.ModalResult-50);
+  ksmIdAdd:=FindMatrop.ModalResult-50;
+  edt_ksmId.Text:=inttostr(FindMatrop.ModalResult-50);
   Label20.Caption :=FindMatrop.IBMatropXARKT.AsString;
   Label21.Caption :=FindMatrop.IBMatropGOST.AsString;
   Label24.Caption :=FindMatrop.IBMatropNamspsr.AsString;
@@ -642,12 +653,12 @@ begin
   if DM1.NormSyPrpf.AsInteger=1 then
   begin
    s_prpf:=1;
-   checkBox1.Checked:=true;
+   cbx_isPf.Checked:=true;
   end
   else
   begin
    s_prpf:=0;
-   checkBox1.Checked:=false;
+   cbx_isPf.Checked:=false;
   end;
   StopWait;
  end;
@@ -678,32 +689,42 @@ end;
 
 procedure TFSyrie.SpeedButton4Click(Sender: TObject);
 begin
-if FRazdel=nil then FRazdel:=TFRazdel.Create(Application);
-    FRazdel.ShowModal;
-    if FRazdel.ModalResult>50 then
-    begin
-     s_raz:=FRazdel.ModalResult-50;
-     Edit7.Text:=FRazdel.RazdelNamraz.AsString;
-     Edit6.Text:=inttostr(FRazdel.RazdelKraz.AsInteger);
-    end;
+  if (FRazdel = nil) then
+  begin
+    FRazdel := TFRazdel.Create(Application);
+    FRazdel.Width := 400;
+    FRazdel.Height := 350;
+  end;
+  FRazdel.ShowModal;
+  if (FRazdel.ModalResult > 50) then
+  begin
+    s_raz := FRazdel.ModalResult - 50;
+    Edit7.Text := FRazdel.RazdelNamraz.AsString;
+    edt_kRaz.Text := inttostr(FRazdel.RazdelKraz.AsInteger);
+  end;
 end;
 
 procedure TFSyrie.SpeedButton5Click(Sender: TObject);
 begin
- if Find_Ediz=nil then Find_Ediz:=TFind_Ediz.Create(Application);
- Find_Ediz.ShowModal;
- if Find_Ediz.ModalResult>50 then
- begin
-  Edit8.Text:=inttostr(Find_Ediz.EDIZKEI_ID.AsInteger);
-  Edit9.Text:=Find_Ediz.EDIZNeis.AsString;
-  s_keiz:=Find_ediz.EdizKei_id.asinteger;
- end;
+  if (Find_Ediz = nil) then
+    Find_Ediz := TFind_Ediz.Create(Application);
+  Find_Ediz.ShowModal;
+  if (Find_Ediz.ModalResult > 50) then
+  begin
+    edt_keiId.Text := inttostr(Find_Ediz.EDIZKEI_ID.AsInteger);
+    Edit9.Text := Find_Ediz.EDIZNeis.AsString;
+    s_keiz := Find_ediz.EdizKei_id.asinteger;
+  end;
 end;
 
 procedure TFSyrie.SpeedButton6Click(Sender: TObject);
 begin
 	if (FRazdel = nil) then
+  begin
   	FRazdel := TFRazdel.Create(Application);
+    FRazdel.Width := 400;
+    FRazdel.Height := 350;
+  end;
   FRazdel.ShowModal;
   if (FRazdel.ModalResult > 50) then
   begin
@@ -718,191 +739,222 @@ end;
 
 procedure TFSyrie.SpinEdit2Change(Sender: TObject);
 begin
- god:=SpinEdit2.Value;
- IF MES<10 THEN S_MES:='0'+INTTOSTR(MES) ELSE S_MES:=INTTOSTR(MES);
- S_DAT1:='01.'+S_MES+'.'+copy(INTTOSTR(GOD),3,2);
- S_DAT2:=datetostr(IncMonth(strtodate(s_dat1),1)-1);
+  god := SpinEdit2.Value;
+  IF (MES < 10) THEN
+    S_MES := '0' + INTTOSTR(MES)
+  ELSE
+    S_MES := INTTOSTR(MES);
+  S_DAT1 := '01.' + S_MES + '.' + copy(INTTOSTR(GOD), 3, 2);
+  S_DAT2 := datetostr(IncMonth(strtodate(s_dat1), 1) - 1);
 end;
 
-procedure TFSyrie.ToolButton1Click(Sender: TObject);
+procedure TFSyrie.btn_changeDataClick(Sender: TObject);
 begin
- if (edit2.Text<>'')or (edit3.Text<>'') or (edit6.Text<>'')or
- (s_prpf<>dm1.normSyPrpf.asinteger) or (edit8.Text<>'') then
- begin
-  if MessageDlg('Произвести замену данных?', mtConfirmation, [mbYes, mbNo], 0)=mrYes then
+  if (edt_ksmId.Text <> '') or (edt_plNorm.Text <> '') or (edt_kRaz.Text <> '')
+     or (s_prpf <> dm1.normSyPrpf.asinteger) or (edt_keiId.Text <> '') then
   begin
-   DM1.NormSy.DisableControls;
-   try
-    StartWait;
-    Pr_ins_del:=0;
-    dm1.NormSy.First;
-    While not dm1.NormSy.Eof do
+    if (MessageDlg('Произвести замену данных?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
     begin
-     if dm1.NormSyVib.AsInteger=1 then
-     begin
-      if edit2.Text<>'' then
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyKsm_id.AsInteger:=s_ksmz;
-       dm1.NormSy.Post;
+      DM1.NormSy.DisableControls;
+      try
+        StartWait;
+        Pr_ins_del := 0;
+        dm1.NormSy.First;
+        While (not dm1.NormSy.Eof) do
+        begin
+          if (dm1.NormSyVib.AsInteger = 1) then
+          begin
+            if (edt_ksmId.Text <> '') then
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyKsm_id.AsInteger := ksmIdAdd;
+              dm1.NormSy.Post;
+            end;
+            if (edt_plNorm.Text <> '') then
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyPlnorm.AsFloat := strtofloat(replacestr(edt_plNorm.text, '.', ','));
+              dm1.NormSy.Post;
+            end;
+            if (edt_kRaz.Text <> '') then
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyKraz.AsInteger := strtoint(edt_kRaz.text);
+              dm1.NormSyRazdel_id.AsInteger := s_raz;
+              dm1.NormSy.Post;
+            end;
+            if (edt_keiId.Text <> '') then
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyKei_id.AsInteger := s_keiz;
+              dm1.NormSyNeis.AsString := edit9.Text;
+              dm1.NormSy.Post;
+            end;
+            if (not cbx_isPf.Checked) then
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyPrpf.AsInteger := 0;
+              dm1.NormSyNazprpf.AsString := '';
+              dm1.NormSy.Post
+            end
+            else
+            begin
+              dm1.NormSy.Edit;
+              dm1.NormSyPrpf.AsInteger := 1;
+              dm1.NormSyNazprpf.AsString := 'п/ф';
+              dm1.NormSy.Post
+            end;
+          end;
+          dm1.NormSy.Next;
+        end;
+      finally
+        StopWait;
       end;
-      if edit3.Text<>'' then
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyPlnorm.AsFloat:=strtofloat(replacestr(edit3.text,'.',','));
-       dm1.NormSy.Post;
-      end;
-      if edit6.Text<>'' then
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyKraz.AsInteger:=strtoint(edit6.text);
-       dm1.NormSyRazdel_id.AsInteger:=s_raz;
-       dm1.NormSy.Post;
-      end;
-      if edit8.Text<>'' then
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyKei_id.AsInteger:=s_keiz;
-       dm1.NormSyNeis.AsString:=edit9.Text;
-       dm1.NormSy.Post;
-      end;
-      if CheckBox1.Checked=False then
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyPrpf.AsInteger:=0;
-       dm1.NormSyNazprpf.AsString:='';
-       dm1.NormSy.Post
-      end
-      else
-      begin
-       dm1.NormSy.Edit;
-       dm1.NormSyPrpf.AsInteger:=1;
-       dm1.NormSyNazprpf.AsString:='п/ф';
-       dm1.NormSy.Post
-      end;
-     end;
-     dm1.NormSy.Next;
     end;
-   finally
-    StopWait;
-   end;
+    dm1.NormSy.EnableControls;
   end;
-  dm1.NormSy.EnableControls;
- end;
 end;
 
-procedure TFSyrie.ToolButton2Click(Sender: TObject);
+procedure TFSyrie.btn_delMaterialClick(Sender: TObject);
 var
-pr_del: boolean;
-mm: integer;
-gg: integer;
+  pr_del : boolean;
 begin
-if MessageDlg('Удалять сырье из помеченных препаратов? ',mtConfirmation, [mbYes,mbNo], 0) = mrYes then
-begin
-try
- if Spis_rashif.Active then Spis_Rashif.Close;
- Spis_rashif.EmptyTable;
- Spis_Rashif.Open;
- Pr_ins_del:=2;
- DM1.NormSy.First;
- while not DM1.NormSy.Eof do
- BEGIN
-  pr_del:=false;
-  if dm1.NormSyVib.AsInteger=1 then
+  if (MessageDlg('Удалять сырье из помеченных препаратов? ', mtConfirmation, [mbYes,mbNo], 0) = mrYes) then
   begin
-   s_kodp:=DM1.NormSyKodp.AsInteger;
-   if DM1.DOCUMENT.active then DM1.DOCUMENT.Close;
-   DM1.DOcUMENT.MacroByName('USL').AsString:='WHERE DOcUMENT.STRUK_ID='+INTTOSTR(VsTRUK_ID)
-   + ' AND (DOCUMENT.TIP_OP_ID=119)'
-   + ' and document.klient_id='+inttostr(s_kodp)
-   + ' AND Document.Date_op='+''''+s_dat1+'''';
-   DM1.DOCUMENT.OPEN;
-   dm1.openNorm(dm1.NormSyKodp.AsInteger, god, mes, 119);
-   if not dm1.norm.Eof then
-   begin
-     if DM1.Norm.Locate('ksm_id;razdel_id',VarArrayOf([dm1.normSyKsm_id.AsInteger,dm1.normSyRazdel_id.AsInteger]),[]) then
-     begin
-      dm1.Norm.Delete;
+    try
+      if (Spis_rashif.Active) then
+        Spis_Rashif.Close;
+      Spis_rashif.EmptyTable;
+      Spis_Rashif.Open;
+      Pr_ins_del := 2;
+      DM1.NormSy.First;
+      while not DM1.NormSy.Eof do
+      BEGIN
+        pr_del := false;
+        if (dm1.NormSyVib.AsInteger = 1) then
+        begin
+          s_kodp := DM1.NormSyKodp.AsInteger;
+          if (DM1.DOCUMENT.active) then
+            DM1.DOCUMENT.Close;
+          DM1.DOcUMENT.MacroByName('USL').AsString := 'WHERE DOcUMENT.STRUK_ID='
+                                                      + INTTOSTR(VsTRUK_ID)
+                                                      + ' AND (DOCUMENT.TIP_OP_ID=119)'
+                                                      + ' and document.klient_id='
+                                                      + inttostr(s_kodp)
+                                                      + ' AND Document.Date_op='
+                                                      + '''' + s_dat1 + '''';
+          DM1.DOCUMENT.OPEN;
+          dm1.openNorm(dm1.NormSyKodp.AsInteger, god, mes, 119);
+          if (not dm1.norm.Eof) then
+          begin
+            if (DM1.Norm.Locate('ksm_id;razdel_id',
+                                VarArrayOf([dm1.normSyKsm_id.AsInteger, dm1.normSyRazdel_id.AsInteger]),
+                                [])) then
+            begin
+              dm1.Norm.Delete;
+              DM1.NormSy.Delete;
+              pr_del := true;
+            end
+          end
+          else
+          begin
+            if (dm1.Document.Eof) then
+              insertNormDocument;
+            vdocument_id := dm1.documentDoc_id.AsInteger;
+            if (findNorms(inttostr(s_kodp), datetostr(dm1.NormSyDatanorm.AsDateTime))) then
+              pr_del := isRecDeletedOrInsertedToNorms();
+          end;
+          DM1.ApplyUpdatesNorm;
+          dm1.norm.First;
+          if (dm1.norm.Locate('nazprpf', 'п/ф', [])) then
+          begin
+    //   Запись признака наличиея п/ф ( 1-есть п/ф)
+            Spis_Rashif.Insert;
+            Spis_RashifKodp.asinteger := dm1.normKodp.AsInteger;
+            Spis_RashifStruk_id.asinteger := dm1.normStruk_id.AsInteger;
+            Spis_Rashif.post;
+          end;
+        end;
+        if (not pr_del) then
+          dm1.NormSy.Next;
+      end;
+    except
+      On E : Exception do
+      begin
+        MessageDlg('Произошла ошибка при удалении записи!' + E.Message, mtWarning, [mbOK], 0);
+        Abort;
+      end;
+    end;
+  end;
+end;
+
+function TFSyrie.isRecDeletedOrInsertedToNorms() : boolean;
+var
+  mm : integer;
+  gg : integer;
+begin
+  result := false;
+  dm1.IBQuery1.First;
+  while (not DM1.IBQuery1.Eof) do
+  begin
+    if (dm1.IBQuery1.FieldByName('ksm_id').AsInteger = dm1.normSyKsm_id.AsInteger)
+       and (dm1.IBQuery1.FieldByName('razdel_id').AsInteger = dm1.normSyRazdel_id.AsInteger) then
+    begin
       DM1.NormSy.Delete;
-      pr_del:=true;
-     end
-   end
-   else
-   begin
-    if not dm1.Document.Eof then vdocument_id:=dm1.documentDoc_id.AsInteger
+      result := true
+    end
     else
     begin
-     vTip_Op_Id:=119;
-     v_Tip_Dok:=102;
-     vNDoc:='Нор'+inttostr(S_Kodp)+'-'+inttostr(mes)+'.'+inttostr(god);
-     vDat_op:=strtodate(s_dat1);
-     dm1.Document.Insert;
-     dm1.Document.Post;
-    end;
-    if dm1.IBQuery1.Active then dm1.IBQuery1.Close;
-    DM1.IBQuery1.SQL.Clear;
-    DM1.IBQuery1.SQL.Add('SELECT normn.* FROM  normn');
-    DM1.IBQuery1.SQL.Add(' where normn.kodp='+inttostr(s_kodp));
-    DM1.IBQuery1.SQL.Add(' and normn.datanorm='+''''+datetostr(dm1.NormSyDatanorm.AsDateTime)+'''');
-    DM1.IBQuery1.SQL.Add(' and normn.Tip_op_id=119');
-    dm1.IBQuery1.Open;
-    while not DM1.IBQuery1.Eof do
-    begin
-     if (dm1.IBQuery1.FieldByName('ksm_id').AsInteger=dm1.normSyKsm_id.AsInteger)and
-     (dm1.IBQuery1.FieldByName('razdel_id').AsInteger=dm1.normSyRazdel_id.AsInteger) then
-     begin
-      DM1.NormSy.Delete;
-      pr_del:=true
-     end
-     else
-     begin
-      mm:=month(dm1.IBQuery1.FieldByName('datanorm').AsDateTime);
-      gg:=year(dm1.IBQuery1.FieldByName('datanorm').AsDateTime);
-      if (mm<>mes)or(gg<>god) then
+      mm := month(dm1.IBQuery1.FieldByName('datanorm').AsDateTime);
+      gg := year(dm1.IBQuery1.FieldByName('datanorm').AsDateTime);
+      if (mm <> mes) or (gg <> god) then
       begin
-       dm1.Norm.Insert;
-       dm1.Norm.FieldByName('doc_id').value:=vdocument_id;
-       dm1.Norm.FieldByName('struk_id').value:=dm1.IBQuery1.FieldByName('struk_id').AsInteger;
-       dm1.Norm.FieldByName('Kodp').value:=dm1.IBQuery1.FieldByName('kodp').AsInteger;
-       dm1.Norm.FieldByName('KRaz').value:=dm1.IBQuery1.FieldByName('Kraz').Asinteger;
-       dm1.Norm.FieldByName('KSM_ID').value:=dm1.IBQuery1.FieldByName('Ksm_id').Asinteger;
-       dm1.Norm.FieldByName('Kei_id').value:=dm1.IBQuery1.FieldByName('Kei_id').Asinteger;
-       dm1.Norm.FieldByName('Razdel_id').value:=dm1.IBQuery1.FieldByName('Razdel_id').AsInteger;
-       dm1.Norm.FieldByName('Prpf').value:=dm1.IBQuery1.FieldByName('Prpf').AsInteger;
-       dm1.Norm.FieldByName('Plnorm').value:=dm1.IBQuery1.FieldByName('Plnorm').AsFloat;
-       dm1.Norm.FieldByName('Nazprpf').value:=dm1.IBQuery1.FieldByName('Nazprpf').AsString;
-       dm1.Norm.FieldByName('Pr_Ov').value:=dm1.IBQuery1.FieldByName('Pr_Ov').AsInteger;
-       dm1.Norm.FieldByName('Tip_Op_id').value:=119;
-       dm1.Norm.FieldByName('Mes').value:=Mes;
-       dm1.Norm.FieldByName('God').value:=God;
-       dm1.Norm.FieldByName('datanorm').value:=s_dat1;
-       DM1.Norm.Post
+        dm1.Norm.Insert;
+        dm1.Norm.FieldByName('doc_id').value := vdocument_id;
+        dm1.Norm.FieldByName('struk_id').value := dm1.IBQuery1.FieldByName('struk_id').AsInteger;
+        dm1.Norm.FieldByName('Kodp').value := dm1.IBQuery1.FieldByName('kodp').AsInteger;
+        dm1.Norm.FieldByName('KRaz').value := dm1.IBQuery1.FieldByName('Kraz').Asinteger;
+        dm1.Norm.FieldByName('KSM_ID').value := dm1.IBQuery1.FieldByName('Ksm_id').Asinteger;
+        dm1.Norm.FieldByName('Kei_id').value := dm1.IBQuery1.FieldByName('Kei_id').Asinteger;
+        dm1.Norm.FieldByName('Razdel_id').value := dm1.IBQuery1.FieldByName('Razdel_id').AsInteger;
+        dm1.Norm.FieldByName('Prpf').value := dm1.IBQuery1.FieldByName('Prpf').AsInteger;
+        dm1.Norm.FieldByName('Plnorm').value := dm1.IBQuery1.FieldByName('Plnorm').AsFloat;
+        dm1.Norm.FieldByName('Nazprpf').value := dm1.IBQuery1.FieldByName('Nazprpf').AsString;
+        dm1.Norm.FieldByName('Pr_Ov').value := dm1.IBQuery1.FieldByName('Pr_Ov').AsInteger;
+        dm1.Norm.FieldByName('Tip_Op_id').value := 119;
+        dm1.Norm.FieldByName('Mes').value := Mes;
+        dm1.Norm.FieldByName('God').value := God;
+        dm1.Norm.FieldByName('datanorm').value := s_dat1;
+        DM1.Norm.Post
       end;
-     end;
-     dm1.IBQuery1.Next;
     end;
-   end;
-   DM1.ApplyUpdatesNorm;
-   dm1.norm.First;
-   if dm1.norm.Locate('nazprpf','п/ф',[]) then
-   begin
-//   Запись признака наличиея п/ф ( 1-есть п/ф)
-    Spis_Rashif.Insert;
-    Spis_RashifKodp.asinteger:=dm1.normKodp.AsInteger;
-    Spis_RashifStruk_id.asinteger:=dm1.normStruk_id.AsInteger;
-    Spis_Rashif.post;
-   end;
+    dm1.IBQuery1.Next;
   end;
-  if not pr_del then dm1.NormSy.Next;
- end;
-except
- On E: Exception do
- begin
-  MessageDlg('Произошла ошибка при удалении записи!'+E.Message, mtWarning, [mbOK], 0);
-  Abort;
- end;
 end;
+
+function TFSyrie.findNorms(kodProd, dateNorm : string) : boolean;
+begin
+  result := false;
+  if (dm1.IBQuery1.Active) then
+    dm1.IBQuery1.Close;
+  DM1.IBQuery1.SQL.Clear;
+  DM1.IBQuery1.SQL.Add('SELECT normn.* FROM  normn');
+  DM1.IBQuery1.SQL.Add(' where normn.kodp=' + kodProd);
+  DM1.IBQuery1.SQL.Add(' and normn.datanorm=' + '''' + dateNorm + '''');
+  DM1.IBQuery1.SQL.Add(' and normn.Tip_op_id=119');
+  dm1.IBQuery1.Open;
+  if (dm1.IBQuery1.RecordCount > 0) then
+    result := true;
 end;
+
+procedure TFSyrie.insertNormDocument;
+begin
+  vTip_Op_Id := 119;
+  v_Tip_Dok := 102;
+  vNDoc := 'Нор' + inttostr(S_Kodp) + '-' + inttostr(mes) + '.' + inttostr(god);
+  vDat_op := strtodate(s_dat1);
+  dm1.Document.Insert;
+  dm1.Document.Post;
 end;
 
 procedure TFSyrie.ToolButton3Click(Sender: TObject);
@@ -962,7 +1014,7 @@ begin
       				if (pr_ins_del = 0)
               	 and (dm1.IBQuery1.FieldByName('norm_id').Asinteger = s_norm_id) then
 //      (dm1.IBQuery1.FieldByName('ksm_id').Asinteger=s_ksm) and
-//       (Edit6.text<>'')and (Edit10.text<>Edit6.text) then
+//       (edt_kRaz.text<>'')and (Edit10.text<>edt_kRaz.text) then
               else
               begin
                	dm1.Norm.Insert;
@@ -1054,11 +1106,11 @@ begin
       Spis_Rashif.Next;
    	end;
 // восстановление NormSyr
-   	if (s_ksmz <> 0) then
+   	if (ksmIdAdd <> 0) then
    	begin
-      s_ksm := s_ksmz;
-      edit1.Text := edit2.Text;
-      edit10.Text := edit6.Text;
+      s_ksm := ksmIdAdd;
+      edit1.Text := edt_ksmId.Text;
+      edit10.Text := edt_kRaz.Text;
       edit11.Text := edit7.Text;
       label19.Caption := label18.Caption;
       label5.Caption := label21.Caption;
@@ -1083,12 +1135,12 @@ begin
    	if (DM1.NormSyPrpf.AsInteger = 1) then
    	begin
       s_prpf := 1;
-      checkBox1.Checked := true;
+      cbx_isPf.Checked := true;
    	end
    	else
    	begin
       s_prpf := 0;
-      checkBox1.Checked := false;
+      cbx_isPf.Checked := false;
    	end;
  		Splash.Free;
 	except
@@ -1138,14 +1190,14 @@ begin
 	s_ksm_spr := DM1.NormSyKsm_id.AsInteger;
 end;
 
-procedure TFSyrie.ToolButton7Click(Sender: TObject);
+procedure TFSyrie.btn_addMaterialClick(Sender: TObject);
 var
   s_kod_prod : string;
   s_nam_prod : string;
   s_reg_prod : string;
   s_nam_struk : string;
 begin
-  if (s_ksmz = 0) then
+  if (ksmIdAdd = 0) then
   begin
     MessageDlg('Введите код сырья в окне "Сырье или п/ф для добавления или замены:"!', mtWarning, [mbOK], 0);
     Abort;
@@ -1167,7 +1219,6 @@ begin
   dm1.openNormSyr(s_ksmz, god, mes, struk, usl, sort);
   StopWait;
  end; }
-
 { if DM1.NormSy.Active then
  begin
   if DM1.NormSy.Eof then s_datanorm:=strtodate(s_dat1) else s_datanorm:= DM1.NormSyDatanorm.AsDateTime;
@@ -1177,7 +1228,6 @@ begin
   DM1.NormSy.Edit;
   Pr_ins_del:=1;
  end;}
-
  	if (MessageDlg('Произвести вставку данных?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
  	begin
   	Pr_ins_del := 1;
@@ -1201,57 +1251,73 @@ begin
          	DM1.NormSyVib.AsInteger := 0;
          	dm1.NormSy.Post;
          	dm1.NormSy.Insert;
-         	dm1.NormSyKodp.AsInteger := s_kodp;
-         	dm1.NormSySprod_id.AsInteger := s_sprod;
-         	DM1.NormSy.FieldByName('KSM_ID').AsInteger := S_Ksmz;
-         	DM1.NormSy.FieldByName('stname').AsString := s_nam_struk;
-         	DM1.NormSy.FieldByName('kod_prod').AsString := s_kod_prod;
-         	DM1.NormSy.FieldByName('Nam').AsString := s_reg_prod;
-         	DM1.NormSy.FieldByName('Nmat').AsString := s_nam_prod;
-         	DM1.NormSy.FieldByName('GOD').AsInteger := god;
-         	DM1.NormSy.FieldByName('MES').AsInteger := mes;
-         	DM1.NormSy.FieldByName('STRUK_id').AsInteger := Struk;
-         	dm1.NormSyPlnorm.AsFloat := strtofloat(replacestr(edit3.text, '.', ','));
-         	dm1.NormSyKraz.AsInteger := strtoint(edit6.text);
-         	dm1.NormSyRazdel_id.AsInteger := s_raz;
-         	DM1.NormSyDatanorm.AsDateTime := s_datanorm;
-         	DM1.NormSyVib1.AsInteger := 2;
-//         	DM1.NormSyVib.AsInteger := 1;
-         	dm1.NormSyKei_id.AsInteger := s_keiz;
-         	dm1.NormSyNeis.AsString := edit9.Text;
-         	if (CheckBox1.Checked = False) then
-         	begin
-            dm1.NormSyPrpf.AsInteger := 0;
-            dm1.NormSyNazprpf.AsString := '';
-         	end
-         	else
-         	begin
-            dm1.NormSyPrpf.AsInteger := 1;
-            dm1.NormSyNazprpf.AsString := 'п/ф';
-         	end;
+          setNormSyRecord(s_kodp, s_sprod, ksmIdAdd, god, mes, struk, strtoint(edt_kRaz.text),
+                          s_raz, 2, s_keiz, s_nam_struk, s_kod_prod, s_reg_prod,
+                          s_nam_prod, edit9.text, strtofloat(replacestr(edt_plNorm.text, '.', ',')),
+                          s_datanorm);
          	dm1.NormSy.Post;
          	dm1.NormSy.First;
       	end;
       	dm1.NormSy.Next;
      	end;
       dm1.NormSy.Filtered := false;
-   		dm1.NormSy.First;
-      While (not dm1.NormSy.Eof) do
-      begin
-        if (DM1.NormSy.FieldByName('vib1').AsInteger = 2) then
-        begin
-          DM1.NormSy.Edit;
-          DM1.NormSyVib.AsInteger := 1;
-          DM1.NormSyVib1.AsInteger := 0;
-          dm1.NormSy.Post;
-      	end;
-      	dm1.NormSy.Next;
-    	end;
+      changeNormSyVib1ToVib;
   	finally
    		StopWait;
   	end;
 		dm1.NormSy.EnableControls;
  	end;
+end;
+
+procedure TFSyrie.changeNormSyVib1ToVib;
+begin
+  dm1.NormSy.First;
+  While (not dm1.NormSy.Eof) do
+  begin
+    if (DM1.NormSy.FieldByName('vib1').AsInteger = 2) then
+    begin
+      DM1.NormSy.Edit;
+      DM1.NormSyVib.AsInteger := 1;
+      DM1.NormSyVib1.AsInteger := 0;
+      dm1.NormSy.Post;
+    end;
+    dm1.NormSy.Next;
+  end;
+end;
+
+procedure TFSyrie.setNormSyRecord(ksmPrep, sprodId, ksmId, year, month, strukId,
+                                  kRaz, razdelId, vib1, keiId : integer; stName,
+                                  kodProd, namRegion, nMat, neis : string;
+                                  plNorm : double; dateNorm : TDate);
+begin
+  dm1.NormSyKodp.AsInteger := ksmPrep;
+  dm1.NormSySprod_id.AsInteger := sprodId;
+  DM1.NormSy.FieldByName('KSM_ID').AsInteger := ksmId;
+  DM1.NormSy.FieldByName('stname').AsString := stName;
+  DM1.NormSy.FieldByName('kod_prod').AsString := kodProd;
+  DM1.NormSy.FieldByName('Nam').AsString := namRegion;
+  DM1.NormSy.FieldByName('Nmat').AsString := nMat;
+  DM1.NormSy.FieldByName('GOD').AsInteger := year;
+  DM1.NormSy.FieldByName('MES').AsInteger := month;
+  DM1.NormSy.FieldByName('STRUK_id').AsInteger := strukId;
+  dm1.NormSyPlnorm.AsFloat := plNorm;
+  dm1.NormSyKraz.AsInteger := kRaz;
+  dm1.NormSyRazdel_id.AsInteger := razdelId;
+  DM1.NormSyDatanorm.AsDateTime := dateNorm;
+  DM1.NormSyVib1.AsInteger := vib1;
+//  DM1.NormSyVib.AsInteger := 1;
+  dm1.NormSyKei_id.AsInteger := keiId;
+  dm1.NormSyNeis.AsString := neis;
+  if (cbx_isPf.Checked) then
+  begin
+    dm1.NormSyPrpf.AsInteger := 1;
+    dm1.NormSyNazprpf.AsString := 'п/ф';
+  end
+  else
+  begin
+    dm1.NormSyPrpf.AsInteger := 0;
+    dm1.NormSyNazprpf.AsString := '';
+  end;
 end;
 
 

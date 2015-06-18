@@ -79,6 +79,8 @@ type
     procedure ToolButton5MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ComboBox1Change(Sender: TObject);
+    procedure DBGridEh3KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     procedure saveNorms;
     function checkDoubleRecords() : boolean;
@@ -146,47 +148,73 @@ var
   nm : integer;
 begin
   nm := 0;
-  if dbgrideh3.SelectedField.FieldName='KEI_ID' then nm:=1;
-  if dbgrideh3.SelectedField.FieldName='KSM_ID' then nm:=2;
-  if dbgrideh3.SelectedField.FieldName='KRAZ' then nm:=3;
-dm1.Norm.Edit;
-case nm of
-1: begin
-    if Find_Ediz=nil then Find_Ediz:=TFind_Ediz.Create(Application);
-//    DM1.FormToObject(Find_Ediz,DbgridEh3);
-    Find_Ediz.ShowModal;
-    if Find_Ediz.ModalResult > 50 then
+  if (dbgrideh3.SelectedField.FieldName = 'KEI_ID') then
+    nm := 1;
+  if (dbgrideh3.SelectedField.FieldName = 'KSM_ID') then
+    nm := 2;
+  if (dbgrideh3.SelectedField.FieldName = 'KRAZ') then
+    nm := 3;
+  dm1.Norm.Edit;
+  case nm of
+  1:
     begin
-     s_kei:=Find_Ediz.ModalResult-50;
-     dm1.NormKei_id.AsInteger:=find_ediz.EDIZKei_Id.AsInteger;
-     dm1.NormNeis.AsString:=find_ediz.EdizNeis.AsString;
+      if (Find_Ediz = nil) then
+        Find_Ediz := TFind_Ediz.Create(Application);
+  //    DM1.FormToObject(Find_Ediz,DbgridEh3);
+      Find_Ediz.ShowModal;
+      if (Find_Ediz.ModalResult > 50) then
+      begin
+        s_kei := Find_Ediz.ModalResult - 50;
+        dm1.NormKei_id.AsInteger := find_ediz.EDIZKei_Id.AsInteger;
+        dm1.NormNeis.AsString := find_ediz.EdizNeis.AsString;
+      end;
     end;
-   end;
-2: begin
-    if FindMatrop=nil then FindMatrop:=TfindMatrop.Create(Application);
-    FindMatrop.DataBaseName:=dm1.BELMED;
-    FindMatrop.ReadOnly:=true;
-    FindMatrop.ShowModal;
-    if FindMatrop.ModalResult > 50 then
+  2:
     begin
-     dm1.Norm.FieldByName('Ksm_Id').AsInteger :=FindMatrop.ModalResult-50;
-     dm1.Norm.FieldByName('Gost').AsString :=FindMatrop.IBMatropGOST.AsString;
-     dm1.Norm.FieldByName('Nmat').AsString :=FindMatrop.IBMatropNMAT.AsString;
-     dm1.Norm.FieldByName('Kei_Id').AsInteger :=FindMatrop.IBMatropKei_id.AsInteger;
-     dm1.Norm.FieldByName('Xarkt').AsString :=FindMatrop.IBMatropXARKT.AsString;
+      if (FindMatrop = nil) then
+        FindMatrop := TfindMatrop.Create(Application);
+      FindMatrop.DataBaseName := dm1.BELMED;
+      FindMatrop.ReadOnly := true;
+      FindMatrop.ShowModal;
+      if (FindMatrop.ModalResult > 50) then
+      begin
+        dm1.Norm.FieldByName('Ksm_Id').AsInteger := FindMatrop.ModalResult - 50;
+        dm1.Norm.FieldByName('Gost').AsString := FindMatrop.IBMatropGOST.AsString;
+        dm1.Norm.FieldByName('Nmat').AsString := FindMatrop.IBMatropNMAT.AsString;
+        dm1.Norm.FieldByName('Kei_Id').AsInteger := FindMatrop.IBMatropKei_id.AsInteger;
+        dm1.Norm.FieldByName('Xarkt').AsString := FindMatrop.IBMatropXARKT.AsString;
+        dm1.normKOD_PROD_KSM.AsString := dm1.getKodProd(dm1.normKSM_ID.AsInteger);
+      end;
     end;
-   end;
-3: begin
-    if FRazdel=nil then FRazdel:=TFRazdel.Create(Application);
-    FRazdel.ShowModal;
-    if FRazdel.ModalResult>50 then
+  3:
     begin
-     dm1.NormRazdel_id.AsInteger:=FRazdel.ModalResult-50;
-     dm1.NormKraz.AsInteger:=FRazdel.RazdelKraz.AsInteger;
+      if (FRazdel = nil) then
+        FRazdel := TFRazdel.Create(Application);
+      FRazdel.ShowModal;
+      if (FRazdel.ModalResult > 50) then
+      begin
+        dm1.NormRazdel_id.AsInteger := FRazdel.ModalResult - 50;
+        dm1.NormKraz.AsInteger := FRazdel.RazdelKraz.AsInteger;
+      end;
     end;
-   end;
   end;
+end;
 
+procedure TFNorm.DBGridEh3KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (key = vk_return) and (dbgrideh3.SelectedField.FieldName = 'KSM_ID') then
+  begin
+    if (dm1.findMatrop(StrToInt(dbgrideh3.InplaceEditor.Text))) then
+    begin
+      dm1.Norm.FieldByName('Ksm_Id').AsInteger := dm1.q_matropKSM_ID.AsInteger;
+      dm1.Norm.FieldByName('Gost').AsString := dm1.q_matropGOST.AsString;
+      dm1.Norm.FieldByName('Nmat').AsString := dm1.q_matropNMAT.AsString;
+      dm1.Norm.FieldByName('Kei_Id').AsInteger := dm1.q_matropKei_id.AsInteger;
+      dm1.Norm.FieldByName('Xarkt').AsString := dm1.q_matropXARKT.AsString;
+      dm1.normKOD_PROD_KSM.AsString := dm1.getKodProd(dm1.normKSM_ID.AsInteger);
+    end;
+  end;
 end;
 
 procedure TFNorm.Edit1Change(Sender: TObject);

@@ -53,35 +53,35 @@ object FSyrie: TFSyrie
       ShowHint = True
       OnMouseDown = ToolButton6MouseDown
     end
-    object ToolButton1: TToolButton
+    object btn_changeData: TToolButton
       Left = 158
       Top = 0
       Hint = #1047#1072#1084#1077#1085#1072' '#1082#1086#1076#1072' '#1089#1099#1088#1100#1103' '#1080'/'#1080#1083#1080' '#1085#1086#1088#1084#1099
-      Caption = 'ToolButton1'
+      Caption = 'btn_changeData'
       ImageIndex = 9
       ParentShowHint = False
       ShowHint = True
-      OnClick = ToolButton1Click
+      OnClick = btn_changeDataClick
     end
-    object ToolButton7: TToolButton
+    object btn_addMaterial: TToolButton
       Left = 189
       Top = 0
       Hint = #1042#1089#1090#1072#1074#1080#1090#1100' '#1089#1099#1088#1100#1077' '#1074' '#1087#1086#1084#1077#1095#1077#1085#1085#1099#1077' '#1087#1088#1077#1087#1072#1088#1072#1090#1099
-      Caption = 'ToolButton7'
+      Caption = 'btn_addMaterial'
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True
-      OnClick = ToolButton7Click
+      OnClick = btn_addMaterialClick
     end
-    object ToolButton2: TToolButton
+    object btn_delMaterial: TToolButton
       Left = 220
       Top = 0
       Hint = #1059#1076#1072#1083#1080#1090#1100' '#1089#1099#1088#1100#1077' '#1080#1079' '#1087#1086#1084#1077#1095#1077#1085#1085#1099#1093' '#1087#1088#1077#1087#1072#1088#1072#1090#1086#1074
-      Caption = 'ToolButton2'
+      Caption = 'btn_delMaterial'
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
-      OnClick = ToolButton2Click
+      OnClick = btn_delMaterialClick
     end
     object ToolButton3: TToolButton
       Left = 251
@@ -106,8 +106,8 @@ object FSyrie: TFSyrie
     object Label1: TLabel
       Left = 313
       Top = 0
-      Width = 48
-      Height = 30
+      Width = 54
+      Height = 13
       Margins.Bottom = 0
       Caption = '   '#1052#1077#1089':'#1103#1094':  '
       Font.Charset = DEFAULT_CHARSET
@@ -143,7 +143,7 @@ object FSyrie: TFSyrie
         ' '#1076#1077#1082#1072#1073#1088#1100)
     end
     object Label3: TLabel
-      Left = 467
+      Left = 473
       Top = 0
       Width = 30
       Height = 30
@@ -158,7 +158,7 @@ object FSyrie: TFSyrie
       Layout = tlCenter
     end
     object SpinEdit2: TSpinEdit
-      Left = 497
+      Left = 503
       Top = 0
       Width = 50
       Height = 30
@@ -350,9 +350,9 @@ object FSyrie: TFSyrie
       Glyph.Data = {
         D6000000424D160100000000000076000000280000000A000000040000000100
         200000000000A000000000000000000000001000000000000000FFFFFF00FFFF
-        FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       OnClick = SpeedButton3Click
@@ -394,7 +394,7 @@ object FSyrie: TFSyrie
       Left = 364
       Top = 7
       Width = 59
-      Height = 22
+      Height = 19
       Color = clWhite
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
@@ -412,7 +412,7 @@ object FSyrie: TFSyrie
       Left = 48
       Top = 7
       Width = 57
-      Height = 22
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -429,7 +429,7 @@ object FSyrie: TFSyrie
       Left = 104
       Top = 7
       Width = 125
-      Height = 22
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -444,7 +444,7 @@ object FSyrie: TFSyrie
       Left = 48
       Top = 33
       Width = 29
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -461,7 +461,7 @@ object FSyrie: TFSyrie
       Left = 75
       Top = 33
       Width = 154
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -886,11 +886,11 @@ object FSyrie: TFSyrie
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object Edit2: TEdit
+    object edt_ksmId: TEdit
       Left = 92
       Top = 25
       Width = 54
-      Height = 22
+      Height = 19
       Color = clWhite
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
@@ -901,14 +901,14 @@ object FSyrie: TFSyrie
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      OnClick = Edit2Click
-      OnKeyDown = Edit2KeyDown
+      OnClick = edt_ksmIdClick
+      OnKeyDown = edt_ksmIdKeyDown
     end
-    object Edit3: TEdit
+    object edt_plNorm: TEdit
       Left = 243
       Top = 72
       Width = 100
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -918,7 +918,7 @@ object FSyrie: TFSyrie
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 1
-      OnClick = Edit3Click
+      OnClick = edt_plNormClick
     end
     object RadioGroup2: TRadioGroup
       Left = 468
@@ -933,11 +933,11 @@ object FSyrie: TFSyrie
       TabOrder = 2
       OnClick = RadioGroup2Click
     end
-    object Edit6: TEdit
+    object edt_kRaz: TEdit
       Left = 47
       Top = 50
       Width = 29
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -947,10 +947,10 @@ object FSyrie: TFSyrie
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 3
-      OnClick = Edit6Click
-      OnKeyDown = Edit6KeyDown
+      OnClick = edt_kRazClick
+      OnKeyDown = edt_kRazKeyDown
     end
-    object CheckBox1: TCheckBox
+    object cbx_isPf: TCheckBox
       Left = 355
       Top = 75
       Width = 89
@@ -966,13 +966,13 @@ object FSyrie: TFSyrie
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 4
-      OnClick = CheckBox1Click
+      OnClick = cbx_isPfClick
     end
     object Edit7: TEdit
       Left = 74
       Top = 50
       Width = 188
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -983,11 +983,11 @@ object FSyrie: TFSyrie
       ParentFont = False
       TabOrder = 5
     end
-    object Edit8: TEdit
+    object edt_keiId: TEdit
       Left = 47
       Top = 72
       Width = 30
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -997,14 +997,14 @@ object FSyrie: TFSyrie
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 6
-      OnClick = Edit8Click
-      OnKeyDown = Edit8KeyDown
+      OnClick = edt_keiIdClick
+      OnKeyDown = edt_keiIdKeyDown
     end
     object Edit9: TEdit
       Left = 76
       Top = 72
       Width = 76
-      Height = 20
+      Height = 19
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1041,7 +1041,7 @@ object FSyrie: TFSyrie
     Left = 512
     Top = 4
     Bitmap = {
-      494C01010D000F00200018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D000F00240018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       000000000000000000000000000000000000000000000000000000000000A87D
       7800B7818300B7818300B7818300B7818300B7818300B7818300B7818300B781

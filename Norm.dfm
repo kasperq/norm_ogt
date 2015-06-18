@@ -529,7 +529,7 @@ object FNorm: TFNorm
       Left = 62
       Top = 7
       Width = 131
-      Height = 22
+      Height = 19
       Color = clWhite
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
@@ -580,6 +580,7 @@ object FNorm: TFNorm
     TitleParams.MultiTitle = True
     TitleParams.RowHeight = 25
     OnEditButtonClick = DBGridEh3EditButtonClick
+    OnKeyDown = DBGridEh3KeyDown
     Columns = <
       item
         Checkboxes = True
@@ -710,7 +711,7 @@ object FNorm: TFNorm
     Left = 792
     Top = 4
     Bitmap = {
-      494C01010B000D00280018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D002C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
