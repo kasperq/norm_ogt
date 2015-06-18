@@ -646,6 +646,7 @@ type
   public
     kurs, kursPrint, forceCalc : boolean;
     percents : integer;
+    inNorm : boolean;
 
     procedure openNorm(kodp, god, mes, oper : integer);
     procedure startRWTranss;
@@ -823,6 +824,7 @@ procedure TDM1.DataModuleCreate(Sender: TObject);
  var
   IniOGT: TIniFile;
 begin
+  inNorm := false;
   kurs := false;
   kursPrint := false;
   IniOGT := TIniFile.Create('OGT.Ini');
@@ -1724,13 +1726,13 @@ procedure TDM1.ApplyUpdatesNorm;
 begin
   startRWTranss;
   try
-    if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) then
+    if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) and (inNorm) then
       DM1.Document.Delete;
     if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount > 0) then
       DM1.Document.ApplyUpdates;
     if (DM1.Norm.UpdatesPending) then
       DM1.Norm.ApplyUpdates;
-    if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount = 0) then
+    if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount = 0) and (inNorm) then
       DM1.Document.ApplyUpdates;
     DM1.IBT_WRITE.Commit;
     DM1.IBT_READ.CommitRetaining;

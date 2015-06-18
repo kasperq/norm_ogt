@@ -80,6 +80,8 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure DBGridEh3KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormHide(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure saveNorms;
     function checkDoubleRecords() : boolean;
@@ -304,6 +306,11 @@ begin
   end;
 end;
 
+procedure TFNorm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  dm1.inNorm := false;
+end;
+
 procedure TFNorm.FormCreate(Sender: TObject);
 begin
   s_kodp := 0;
@@ -320,8 +327,14 @@ begin
   LABEL8.Caption := '';
 end;
 
+procedure TFNorm.FormHide(Sender: TObject);
+begin
+   dm1.inNorm := false;
+end;
+
 procedure TFNorm.FormShow(Sender: TObject);
 begin
+  dm1.inNorm := true;
   dm1.IBT_WRITE.Active:=FALSE;
   dm1.IBT_READ.Active:=FALSE;
   dm1.startRWTranss;

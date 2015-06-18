@@ -516,6 +516,7 @@ end;
 
 procedure TFSyrie.FormShow(Sender: TObject);
 begin
+  dm1.inNorm := false;
  dm1.IBT_WRITE.Active:=FALSE;
  dm1.IBT_READ.Active:=FALSE;
  dm1.startRWTranss;
