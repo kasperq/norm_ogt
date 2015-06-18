@@ -1728,7 +1728,7 @@ begin
   try
     if (not DM1.Document.Eof) and (dm1.norm.RecordCount = 0) and (inNorm) then
       DM1.Document.Delete;
-    if (DM1.Document.UpdatesPending) and (dm1.Document.RecordCount > 0) then
+    if ((DM1.Document.UpdatesPending) and (not inNorm)) or (document.RecordCount > 0) then
       DM1.Document.ApplyUpdates;
     if (DM1.Norm.UpdatesPending) then
       DM1.Norm.ApplyUpdates;
