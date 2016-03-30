@@ -179,12 +179,21 @@ begin
       FindMatrop.ShowModal;
       if (FindMatrop.ModalResult > 50) then
       begin
+        dm1.isChangingKsmId := true;
         dm1.Norm.FieldByName('Ksm_Id').AsInteger := FindMatrop.ModalResult - 50;
         dm1.Norm.FieldByName('Gost').AsString := FindMatrop.IBMatropGOST.AsString;
         dm1.Norm.FieldByName('Nmat').AsString := FindMatrop.IBMatropNMAT.AsString;
-        dm1.Norm.FieldByName('Kei_Id').AsInteger := FindMatrop.IBMatropKei_id.AsInteger;
+        if (MessageDlg('Изменить единицу измерения нормы расхода?', mtWarning, [mbYes, mbNo], 0) = mrYes) then
+        begin
+          dm1.Norm.FieldByName('Kei_Id').AsInteger := FindMatrop.IBMatropKei_id.AsInteger;
+          if (not dM1.Ediz_asy.Active) then
+            dm1.Ediz_asy.Active := true;
+          if (dm1.Ediz_ASY.Locate('kei_id',dm1.NormKei_id.AsInteger,[])) then
+            dm1.NormNeis.AsString := dm1.Ediz_asyNeis.AsString
+        end;
         dm1.Norm.FieldByName('Xarkt').AsString := FindMatrop.IBMatropXARKT.AsString;
         dm1.normKOD_PROD_KSM.AsString := dm1.getKodProd(dm1.normKSM_ID.AsInteger);
+        dm1.isChangingKsmId := false;
       end;
     end;
   3:
@@ -199,6 +208,7 @@ begin
       end;
     end;
   end;
+  dm1.isChangingKsmId := false;
 end;
 
 procedure TFNorm.DBGridEh3KeyDown(Sender: TObject; var Key: Word;
@@ -211,7 +221,14 @@ begin
       dm1.Norm.FieldByName('Ksm_Id').AsInteger := dm1.q_matropKSM_ID.AsInteger;
       dm1.Norm.FieldByName('Gost').AsString := dm1.q_matropGOST.AsString;
       dm1.Norm.FieldByName('Nmat').AsString := dm1.q_matropNMAT.AsString;
-      dm1.Norm.FieldByName('Kei_Id').AsInteger := dm1.q_matropKei_id.AsInteger;
+      if (MessageDlg('Изменить единицу измерения нормы расхода?', mtWarning, [mbYes, mbNo], 0) = mrYes) then
+      begin
+        dm1.Norm.FieldByName('Kei_Id').AsInteger := dm1.q_matropKei_id.AsInteger;
+        if (not dM1.Ediz_asy.Active) then
+          dm1.Ediz_asy.Active := true;
+        if (dm1.Ediz_ASY.Locate('kei_id',dm1.NormKei_id.AsInteger,[])) then
+          dm1.NormNeis.AsString := dm1.Ediz_asyNeis.AsString
+      end;
       dm1.Norm.FieldByName('Xarkt').AsString := dm1.q_matropXARKT.AsString;
       dm1.normKOD_PROD_KSM.AsString := dm1.getKodProd(dm1.normKSM_ID.AsInteger);
     end;
