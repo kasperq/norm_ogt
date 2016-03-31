@@ -647,7 +647,8 @@ type
     kurs, kursPrint, forceCalc : boolean;
     percents : integer;
     inNorm : boolean;
-    isChangingKsmId : boolean;
+    curKeiId : integer;
+    curNeis : string;
 
     procedure openNorm(kodp, god, mes, oper : integer);
     procedure startRWTranss;
@@ -825,7 +826,6 @@ procedure TDM1.DataModuleCreate(Sender: TObject);
  var
   IniOGT: TIniFile;
 begin
-  isChangingKsmId := false;
   inNorm := false;
   kurs := false;
   kursPrint := false;
@@ -1581,30 +1581,54 @@ end;
 
 procedure TDM1.normKEI_IDValidate(Sender: TField);
 begin
-{  if (not dM1.Ediz_asy.Active) then
+  if (not dM1.Ediz_asy.Active) then
     dm1.Ediz_asy.Active := true;
   if (dm1.Ediz_ASY.Locate('kei_id',dm1.NormKei_id.AsInteger,[])) then
   begin
     dm1.NormNeis.AsString := dm1.Ediz_asyNeis.AsString
   end
   else
-    showMessage('Нет такого кода! Воспользуйтесь справочником!');  }
+    showMessage('Нет такого кода! Воспользуйтесь справочником!');
 end;
 
 procedure TDM1.normKSM_IDValidate(Sender: TField);
 begin
-  {dM1.Matrop.Active:=false;
-  dM1.Matrop.ParamByName('ksm').AsInteger:=NORM.FieldByName('Ksm_Id').AsInteger;
-  dM1.Matrop.Active:=TRUE;
+  dM1.Matrop.Active := false;
+  dM1.Matrop.ParamByName('ksm').AsInteger := NORM.FieldByName('Ksm_Id').AsInteger;
+  dM1.Matrop.Active := TRUE;
   if (not dm1.Matrop.eof) then
   begin
     NORM.FieldByName('Gost').AsString := dm1.MatropGOST.AsString;
-    NORM.FieldByName('Nmat').AsString := dm1.Matrop.FieldByName('Nmat').AsString;;
-    NORM.FieldByName('Kei_Id').AsInteger := dm1.Matrop.FieldByName('Kei_id').AsInteger;;
+    NORM.FieldByName('Nmat').AsString := dm1.Matrop.FieldByName('Nmat').AsString;
     NORM.FieldByName('Xarkt').AsString := dm1.Matrop.FieldByName('Xarkt').AsString;
+    if (inNorm) and
+       (dm1.Norm.FieldByName('Kei_Id').AsInteger <> 0) and
+       (NORM.FieldByName('Kei_Id').AsInteger <> dm1.Matrop.FieldByName('Kei_id').AsInteger) then
+    begin
+      normKEI_ID.OnValidate := nil;
+      curKeiId := NORM.FieldByName('Kei_Id').AsInteger;
+      curNeis := NORM.FieldByName('neis').AsString;
+      NORM.FieldByName('Kei_Id').AsInteger := dm1.Matrop.FieldByName('Kei_id').AsInteger;
+      if (not dM1.Ediz_asy.Active) then
+        dm1.Ediz_asy.Active := true;
+      if (dm1.Ediz_ASY.Locate('kei_id',dm1.NormKei_id.AsInteger,[])) then
+      begin
+        dm1.NormNeis.AsString := dm1.Ediz_asyNeis.AsString
+      end;
+      if (MessageDlg('Изменить единицу измерения нормы расхода c '
+                     + curNeis + ' на ' + dm1.NormNeis.AsString + '? '
+                     , mtWarning, [mbYes, mbNo], 0) = mrNo) then
+      begin
+        NORM.FieldByName('Kei_Id').AsInteger := curKeiId;
+        dm1.NormNeis.AsString := curNeis;
+      end;
+      normKEI_ID.OnValidate := normKEI_IDValidate;
+    end
+    else
+      NORM.FieldByName('Kei_Id').AsInteger := dm1.Matrop.FieldByName('Kei_id').AsInteger;
   end
   else
-    showMessage('Нет такого кода! Воспользуйтесь справочником!');  }
+    showMessage('Нет такого кода! Воспользуйтесь справочником!');  
 end;
 
 procedure TDM1.normNewRecord(DataSet: TDataSet);

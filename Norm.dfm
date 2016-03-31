@@ -176,7 +176,7 @@ object FNorm: TFNorm
         Width = 101
         Height = 21
         DropDownCount = 12
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox1Change
         Items.Strings = (
@@ -687,6 +687,18 @@ object FNorm: TFNorm
         EditButtons = <>
         FieldName = 'ZNACH'
         Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DOC_ID'
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        FieldName = 'NORM_ID'
+        Footers = <>
+        Visible = False
       end>
   end
   object ImageList1: TImageList
@@ -695,7 +707,7 @@ object FNorm: TFNorm
     Left = 792
     Top = 4
     Bitmap = {
-      494C01010B000D00340018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00380018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
