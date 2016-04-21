@@ -653,6 +653,7 @@ procedure TFNorm.ProsmNorm;
 //  prevNorms : boolean;
 begin
 //  prevNorms := false;
+  dm1.normLoading := true;
   vTip_Op_Id := 119;
   v_Tip_Dok := 102;
   vDocument_Id := 0;
@@ -769,7 +770,8 @@ begin
 //    if (prevNorms) then
 //      saveNorms;
     dm1.norm.First;
-  end
+  end;
+  dm1.normLoading := false;
 end;
 
 end.

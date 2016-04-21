@@ -649,6 +649,7 @@ type
     inNorm : boolean;
     curKeiId : integer;
     curNeis : string;
+    normLoading : boolean;
 
     procedure openNorm(kodp, god, mes, oper : integer);
     procedure startRWTranss;
@@ -826,6 +827,7 @@ procedure TDM1.DataModuleCreate(Sender: TObject);
  var
   IniOGT: TIniFile;
 begin
+  normLoading := false;
   inNorm := false;
   kurs := false;
   kursPrint := false;
@@ -1601,9 +1603,9 @@ begin
     NORM.FieldByName('Gost').AsString := dm1.MatropGOST.AsString;
     NORM.FieldByName('Nmat').AsString := dm1.Matrop.FieldByName('Nmat').AsString;
     NORM.FieldByName('Xarkt').AsString := dm1.Matrop.FieldByName('Xarkt').AsString;
-    if (inNorm) and
-       (dm1.Norm.FieldByName('Kei_Id').AsInteger <> 0) and
-       (NORM.FieldByName('Kei_Id').AsInteger <> dm1.Matrop.FieldByName('Kei_id').AsInteger) then
+    if (inNorm) and (not normLoading)
+      { (dm1.Norm.FieldByName('Kei_Id').AsInteger <> 0) and
+       (NORM.FieldByName('Kei_Id').AsInteger <> dm1.Matrop.FieldByName('Kei_id').AsInteger)} then
     begin
       normKEI_ID.OnValidate := nil;
       curKeiId := NORM.FieldByName('Kei_Id').AsInteger;
