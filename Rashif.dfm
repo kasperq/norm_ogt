@@ -129,6 +129,7 @@ object FRashif: TFRashif
       Width = 168
       Height = 30
       Caption = #1042#1080#1076' '#1088#1072#1089#1096#1080#1092#1088#1086#1074#1082#1080
+      Color = clBtnFace
       Columns = 2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
@@ -139,6 +140,8 @@ object FRashif: TFRashif
       Items.Strings = (
         #1087#1086#1083#1085#1072#1103
         #1082#1086#1088#1086#1090#1082#1072#1103)
+      ParentBackground = False
+      ParentColor = False
       ParentFont = False
       TabOrder = 1
       OnClick = RadioGroup2Click
@@ -163,11 +166,14 @@ object FRashif: TFRashif
       Width = 321
       Height = 30
       Caption = #1044#1072#1090#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072
+      Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
+      ParentBackground = False
+      ParentColor = False
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
@@ -223,7 +229,6 @@ object FRashif: TFRashif
         Width = 101
         Height = 21
         DropDownCount = 12
-        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox1Change
         Items.Strings = (
@@ -711,36 +716,28 @@ object FRashif: TFRashif
     Align = alClient
     AutoFitColWidths = True
     DataSource = DM1.DSRashif
+    DynProps = <>
     Flat = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clNavy
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = [fsBold]
-    HorzScrollBar.Tracking = True
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleHeight = 25
-    TitleImages = ImageList1
-    UseMultiTitle = True
-    VertScrollBar.Tracking = True
+    TitleParams.Images = ImageList1
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 25
     OnDrawColumnCell = DBGridEh3DrawColumnCell
     Columns = <
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KRAZ'
         Footers = <>
@@ -749,6 +746,7 @@ object FRashif: TFRashif
       end
       item
         Checkboxes = False
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KSM_ID'
         Footers = <>
@@ -756,6 +754,7 @@ object FRashif: TFRashif
         Width = 48
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NMAT'
         Footers = <>
@@ -763,6 +762,7 @@ object FRashif: TFRashif
         Width = 172
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NEIS'
         Footers = <>
@@ -771,6 +771,7 @@ object FRashif: TFRashif
       end
       item
         DisplayFormat = '### ### ### ##0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CENA'
         Footers = <>
@@ -779,6 +780,7 @@ object FRashif: TFRashif
       end
       item
         DisplayFormat = '######0.000000'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PLNORM'
         Footers = <>
@@ -787,6 +789,7 @@ object FRashif: TFRashif
       end
       item
         DisplayFormat = '### ### ### ##0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CEN_NDS'
         Footers = <>
@@ -795,6 +798,7 @@ object FRashif: TFRashif
       end
       item
         DisplayFormat = '### ### ### ##0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CENNORM'
         Footers = <>
@@ -803,6 +807,7 @@ object FRashif: TFRashif
       end
       item
         DisplayFormat = '### ### ### ##0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NDS'
         Footers = <>
@@ -812,6 +817,7 @@ object FRashif: TFRashif
       item
         Checkboxes = False
         DisplayFormat = '### ### ### ##0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CENNORM_NDS'
         Footers = <>
@@ -819,6 +825,7 @@ object FRashif: TFRashif
         Width = 92
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'DATCEN'
         Footers = <>
@@ -826,23 +833,28 @@ object FRashif: TFRashif
         Width = 123
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'ZNAK'
         Footers = <>
         Visible = False
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PRIX_REG'
         Footers = <>
         Title.Caption = #1057#1090#1088#1072#1085#1072' '#1087#1088#1080#1093'.'
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'DAT_PRIX'
         Footers = <>
         Visible = False
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Panel3: TPanel
     Left = 0
@@ -868,31 +880,24 @@ object FRashif: TFRashif
       Align = alLeft
       AutoFitColWidths = True
       DataSource = DM1.DSsumRash_Razd
+      DynProps = <>
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clNavy
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = [fsBold]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab]
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
+      IndicatorOptions = [gioShowRowIndicatorEh]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
       ParentFont = False
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clBlack
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      TitleHeight = 25
-      UseMultiTitle = True
-      VertScrollBar.Tracking = True
+      TitleParams.MultiTitle = True
+      TitleParams.RowHeight = 25
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'NAMRAZ'
           Footers = <>
@@ -901,6 +906,7 @@ object FRashif: TFRashif
         end
         item
           DisplayFormat = '### ### ### ##0.00'
+          DynProps = <>
           EditButtons = <>
           FieldName = 'SUMCENNORM'
           Footers = <>
@@ -909,6 +915,7 @@ object FRashif: TFRashif
         end
         item
           DisplayFormat = '### ### ### ##0.00'
+          DynProps = <>
           EditButtons = <>
           FieldName = 'SUMCENNORM_NDS'
           Footers = <>
@@ -916,11 +923,14 @@ object FRashif: TFRashif
           Width = 122
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'KODRAZ'
           Footers = <>
           Visible = False
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object DBGridEh2: TDBGridEh
       Left = 554
@@ -930,31 +940,24 @@ object FRashif: TFRashif
       Align = alClient
       AutoFitColWidths = True
       DataSource = DM1.DSPfnorm
+      DynProps = <>
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clNavy
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = [fsBold]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab]
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
+      IndicatorOptions = [gioShowRowIndicatorEh]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
       ParentFont = False
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clBlack
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      TitleHeight = 25
-      UseMultiTitle = True
-      VertScrollBar.Tracking = True
+      TitleParams.MultiTitle = True
+      TitleParams.RowHeight = 25
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'STNAME'
           Footers = <>
@@ -962,12 +965,14 @@ object FRashif: TFRashif
           Width = 93
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'KOD_PROD'
           Footers = <>
           Title.Caption = #1050#1086#1076' '#1087'/'#1092
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'NMAT'
           Footers = <>
@@ -975,6 +980,7 @@ object FRashif: TFRashif
           Width = 204
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PLNORM'
           Footers = <>
@@ -982,6 +988,7 @@ object FRashif: TFRashif
           Width = 87
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'NEIS'
           Footers = <>
@@ -989,12 +996,15 @@ object FRashif: TFRashif
           Width = 46
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'KRAZ'
           Footers = <>
           Title.Caption = #1056#1072#1079#1076#1077#1083
           Width = 49
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel2: TPanel
       Left = 1
@@ -1039,7 +1049,7 @@ object FRashif: TFRashif
     Left = 544
     Top = 36
     Bitmap = {
-      494C01010F0034004C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F003400580018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000000000002A9226FF2D99

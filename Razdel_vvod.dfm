@@ -24,25 +24,19 @@ object FRazdel_vvod: TFRazdel_vvod
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSrazdel
+    DynProps = <>
     Flat = True
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'Tahoma'
-    FooterFont.Style = []
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab]
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
     RowLines = 1
     STFilter.Visible = True
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    TitleHeight = 35
+    TitleParams.RowHeight = 35
     Columns = <
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAMRAZ'
         Footers = <>
@@ -51,6 +45,7 @@ object FRazdel_vvod: TFRazdel_vvod
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KRAZ'
         Footers = <>
@@ -60,6 +55,7 @@ object FRazdel_vvod: TFRazdel_vvod
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'KODRAZ'
         Footers = <>
@@ -67,6 +63,8 @@ object FRazdel_vvod: TFRazdel_vvod
         Title.Caption = #1050#1086#1076' '#1088#1072#1079#1076#1077#1083#1072' '#1076#1083#1103' '#1088#1072#1089#1096#1080#1092#1088#1086#1074#1086#1082
         Width = 88
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object ToolBar1: TToolBar
     Left = 0
@@ -127,7 +125,9 @@ object FRazdel_vvod: TFRazdel_vvod
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT *'
       '  FROM razdel'
@@ -202,7 +202,7 @@ object FRazdel_vvod: TFRazdel_vvod
     Left = 360
     Top = 124
     Bitmap = {
-      494C01010B000D00040018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00080018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

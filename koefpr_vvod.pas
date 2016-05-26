@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ImgList, DB, IBCustomDataSet, IBUpdateSQL, IBUpdSQLW, IBQuery,
-  RxIBQuery, ComCtrls, ExtCtrls, DBCtrls, ToolWin, Grids, DBGridEh, FindDlgEh;
+  RxIBQuery, ComCtrls, ExtCtrls, DBCtrls, ToolWin, Grids, DBGridEh, FindDlgEh,
+  System.UITypes, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFkoefpr_vvod = class(TForm)

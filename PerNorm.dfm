@@ -358,7 +358,9 @@ object FPerNorm: TFPerNorm
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT * '
       ' FROM  normn '
@@ -512,6 +514,9 @@ object FPerNorm: TFPerNorm
   object Normn_asy: TIBQuery
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       'SELECT *'
       'FROM norm_view(119,:god,:mes,0,0,0) norm')
@@ -673,7 +678,9 @@ object FPerNorm: TFPerNorm
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
     BeforeInsert = Otx_impBeforeInsert
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT *'
       '  FROM Norm_Otxody')
@@ -896,7 +903,9 @@ object FPerNorm: TFPerNorm
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT * '
       ' FROM  arxnorm '
@@ -1037,7 +1046,9 @@ object FPerNorm: TFPerNorm
     Transaction = DM1.IBT_Read
     AutoCalcFields = False
     BeforeInsert = IBArhRashiBeforeInsert
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT * '
       ' FROM Arhrashi '
@@ -1141,6 +1152,9 @@ object FPerNorm: TFPerNorm
   object IBQuery1: TIBQuery
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       ''
       ''
@@ -1152,6 +1166,9 @@ object FPerNorm: TFPerNorm
   object IBPodpis: TIBQuery
     Database = DM1.BELMED
     Transaction = DM1.IBT_Read
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       'SELECT *'
       'FROM podpis')

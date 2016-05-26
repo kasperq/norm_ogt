@@ -5,8 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGridEh, StdCtrls, DBCtrls, ExtCtrls, Spin, ImgList,
-  ComCtrls, ToolWin, Buttons, ActnList, FindDlgEh, UtilRIB,RxStrUtils,VCLUtils,
-  DateUtils,SplshWnd, DB, RxMemDS,Utilr, kbmMemTable;
+  ComCtrls, ToolWin, Buttons, ActnList, FindDlgEh, UtilRIB,RxStrUtils, rxVCLUtils,
+  DateUtils, rxSplshWnd, DB, RxMemDS,Utilr, kbmMemTable, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  System.UITypes;
 
 type
   TFSyrie = class(TForm)
