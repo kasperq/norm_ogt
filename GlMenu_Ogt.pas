@@ -9,8 +9,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, Menus, RxGIF, ImgList, ComCtrls, ToolWin, jpeg,
   StdCtrls,DateUtils, RXCtrls, DBCtrls, Grids, DBGridEh, DBGrids,
-  RxMemDS, DBTables, IBCustomDataSet, IBQuery,SplshWnd, Buttons,UtilRIB,FileUtil,IniFiles,
-  ActnList, BDEConfig;
+  RxMemDS, DBTables, IBCustomDataSet, IBQuery, rxSplshWnd, Buttons, UtilRIB,
+  rxFileUtil,IniFiles, ActnList, BDEConfig, System.Actions;
 type
   TFGlmenu_ogt = class(TForm)
     MainMenu1: TMainMenu;

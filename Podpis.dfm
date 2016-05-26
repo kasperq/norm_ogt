@@ -27,6 +27,7 @@ object FPodpis: TFPodpis
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 0
+    Transparent = False
     object ToolButton1: TToolButton
       Left = 0
       Top = 0
@@ -101,16 +102,14 @@ object FPodpis: TFPodpis
       Top = 0
       Width = 24
       Height = 30
+      Align = alLeft
       Glyph.Data = {
-        16010000424D5601000000000000B6000000280000000A000000040000000100
-        200000000000A000000000000000000000001000000000000000000000000000
+        96000000424D960000000000000076000000280000000A000000040000000100
+        0400000000002000000000000000000000001000000000000000000000000000
         80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
-        FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFF00
+        000000FF00FF0000000000FF00FF00000000FFFFFFFFFF000000}
+      Transparent = False
       OnClick = SpeedButton3Click
     end
     object Label1: TLabel
@@ -120,6 +119,7 @@ object FPodpis: TFPodpis
       Height = 30
       Margins.Bottom = 0
       Caption = '   '#1042#1099#1073#1077#1088#1080#1090#1077' '#13#10'   '#1076#1086#1082#1091#1084#1077#1085#1090':'
+      Transparent = False
       Layout = tlCenter
     end
     object Label14: TLabel
@@ -142,7 +142,6 @@ object FPodpis: TFPodpis
       Width = 286
       Height = 21
       Ctl3D = False
-      ItemHeight = 13
       ParentCtl3D = False
       TabOrder = 2
       OnChange = ComboBox1Change
@@ -167,33 +166,26 @@ object FPodpis: TFPodpis
       Align = alClient
       AutoFitColWidths = True
       DataSource = DM1.DSpodpis
+      DynProps = <>
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clNavy
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = [fsBold]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab]
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
+      IndicatorOptions = [gioShowRowIndicatorEh]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
       ParentFont = False
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clBlack
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      TitleHeight = 25
-      UseMultiTitle = True
-      VertScrollBar.Tracking = True
+      TitleParams.MultiTitle = True
+      TitleParams.RowHeight = 25
       OnDrawColumnCell = DBGridEh3DrawColumnCell
       Columns = <
         item
           Alignment = taCenter
+          DynProps = <>
           EditButtons = <>
           FieldName = 'POLOG'
           Footers = <>
@@ -201,6 +193,7 @@ object FPodpis: TFPodpis
           Width = 108
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'DOLG'
           Footers = <>
@@ -229,6 +222,7 @@ object FPodpis: TFPodpis
           Width = 269
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'FIO'
           Footers = <>
@@ -263,6 +257,8 @@ object FPodpis: TFPodpis
           Title.Caption = #1060#1072#1084#1080#1083#1080#1103', '#1080#1084#1103', '#1086#1090#1095#1077#1089#1090#1074#1086
           Width = 292
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
   end
   object ImageList1: TImageList
@@ -271,7 +267,7 @@ object FPodpis: TFPodpis
     Left = 536
     Top = 140
     Bitmap = {
-      494C01010B000D00040018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00140018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

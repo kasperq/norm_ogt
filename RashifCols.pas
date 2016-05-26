@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, kbmMemTable, Grids, DBGridEh, IniFiles;
+  Dialogs, DB, kbmMemTable, Grids, DBGridEh, IniFiles, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFRashifCols = class(TForm)

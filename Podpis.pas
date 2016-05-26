@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, IBCustomDataSet, IBQuery, StdCtrls, DBCtrls, ImgList, ComCtrls,
   ToolWin, Buttons, Grids, DBGridEh, ExtCtrls, Mask, DBCtrlsEh, DBLookupEh,UtilRIB
-  ,RxStrUtils;
+  ,RxStrUtils, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, GridsEh, DBAxisGridsEh, System.UITypes;
 type
   TFPodpis = class(TForm)
     ToolBar1: TToolBar;
@@ -61,7 +62,7 @@ begin
 end;
 
 procedure TFPodpis.DBGridEh3DrawColumnCell(Sender: TObject; const Rect: TRect;
-  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+  DataCol: Integer; Column: TColumnEh; State: GridsEh.TGridDrawState);
 begin
  if dm1.PodpisStruk_id.AsInteger=0 then
  begin

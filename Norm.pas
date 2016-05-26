@@ -5,8 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, DBCtrls, ToolWin, ComCtrls, DBGrids, StdCtrls, Grids,
-  DBGridEh, Mask, Spin, Buttons, ImgList,RxStrUtils,VCLUtils,DateUtils,RxMemDS,
-  DB, kbmMemTable;
+  DBGridEh, Mask, Spin, Buttons, ImgList,RxStrUtils,rxVCLUtils,DateUtils,RxMemDS,
+  DB, kbmMemTable, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, GridsEh, DBAxisGridsEh, System.UITypes;
 
 type
   TFNorm = class(TForm)

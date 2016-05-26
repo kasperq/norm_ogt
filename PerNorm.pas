@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, IBCustomDataSet, IBQuery, ImgList, ComCtrls, ToolWin, DBTables,
-  IBUpdateSQL, IBUpdSQLW, RxIBQuery,Math, StdCtrls, Spin,SplshWnd, Menus, Grids,
+  IBUpdateSQL, IBUpdSQLW, RxIBQuery,Math, StdCtrls, Spin, rxSplshWnd, Menus, Grids,
   DBGrids;
 
 type

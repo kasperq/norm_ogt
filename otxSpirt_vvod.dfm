@@ -24,40 +24,37 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSOtxody
+    DynProps = <>
     Flat = True
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'Tahoma'
-    FooterFont.Style = []
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = [gioShowRowIndicatorEh]
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghEnterAsTab]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghEnterAsTab, dghColumnResize, dghColumnMove]
     RowLines = 1
     STFilter.Visible = True
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    TitleHeight = 35
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
+    TitleParams.RowHeight = 35
     OnEditButtonClick = DBGridEh2EditButtonClick
     OnSortMarkingChanged = DBGridEh2SortMarkingChanged
     Columns = <
       item
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'PROD_OS'
         Footers = <>
         Title.Caption = #1050#1086#1076' '#1087#1088#1077#1087#1072#1088#1072#1090#1072
+        Title.TitleButton = True
         Title.SortIndex = 1
         Title.SortMarker = smDownEh
-        Title.TitleButton = True
         Width = 111
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAMPROS'
         Footers = <>
@@ -68,6 +65,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KRAZ_OS'
         Footers = <>
@@ -78,6 +78,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KSM_IDOS'
         Footers = <>
@@ -86,6 +89,7 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
         Width = 50
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAMOS'
         Footers = <>
@@ -96,6 +100,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taRightJustify
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'NEISOS'
         Footers = <>
@@ -106,6 +113,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KRAZ_O'
         Footers = <>
@@ -116,6 +126,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taCenter
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'KSM_IDO'
         Footers = <>
@@ -124,6 +137,7 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
         Width = 60
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'NAMO'
         Footers = <>
@@ -134,6 +148,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       item
         Alignment = taRightJustify
         ButtonStyle = cbsEllipsis
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'NEISO'
         Footers = <>
@@ -141,6 +158,8 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
         Title.TitleButton = True
         Width = 48
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object ToolBar1: TToolBar
     Left = 0
@@ -200,16 +219,17 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       Left = 264
       Top = 0
       Width = 67
-      Height = 26
+      Height = 30
       Margins.Bottom = 0
       Caption = '       '#1047#1072#1076#1072#1081#1090#1077' '#13#10'         '#1094#1077#1093':'
+      Transparent = False
       Layout = tlCenter
     end
     object Edit4: TEdit
       Left = 331
       Top = 0
       Width = 50
-      Height = 19
+      Height = 30
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
@@ -228,22 +248,18 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       Width = 24
       Height = 30
       Glyph.Data = {
-        16010000424D5601000000000000B6000000280000000A000000040000000100
-        200000000000A000000000000000000000001000000000000000000000000000
+        96000000424D960000000000000076000000280000000A000000040000000100
+        0400000000002000000000000000000000001000000000000000000000000000
         80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
-        FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFF00
+        000000FF00FF0000000000FF00FF00000000FFFFFFFFFF000000}
       OnClick = SpeedButton3Click
     end
     object Label4: TLabel
       Left = 405
       Top = 0
       Width = 37
-      Height = 13
+      Height = 30
       Margins.Bottom = 0
       Alignment = taCenter
       Caption = 'Label4'
@@ -253,22 +269,24 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Transparent = False
       Layout = tlCenter
     end
     object Label1: TLabel
       Left = 442
       Top = 0
       Width = 98
-      Height = 26
+      Height = 30
       Margins.Bottom = 0
       Caption = '      '#1047#1072#1076#1072#1081#1090#1077'  '#1082#1086#1076' '#13#10'    '#1086#1090#1095#1077#1090#1072' '#1086#1090#1093#1086#1076#1086#1074':'
+      Transparent = False
       Layout = tlCenter
     end
     object Edit1: TEdit
       Left = 540
       Top = 0
       Width = 111
-      Height = 19
+      Height = 30
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
@@ -288,22 +306,18 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       Width = 24
       Height = 30
       Glyph.Data = {
-        16010000424D5601000000000000B6000000280000000A000000040000000100
-        200000000000A000000000000000000000001000000000000000000000000000
+        96000000424D960000000000000076000000280000000A000000040000000100
+        0400000000002000000000000000000000001000000000000000000000000000
         80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
-        FF0000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFF00
+        000000FF00FF0000000000FF00FF00000000FFFFFFFFFF000000}
       OnClick = SpeedButton1Click
     end
     object Label3: TLabel
       Left = 675
       Top = 0
       Width = 37
-      Height = 13
+      Height = 30
       Margins.Bottom = 0
       Alignment = taCenter
       Caption = 'Label3'
@@ -313,6 +327,7 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Transparent = False
       Layout = tlCenter
     end
   end
@@ -322,7 +337,9 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
     AutoCalcFields = False
     BeforeOpen = OtxodyBeforeOpen
     OnNewRecord = OtxodyNewRecord
+    BufferChunks = 1000
     CachedUpdates = True
+    ParamCheck = True
     SQL.Strings = (
       'SELECT  otxody.kodp_o,otxody.kodp_os,otxody.struk_id,'
       'otxody.datevv,otxody.razdel_ido,otxody.razdel_idos,'
@@ -514,7 +531,7 @@ object FOtxSpirt_vvod: TFOtxSpirt_vvod
     Left = 360
     Top = 124
     Bitmap = {
-      494C01010B000D00040018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00100018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
