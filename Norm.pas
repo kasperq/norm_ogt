@@ -99,6 +99,7 @@ implementation
 
 function TFNorm.checkDoubleRecords() : boolean;
 begin
+  dm1.normLoading := true;
   result := false;
   dm1.norm.DisableControls;
   normMem.LoadFromDataSet(dm1.norm, [mtcpoAppend]);
@@ -128,6 +129,7 @@ begin
   normMem.Close;
   normMem.EmptyTable;
   dm1.norm.EnableControls;
+  dm1.normLoading := false;
 end;
 
 procedure TFNorm.ComboBox1Change(Sender: TObject);
@@ -483,6 +485,7 @@ procedure TFNorm.ToolButton1Click(Sender: TObject);
 var
 s_kodp_kop: integer;
 begin
+  dm1.normLoading := true;
  if FindSpprod=nil then FindSpprod:=TfindSpprod.Create(Application);
  FindSpprod.DataBaseName:=dm1.BELMED;
  FindSpprod.ReadOnly:=true;
@@ -512,6 +515,7 @@ begin
     DM1.IBRabNorm.next;
   end;
  end;
+ dm1.normLoading := false;
 end;
 
 procedure TFNorm.ToolButton2Click(Sender: TObject);
@@ -546,6 +550,7 @@ procedure TFNorm.saveNorms;
 var
   dd : integer;
 begin
+  dm1.normLoading := true;
   if (dm1.norm.Modified) or (dm1.norm.State = dsEdit)
      or (dm1.norm.State = dsInsert) then
     dm1.norm.Post;
@@ -586,11 +591,14 @@ begin
   dm1.IBT_WRITE.Active := FALSE;
   dm1.IBT_READ.Active := FALSE;
   dm1.startRWTranss;
+  dm1.normLoading := false;
   ProsmNorm;
+
 end;
 
 procedure TFNorm.ToolButton4Click(Sender: TObject);
 begin
+  dm1.normLoading := true;
   if (dm1.norm.Active) then
   begin
     s_kodp_s := 0;
@@ -622,10 +630,12 @@ begin
     while (DM1.Norm.ControlsDisabled) do
       DM1.Norm.EnableControls;
   end;
+  dm1.normLoading := false;
 end;
 
 procedure TFNorm.ToolButton5Click(Sender: TObject);
 begin
+  dm1.normLoading := true;
  if (DecodeSpprod = nil) then
   begin
     Application.CreateForm(TDecodeSpprod, DecodeSpprod);
@@ -633,6 +643,7 @@ begin
   DecodeSpprod.l_id:=s_kodp;
   DecodeSpprod.DEC.Database:=dm1.BELMED;
   DecodeSpprod.ShowModal;
+  dm1.normLoading := false;
 end;
 
 procedure TFNorm.ToolButton5MouseDown(Sender: TObject; Button: TMouseButton;
@@ -643,9 +654,11 @@ end;
 
 procedure TFNorm.ToolButton6Click(Sender: TObject);
 begin
+  dm1.normLoading := true;
   FindMatrop.DataBaseName := dm1.BELMED;
   FindMatrop.k_id := dm1.Norm.FieldByName('ksm_id').AsInteger;
   DecodeMatrop.ShowModal;
+  dm1.normLoading := false;
 end;
 
 procedure TFNorm.ProsmNorm;

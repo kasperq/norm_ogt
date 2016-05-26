@@ -1594,6 +1594,8 @@ begin
 end;
 
 procedure TDM1.normKSM_IDValidate(Sender: TField);
+var
+  questionStr : string;
 begin
   dM1.Matrop.Active := false;
   dM1.Matrop.ParamByName('ksm').AsInteger := NORM.FieldByName('Ksm_Id').AsInteger;
@@ -1603,9 +1605,7 @@ begin
     NORM.FieldByName('Gost').AsString := dm1.MatropGOST.AsString;
     NORM.FieldByName('Nmat').AsString := dm1.Matrop.FieldByName('Nmat').AsString;
     NORM.FieldByName('Xarkt').AsString := dm1.Matrop.FieldByName('Xarkt').AsString;
-    if (inNorm) and (not normLoading)
-      { (dm1.Norm.FieldByName('Kei_Id').AsInteger <> 0) and
-       (NORM.FieldByName('Kei_Id').AsInteger <> dm1.Matrop.FieldByName('Kei_id').AsInteger)} then
+    if (inNorm) and (not normLoading) then
     begin
       normKEI_ID.OnValidate := nil;
       curKeiId := NORM.FieldByName('Kei_Id').AsInteger;
@@ -1617,12 +1617,17 @@ begin
       begin
         dm1.NormNeis.AsString := dm1.Ediz_asyNeis.AsString
       end;
-      if (MessageDlg('Изменить единицу измерения нормы расхода c '
-                     + curNeis + ' на ' + dm1.NormNeis.AsString + '? '
-                     , mtWarning, [mbYes, mbNo], 0) = mrNo) then
+      questionStr := 'Изменить единицу измерения нормы расхода c "' + trim(dm1.NormNeis.AsString) + '"';
+      if (curKeiId <> 0) then
+        questionStr := questionStr + ' на "' + trim(curNeis) + '"';
+      questionStr := questionStr + '? ';
+      if (MessageDlg(questionStr, mtWarning, [mbYes, mbNo], 0) = mrYes) then
       begin
-        NORM.FieldByName('Kei_Id').AsInteger := curKeiId;
-        dm1.NormNeis.AsString := curNeis;
+        if (curKeiId <> 0) then
+        begin
+          NORM.FieldByName('Kei_Id').AsInteger := curKeiId;
+          dm1.NormNeis.AsString := curNeis;
+        end;
       end;
       normKEI_ID.OnValidate := normKEI_IDValidate;
     end
