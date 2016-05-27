@@ -47,69 +47,69 @@ uses
 {$R X:\publicForms\anitanec.res}
 
 begin
-  Application.Initialize;                     
+  Application.Initialize;
   Application.Title := 'Нормы';
-  Application.CreateForm(TDM1, DM1);
-  Application.CreateForm(TFGlmenu_ogt, FGlmenu_ogt);
-  Application.CreateForm(TFSplash_norm, FSplash_norm);
-  Application.CreateForm(Tfrazdel, frazdel);
-  Application.CreateForm(TFind_Ediz, Find_Ediz);
-  Application.CreateForm(TFPerNovMes, FPerNovMes);
-  Application.CreateForm(TFSyrie, FSyrie);
-  Application.CreateForm(TFNorm, FNorm);
-  Application.CreateForm(TFRashif, FRashif);
-  Application.CreateForm(TFSyrie_Period, FSyrie_Period);
-  Application.CreateForm(TFPodpis, FPodpis);
-  Application.CreateForm(TFViborGrPrep, FViborGrPrep);
-  Application.CreateForm(TFRazdel_vvod, FRazdel_vvod);
-  Application.CreateForm(TFEdiz_vvod, FEdiz_vvod);
-  Application.CreateForm(TFkoefpr_vvod, Fkoefpr_vvod);
-  Application.CreateForm(TFBasSyr_vvod, FBasSyr_vvod);
-  Application.CreateForm(TFOtxSpirt_vvod, FOtxSpirt_vvod);
-  Application.CreateForm(TUpdateBank, UpdateBank);
-  Application.CreateForm(TFindBank, FindBank);
-  Application.CreateForm(TFVibEan, FVibEan);
-  if (FRashifCols = nil) then
-    Application.CreateForm(TFRashifCols, FRashifCols);
+  Application.CreateForm(TDM1, DM1);//
+  Application.CreateForm(TFGlmenu_ogt, FGlmenu_ogt);//
+  Application.CreateForm(TFSplash_norm, FSplash_norm);//
+//  Application.CreateForm(Tfrazdel, frazdel);
+//  Application.CreateForm(TFind_Ediz, Find_Ediz);
+  Application.CreateForm(TFPerNovMes, FPerNovMes);//
+  Application.CreateForm(TFSyrie, FSyrie);          //
+  Application.CreateForm(TFNorm, FNorm);              //
+  Application.CreateForm(TFRashif, FRashif);            //
+  Application.CreateForm(TFSyrie_Period, FSyrie_Period);  //
+  Application.CreateForm(TFPodpis, FPodpis);                //
+  Application.CreateForm(TFViborGrPrep, FViborGrPrep);        //
+  Application.CreateForm(TFRazdel_vvod, FRazdel_vvod);          //
+  Application.CreateForm(TFEdiz_vvod, FEdiz_vvod);                //
+  Application.CreateForm(TFkoefpr_vvod, Fkoefpr_vvod);              //
+  Application.CreateForm(TFBasSyr_vvod, FBasSyr_vvod);                //
+  Application.CreateForm(TFOtxSpirt_vvod, FOtxSpirt_vvod);              //
+//  Application.CreateForm(TUpdateBank, UpdateBank);
+//  Application.CreateForm(TFindBank, FindBank);
+//  Application.CreateForm(TFVibEan, FVibEan);
+  if (FRashifCols = nil) then                                             //
+    Application.CreateForm(TFRashifCols, FRashifCols);                      //
   FSPlash_Norm.SetBar(290,10);
   FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFPerNorm, FPerNorm);
+  Application.CreateForm(TFPerNorm, FPerNorm);                                //
   FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFNorm, FNorm);
+  Application.CreateForm(TFNorm, FNorm);                                        //
   FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TDecodeMatrop, DecodeMatrop);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TDecodeSpprod, DecodeSpprod);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindAccount, FindAccount);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindLekGroup, FindLekGroup);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindMatrop, FindMatrop);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindSpprod, FindSpprod);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindSprorg, FindSprorg);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindStruk, FindStruk);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TViborSpr, ViborSpr);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindBS, FindBS);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TUpdateSprorg, UpdateSprorg);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TInfKlient, InfKlient);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TViborSprTree, ViborSprTree);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TRegF, RegF);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TUpdateSpprod, UpdateSpprod);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TFindEan, FindEan);
-  FSPlash_Norm.ProgressBar1.StepIt;
-  Application.CreateForm(TUpdateMatrop, UpdateMatrop);
-  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TDecodeMatrop, DecodeMatrop);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TDecodeSpprod, DecodeSpprod);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindAccount, FindAccount);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindLekGroup, FindLekGroup);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindMatrop, FindMatrop);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindSpprod, FindSpprod);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindSprorg, FindSprorg);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindStruk, FindStruk);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TViborSpr, ViborSpr);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindBS, FindBS);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TUpdateSprorg, UpdateSprorg);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TInfKlient, InfKlient);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TViborSprTree, ViborSprTree);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TRegF, RegF);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TUpdateSpprod, UpdateSpprod);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TFindEan, FindEan);
+//  FSPlash_Norm.ProgressBar1.StepIt;
+//  Application.CreateForm(TUpdateMatrop, UpdateMatrop);
+//  FSPlash_Norm.ProgressBar1.StepIt;
   Application.Run;
 end.

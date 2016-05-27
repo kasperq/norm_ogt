@@ -327,6 +327,7 @@ end;
 procedure TFNorm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   dm1.inNorm := false;
+//  FreeAndNil(FindSpprod);
 end;
 
 procedure TFNorm.FormCreate(Sender: TObject);

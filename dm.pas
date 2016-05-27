@@ -313,7 +313,6 @@ type
     Otxody_asySTRUK_ID: TIntegerField;
     Otxody_asyRAZOS: TSmallintField;
     Otxody_asyNMAT: TIBStringField;
-    frxDotMatrixExport1: TfrxDotMatrixExport;
     normSPROD_ID: TIntegerField;
     ITOGISPROD_ID: TIntegerField;
     R_sprodSPROD_ID: TIntegerField;
@@ -363,7 +362,6 @@ type
     ConfigUMCACTIVE_SKLAD: TSmallintField;
     ConfigUMCSTKOD: TIBStringField;
     ConfigUMCPRECISION: TSmallintField;
-    frxXLSExport1: TfrxXLSExport;
     PodpisDOLG: TIBStringField;
     normZNACH: TSmallintField;
     normGOST: TIBStringField;

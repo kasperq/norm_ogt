@@ -98,6 +98,7 @@ type
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure showRashifColsBtnClick(Sender: TObject);
     procedure percEditChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
 //    rashifColsSetsIni : TIniFile;
@@ -283,6 +284,11 @@ begin
   end;
 end;
 
+
+procedure TFRashif.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//  FreeAndNil(FindSpprod);
+end;
 
 procedure TFRashif.FormCreate(Sender: TObject);
 begin
@@ -838,6 +844,7 @@ procedure TFRashif.ProsmRashif;
 begin
   if (s_kodp <> 0) then
   begin
+    dm1.Rashif.DisableControls;
     if (S_dat_cen = '') then
     begin
       MessageDlg('Задайте дату цены!', mtWarning, [mbOK], 0);
@@ -1037,6 +1044,7 @@ begin
         abort;
       end;
     end;
+    dm1.Rashif.EnableControls;
 //  ^^^^ из архива          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
   end;
 

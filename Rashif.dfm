@@ -13,6 +13,7 @@ object FRashif: TFRashif
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -311,7 +312,7 @@ object FRashif: TFRashif
       ParentFont = False
     end
     object Label19: TLabel
-      Left = 255
+      Left = 217
       Top = 7
       Width = 445
       Height = 19
@@ -729,6 +730,7 @@ object FRashif: TFRashif
     OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghColumnResize, dghColumnMove]
     ParentFont = False
     ParentShowHint = False
+    SelectionDrawParams.SelectionStyle = gsdsClassicEh
     ShowHint = True
     TabOrder = 3
     TitleParams.Images = ImageList1
@@ -1049,7 +1051,7 @@ object FRashif: TFRashif
     Left = 544
     Top = 36
     Bitmap = {
-      494C01010F003400580018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F003400680018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000000000002A9226FF2D99
