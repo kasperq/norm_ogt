@@ -140,36 +140,38 @@ end;
 
 procedure TFViborGrPrep.DBGridEh1EditButtonClick(Sender: TObject);
 begin
- if dbgrideh1.SelectedField.FieldName='LEKKOD' then
- begin
-  if FindSpprod=nil then FindSpprod:=TfindSpprod.Create(Application);
-  FindSpprod.DataBaseName:=dm1.BELMED;
-  FindSpprod.ReadOnly:=true;
-  if struk<>0 then FindSpprod.Usl_Struk :='spprod.struk_id='+inttostr(Struk);
-  FindSpprod.ShowModal;
-  if FindSpprod.ModalResult > 50 then
+  if (dbgrideh1.SelectedField.FieldName = 'LEKKOD') then
   begin
-   DM1.R_sprod.Edit;
-   DM1.R_sprod.FieldByName('LEKKOD').value:=FindSpprod.IBSpprodKod_Prod.Asstring;;
-   DM1.R_sprod.FieldByName('Nmat').value:=FindSpprod.IBSpprodNmat.Asstring;
-   dm1.R_sprodKsm_id.AsInteger:=FindSpprod.ModalResult-50;
-   dm1.R_sprodGost.AsString:=FindSpprod.IBSpprodGost.AsString;
-   DM1.R_sprod.FieldByName('SPROD_id').value:=FindSpprod.IBSpprodSprod_id.AsInteger;
-   dm1.R_sprodStruk_id.AsInteger:=FindSpprod.IBSpprodStruk_id.AsInteger;
-   dm1.R_sprodKei_id.AsInteger:=FindSpprod.IBSpprodKei_id.AsInteger;
-   dm1.R_sprodSpprn.AsInteger:=FindSpprod.IBSpprodSpprn.AsInteger;
-   dm1.R_sprodSpvis.AsInteger:=FindSpprod.IBSpprodSpvis.AsInteger;
-   dm1.R_sprodXarkt.AsString:=FindSpprod.IBSpprodXarkt.asstring;
-   dm1.R_sprodSpksm.AsString:=FindSpprod.IBSpprodSpksm.asstring;
-   dm1.R_sprodNamegr.AsString:=FindSpprod.IBSpprodName_reg.asstring;
-   dm1.R_sprodStname.AsString:=FindSpprod.IBSpprodStname.asstring;
-   dm1.R_sprodNeis_pr.AsString:=FindSpprod.IBSpprodNeis.asstring;
-   dm1.R_sprodVib.AsInteger:=1;
-   dm1.R_sprodMes.AsInteger:=mes;
-   dm1.R_SprodGod.AsInteger:=god;
-   DM1.R_sprod.POST;
+    if (FindSpprod = nil) then
+      FindSpprod := TfindSpprod.Create(Application);
+    FindSpprod.DataBaseName := dm1.BELMED;
+    FindSpprod.ReadOnly := true;
+    if (struk <> 0) then
+      FindSpprod.Usl_Struk :='spprod.struk_id='+inttostr(Struk);
+    FindSpprod.ShowModal;
+    if (FindSpprod.ModalResult > 50) then
+    begin
+      DM1.R_sprod.Edit;
+      DM1.R_sprod.FieldByName('LEKKOD').value := FindSpprod.IBSpprodKod_Prod.Asstring;;
+      DM1.R_sprod.FieldByName('Nmat').value := FindSpprod.IBSpprodNmat.Asstring;
+      dm1.R_sprodKsm_id.AsInteger := FindSpprod.ModalResult-50;
+      dm1.R_sprodGost.AsString := FindSpprod.IBSpprodGost.AsString;
+      DM1.R_sprod.FieldByName('SPROD_id').value := FindSpprod.IBSpprodSprod_id.AsInteger;
+      dm1.R_sprodStruk_id.AsInteger := FindSpprod.IBSpprodStruk_id.AsInteger;
+      dm1.R_sprodKei_id.AsInteger := FindSpprod.IBSpprodKei_id.AsInteger;
+      dm1.R_sprodSpprn.AsInteger := FindSpprod.IBSpprodSpprn.AsInteger;
+      dm1.R_sprodSpvis.AsInteger := FindSpprod.IBSpprodSpvis.AsInteger;
+      dm1.R_sprodXarkt.AsString := FindSpprod.IBSpprodXarkt.asstring;
+      dm1.R_sprodSpksm.AsString := FindSpprod.IBSpprodSpksm.asstring;
+      dm1.R_sprodNamegr.AsString := FindSpprod.IBSpprodName_reg.asstring;
+      dm1.R_sprodStname.AsString := FindSpprod.IBSpprodStname.asstring;
+      dm1.R_sprodNeis_pr.AsString := FindSpprod.IBSpprodNeis.asstring;
+      dm1.R_sprodVib.AsInteger := 1;
+      dm1.R_sprodMes.AsInteger := mes;
+      dm1.R_SprodGod.AsInteger := god;
+      DM1.R_sprod.POST;
+    end;
   end;
- end;
 end;
 
 procedure TFViborGrPrep.FormCreate(Sender: TObject);
@@ -192,80 +194,84 @@ end;
 
 procedure TFViborGrPrep.FormShow(Sender: TObject);
 begin
-if not dm1.R_sprod.Active then
-begin
- SpinEdit2.OnChange:=nil;
- SpinEdit2.Value:=god;
- SpinEdit2.OnChange:=SpinEdit2Change;
- ComboBox1.OnChange:=nil;
- ComboBox1.ItemIndex:=mes-1;
- ComboBox1.OnChange:=ComboBox1Change;
- IF MES<10 THEN S_MES:='0'+INTTOSTR(MES) ELSE S_MES:=INTTOSTR(MES);
- S_DAT1:='01.'+S_MES+'.'+copy(INTTOSTR(GOD),3,2);
- S_DAT2:=datetostr(IncMonth(strtodate(s_dat1),1)-1);
-end;
- if S_VID_DOK='Плановые нормы' then
- begin
-  vtip_op_id:=119;
-  RadioGroup5.Visible:=false;
-  Panel4.Visible:=false;
-  label24.Visible:=false;
-  label23.Visible:=false;
-  label18.Visible:=false;
-  dataBox.Visible:=false;
-  SpinEdit6.Visible:=false;
-  SpinEdit7.Visible:=false;
-  dbgrideh1.Columns[6].Visible:=true;
- end;
- if S_VID_DOK='Расшифровки' then
- begin
-  vtip_op_id:=120;
-  RadioGroup5.Visible:=true;
-  Panel4.Visible:=true;
-  label24.Visible:=true;
-  label23.Visible:=true;
-  label18.Visible:=true;
-  dataBox.Visible:=true;
-  SpinEdit6.Visible:=true;
-  SpinEdit7.Visible:=true;
-  dbgrideh1.Columns[6].Visible:=False;
-  if mes<>1 then
+  if (not dm1.R_sprod.Active) then
   begin
-    mes_c:=mes-1;
-    god_c:=god;
-  end
-  else
-  begin
-    mes_c:=12;
-    god_c:=god-1;
+    SpinEdit2.OnChange := nil;
+    SpinEdit2.Value := god;
+    SpinEdit2.OnChange := SpinEdit2Change;
+    ComboBox1.OnChange := nil;
+    ComboBox1.ItemIndex := mes - 1;
+    ComboBox1.OnChange := ComboBox1Change;
+    IF (MES < 10) THEN
+      S_MES := '0' + INTTOSTR(MES)
+    ELSE
+      S_MES := INTTOSTR(MES);
+    S_DAT1 := '01.' + S_MES + '.' + copy(INTTOSTR(GOD), 3, 2);
+    S_DAT2 := datetostr(IncMonth(strtodate(s_dat1), 1) -1);
   end;
-  SpinEdit6.OnChange:=nil;
-  SpinEdit7.OnChange:=nil;
-  SpinEdit6.Value:=mes_c;
-  SpinEdit7.Value:=god_c;
-  SpinEdit6.OnChange:=SpinEdit6Change;
-  SpinEdit7.OnChange:=SpinEdit7Change;
-  s_dat_cen1:='01.'+inttostr(MES_c)+'.'+INTTOSTR(GOD_c);
-  s_dat_cen2:=datetostr(IncMonth(strtodate(s_dat_cen1),1)-1);
-  dm1.Datcen.Active :=False;
-  dm1.Datcen.ParamByName('DATN1').AsDate :=StrToDate(s_dat_cen1);
-  dm1.Datcen.ParamByName('DATN2').AsDate :=StrToDate(s_dat_cen2);
-  dm1.Datcen.Active :=True;
-  If not dm1.Datcen.Eof then s_dat_cen:=datetostr(dm1.DatcenDatcen.AsDateTime)
-  else databox.SetFocus;
- end;
- if not dm1.r_sprod.Active then
- begin
-  dm1.r_sprod.MacroByName('usl').AsString:=usl_sp;
-  dm1.r_sprod.MacroByName('ut_tek_plan').AsString:=s_ut_tek;
-  dm1.r_sprod.ParamByName('mes').AsInteger:=mes;
-  dm1.r_sprod.ParamByName('god').AsInteger:=god;
-  dm1.r_sprod.Active :=true;
-  dm1.r_sprod.First;
-  while not dm1.r_sprod.Eof do
-  dm1.r_sprod.Delete;
- end; 
-
+  if (S_VID_DOK = 'Плановые нормы') then
+  begin
+    vtip_op_id:=119;
+    RadioGroup5.Visible := false;
+    Panel4.Visible := false;
+    label24.Visible := false;
+    label23.Visible := false;
+    label18.Visible := false;
+    dataBox.Visible := false;
+    SpinEdit6.Visible := false;
+    SpinEdit7.Visible := false;
+    dbgrideh1.Columns[6].Visible := true;
+  end;
+  if (S_VID_DOK = 'Расшифровки') then
+  begin
+    vtip_op_id := 120;
+    RadioGroup5.Visible := true;
+    Panel4.Visible := true;
+    label24.Visible := true;
+    label23.Visible := true;
+    label18.Visible := true;
+    dataBox.Visible := true;
+    SpinEdit6.Visible := true;
+    SpinEdit7.Visible := true;
+    dbgrideh1.Columns[6].Visible := False;
+    if (mes <> 1) then
+    begin
+      mes_c := mes - 1;
+      god_c := god;
+    end
+    else
+    begin
+      mes_c := 12;
+      god_c := god - 1;
+    end;
+    SpinEdit6.OnChange := nil;
+    SpinEdit7.OnChange := nil;
+    SpinEdit6.Value := mes_c;
+    SpinEdit7.Value := god_c;
+    SpinEdit6.OnChange := SpinEdit6Change;
+    SpinEdit7.OnChange := SpinEdit7Change;
+    s_dat_cen1 := '01.' + inttostr(MES_c) + '.' + INTTOSTR(GOD_c);
+    s_dat_cen2 := datetostr(IncMonth(strtodate(s_dat_cen1),1) -1);
+    dm1.Datcen.Active := False;
+    dm1.Datcen.ParamByName('DATN1').AsDate := StrToDate(s_dat_cen1);
+    dm1.Datcen.ParamByName('DATN2').AsDate := StrToDate(s_dat_cen2);
+    dm1.Datcen.Active := True;
+    If (not dm1.Datcen.Eof) then
+      s_dat_cen := datetostr(dm1.DatcenDatcen.AsDateTime)
+    else
+      databox.SetFocus;
+  end;
+  if (not dm1.r_sprod.Active) then
+  begin
+    dm1.r_sprod.MacroByName('usl').AsString := usl_sp;
+    dm1.r_sprod.MacroByName('ut_tek_plan').AsString := s_ut_tek;
+    dm1.r_sprod.ParamByName('mes').AsInteger := mes;
+    dm1.r_sprod.ParamByName('god').AsInteger := god;
+    dm1.r_sprod.Active := true;
+    dm1.r_sprod.First;
+//    while (not dm1.r_sprod.Eof) do
+//      dm1.r_sprod.Delete;
+  end;
 end;
 
 procedure TFViborGrPrep.RadioGroup1Click(Sender: TObject);
@@ -398,6 +404,7 @@ var
   pr_rashif : integer;
   pr_norm : integer;
 begin
+  try
   if (dm1.R_sprod.Active) then
   begin
     if (S_VID_DOK = 'Расшифровки') and (S_dat_cen = '')  then
@@ -412,6 +419,7 @@ begin
       dm1.p_rashif.Close;
     dm1.p_rashif.EmptyTable;
     dm1.p_rashif.Active := true;
+//    dm1.R_sprod.DisableControls;
     dm1.R_sprod.First;
     while (not dm1.R_sprod.Eof) do
     begin
@@ -619,14 +627,24 @@ begin
     if (dm1.ITOGI.Active) then
       dm1.ITOGI.Active := false;
     DM1.r_sprod.First;
+//    dm1.R_sprod.EnableControls;
     Splash.Free;
+  end;
+  except
+    on e : exception do
+    begin
+//      dm1.R_sprod.EnableControls;
+      if (Splash.Active) then
+        Splash.Free;
+    end;
+
   end;
 end;
 
 procedure TFViborGrPrep.ToolButton2Click(Sender: TObject);
 begin
- while not dm1.r_sprod.Eof do
-  dm1.r_sprod.Delete;
+  while not dm1.r_sprod.Eof do
+    dm1.r_sprod.Delete;
 end;
 
 procedure TFViborGrPrep.ToolButton3Click(Sender: TObject);

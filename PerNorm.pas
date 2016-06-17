@@ -398,6 +398,8 @@ end;
 
 procedure TFPerNorm.ediz1Click(Sender: TObject);
 begin
+  if (FRazdel = nil) then
+    FRazdel := TFRazdel.Create(Application);
  FRazdel.Razdel.Active:=true;
  dm1.ITOGI.Active:=true;
    ITOGI_ST.Active:=true;

@@ -609,20 +609,21 @@ end;
 
 procedure TFSyrie.SpeedButton1Click(Sender: TObject);
 begin
- if FindMatrop=nil then FindMatrop:=TfindMatrop.Create(Application);
- FindMatrop.DataBaseName:=dm1.BELMED;
- FindMatrop.ReadOnly:=true;
- FindMatrop.ShowModal;
- if FindMatrop.ModalResult > 50 then
- begin
-  ksmIdAdd:=FindMatrop.ModalResult-50;
-  edt_ksmId.Text:=inttostr(FindMatrop.ModalResult-50);
-  Label20.Caption :=FindMatrop.IBMatropXARKT.AsString;
-  Label21.Caption :=FindMatrop.IBMatropGOST.AsString;
-  Label24.Caption :=FindMatrop.IBMatropNamspsr.AsString;
-  Label25.Caption :=FindMatrop.IBMatropNam.AsString;
-  Label18.Caption :=FindMatrop.IBMatropNMAT.AsString;
- end;
+  if (FindMatrop = nil) then
+    FindMatrop := TfindMatrop.Create(Application);
+  FindMatrop.DataBaseName := dm1.BELMED;
+  FindMatrop.ReadOnly := true;
+  FindMatrop.ShowModal;
+  if (FindMatrop.ModalResult > 50) then
+  begin
+    ksmIdAdd := FindMatrop.ModalResult-50;
+    edt_ksmId.Text := inttostr(FindMatrop.ModalResult-50);
+    Label20.Caption := FindMatrop.IBMatropXARKT.AsString;
+    Label21.Caption := FindMatrop.IBMatropGOST.AsString;
+    Label24.Caption := FindMatrop.IBMatropNamspsr.AsString;
+    Label25.Caption := FindMatrop.IBMatropNam.AsString;
+    Label18.Caption := FindMatrop.IBMatropNMAT.AsString;
+  end;
 end;
 
 procedure TFSyrie.SpeedButton2Click(Sender: TObject);

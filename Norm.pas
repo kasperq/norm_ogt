@@ -182,7 +182,16 @@ begin
       FindMatrop.ShowModal;
       if (FindMatrop.ModalResult > 50) then
       begin
-        dm1.Norm.FieldByName('Gost').AsString := FindMatrop.IBMatropGOST.AsString;
+        if (FindMatrop.IBMatrop_Fsp.Eof) then
+        begin
+          dm1.Norm.FieldByName('Gost').AsString := FindMatrop.IBMatropGOST.AsString;
+          dm1.norm.FieldByName('fsp_id').AsInteger := 0;
+        end
+        else
+        begin
+          dm1.Norm.FieldByName('Gost').AsString := FindMatrop.IBMatrop_FspGOST.AsString;
+          dm1.norm.FieldByName('fsp_id').AsInteger := FindMatrop.IBMatrop_FspFSP_ID.AsInteger;
+        end;
         dm1.Norm.FieldByName('Nmat').AsString := FindMatrop.IBMatropNMAT.AsString;
 //        if (dm1.Norm.FieldByName('Kei_Id').AsInteger <> 0) and
 //           (dm1.Norm.FieldByName('Kei_Id').AsInteger <> FindMatrop.IBMatropKei_id.AsInteger) and

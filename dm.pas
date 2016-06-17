@@ -364,7 +364,6 @@ type
     ConfigUMCPRECISION: TSmallintField;
     PodpisDOLG: TIBStringField;
     normZNACH: TSmallintField;
-    normGOST: TIBStringField;
     R_sprodGOST: TIBStringField;
     MatropGOST: TIBStringField;
     NormArxGOST: TIBStringField;
@@ -606,6 +605,8 @@ type
     q_matropSPEC: TSmallintField;
     RashifVALUTA: TIBStringField;
     RashifNAM_VAL: TIBStringField;
+    normGOST: TIBStringField;
+    normFSP_ID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure normNewRecord(DataSet: TDataSet);
     procedure normBeforePost(DataSet: TDataSet);
@@ -1056,10 +1057,7 @@ begin
         end;
       end;
       if (DM1.p_rashifkraz.asInteger <> 51) and (DM1.p_rashifkraz.asInteger <> 52) then
-        ParValue := 'Всего:                           '
-                    + floattostrF(s_sumv, ffNumber, 12, 0)
-                    + '                              '
-                    + floattostrF(s_sumvnds, ffNumber, 12, 0)
+        ParValue := 'Всего:'
       else
         ParValue := '';
     END
@@ -1094,16 +1092,233 @@ begin
         begin
           s_sumv2 := round(IBQuery1.FieldByName('sum_it').AsFloat);
           s_sumvnds2 := round(IBQuery1.FieldByName('sumnds').AsFloat);
-          ParValue := 'Итого по всп.cырью:     '
-                      + floattostrf(s_sumv2, ffNumber, 12, 0)
-                      + '                                     '
-                      + floattostrF(s_sumvnds2, ffNumber, 12, 0);
+          ParValue := 'Итого по всп.cырью:';
         end
         else
         begin
           s_sumv2 := 0;
           s_sumvnds2 := 0;
           ParValue := '';
+        end;
+      END;
+    end;
+  end;
+  if (ParName = 'vsego1') then
+  begin
+    ParValue := 0;
+    s_sumv := 0;
+    s_sumvnds := 0;
+    s_raz2 := round( (DM1.p_rashifkraz.asInteger - 4) / 10 ) * 10;
+    if (dm1.P_RashifKraz.AsInteger = 55) then
+      s_raz2 := 40;
+    IF (S_RAZ2 = 30) OR (S_RAZ2 = 50) OR (S_RAZ2 = 60) OR (S_RAZ2 = 70) THEN
+    BEGIN
+      case (s_raz2) of
+        50 : s_raz1 := 40;
+        60 : s_raz1 := 51;
+        70 : s_raz1 := 52;
+        30 : s_raz1 := 20;
+      end;
+      if (kursPrint) then
+      begin
+        mem_sumRashRazd.First;
+        if (not mem_SumRashRazd.Eof) then
+        begin
+          s_sumv2 := 0;
+          s_sumvnds2 := 0;
+          s_sumv1 := 0;
+          s_sumvnds1 := 0;
+          s_sumv := s_sumv1 - s_sumv2;
+          s_sumvnds := s_sumvnds1 - s_sumvnds2;
+        end;
+      end
+      else
+      begin
+        if (dm1.SumRash_Razd.Active) then
+          dm1.SumRash_Razd.Active := false;
+        dm1.SumRash_Razd.ParamByName('datcen').AsDateTime := strtodate(s_dat_cen);
+        dm1.SumRash_Razd.ParamByName('doc').AsInteger := dm1.p_rashifDoc_id.AsInteger;
+        dm1.SumRash_Razd.Open;
+        sumRash_Razd.First;
+        if (not dm1.SumRash_Razd.Eof) then
+        begin
+          if (dm1.SumRash_Razd.Locate(('kodraz'), s_raz2, [])) then
+          begin
+            s_sumv2 := round(dm1.SumRash_Razd.FieldByName('sumcennorm').AsFloat);
+            s_sumvnds2 := round(dm1.SumRash_Razd.FieldByName('sumcennorm_nds').AsFloat);
+          end
+          else
+          begin
+            s_sumv2 := 0;
+            s_sumvnds2 := 0;
+          end;
+          if (dm1.SumRash_Razd.Locate(('kodraz'), s_raz1, []))then
+          begin
+            s_sumv1 := round(dm1.SumRash_Razd.FieldByName('sumcennorm').AsFloat);
+            s_sumvnds1 := round(dm1.SumRash_Razd.FieldByName('sumcennorm_nds').AsFloat);
+          end
+          else
+          begin
+            s_sumv1 := 0;
+            s_sumvnds1 := 0;
+          end;
+          s_sumv := s_sumv1 - s_sumv2;
+          s_sumvnds := s_sumvnds1 - s_sumvnds2;
+        end;
+      end;
+      if (DM1.p_rashifkraz.asInteger <> 51) and (DM1.p_rashifkraz.asInteger <> 52) then
+        ParValue := s_sumv
+      else
+        ParValue := 0;
+    END
+    else
+    begin
+      DM1.p_rashif.Next;
+      if (not DM1.p_rashif.Eof) then
+      begin
+        s_raz1 := (round( (DM1.p_rashifkraz.asInteger - 4) / 10) ) * 10;
+        if (dm1.P_RashifKraz.AsInteger = 55) then
+          s_raz1 := 40;
+        DM1.p_rashif.Prior;
+      end
+      else
+        s_raz1 := 50;
+      IF (S_RAZ2 = 40) and (s_raz1 <> s_raz2) THEN
+      BEGIN
+        IBQuery1.Close;
+        IBQuery1.SQL.Clear;
+        IBQuery1.SQL.Add('SELECT itogi.SUM_it,itogi.sumnds ');
+        IBQuery1.SQL.Add(' FROM norm_itogi itogi ');
+        IBQuery1.SQL.Add(' WHERE itogi.god=' + INTTOSTR(god) + ' and itogi.mes='
+                         + iNTTOSTR(mes));
+        IBQuery1.SQL.Add(' and itogi.pr=' + '''' + DM1.p_rashifprras.asstring
+                         + '''' + ' and itogi.kodp=' + inttoSTR(dm1.P_rashifKodp.AsInteger));
+        IBQuery1.SQL.Add(' and itogi.kraz=' + INTTOSTR(S_raz2) + ' and itogi.datec='
+                         + '''' + s_dat_cen + '''');
+        IBQuery1.Open;
+        IBQuery1.First;
+        if (IBQuery1.RecordCount > 0)
+           or ((kursPrint) and (mem_sumRashRazd.Locate('kraz', s_raz2, []))) then
+        begin
+          s_sumv2 := round(IBQuery1.FieldByName('sum_it').AsFloat);
+          s_sumvnds2 := round(IBQuery1.FieldByName('sumnds').AsFloat);
+          ParValue := s_sumv2;
+        end
+        else
+        begin
+          s_sumv2 := 0;
+          s_sumvnds2 := 0;
+          ParValue := 0;
+        end;
+      END;
+    end;
+  end;
+  if (ParName = 'vsego2') then
+  begin
+    ParValue := 0;
+    s_sumv := 0;
+    s_sumvnds := 0;
+    s_raz2 := round( (DM1.p_rashifkraz.asInteger - 4) / 10 ) * 10;
+    if (dm1.P_RashifKraz.AsInteger = 55) then
+      s_raz2 := 40;
+    IF (S_RAZ2 = 30) OR (S_RAZ2 = 50) OR (S_RAZ2 = 60) OR (S_RAZ2 = 70) THEN
+    BEGIN
+      case (s_raz2) of
+        50 : s_raz1 := 40;
+        60 : s_raz1 := 51;
+        70 : s_raz1 := 52;
+        30 : s_raz1 := 20;
+      end;
+      if (kursPrint) then
+      begin
+        mem_sumRashRazd.First;
+        if (not mem_SumRashRazd.Eof) then
+        begin
+          s_sumv2 := 0;
+          s_sumvnds2 := 0;
+          s_sumv1 := 0;
+          s_sumvnds1 := 0;
+          s_sumv := s_sumv1 - s_sumv2;
+          s_sumvnds := s_sumvnds1 - s_sumvnds2;
+        end;
+      end
+      else
+      begin
+        if (dm1.SumRash_Razd.Active) then
+          dm1.SumRash_Razd.Active := false;
+        dm1.SumRash_Razd.ParamByName('datcen').AsDateTime := strtodate(s_dat_cen);
+        dm1.SumRash_Razd.ParamByName('doc').AsInteger := dm1.p_rashifDoc_id.AsInteger;
+        dm1.SumRash_Razd.Open;
+        sumRash_Razd.First;
+        if (not dm1.SumRash_Razd.Eof) then
+        begin
+          if (dm1.SumRash_Razd.Locate(('kodraz'), s_raz2, [])) then
+          begin
+            s_sumv2 := round(dm1.SumRash_Razd.FieldByName('sumcennorm').AsFloat);
+            s_sumvnds2 := round(dm1.SumRash_Razd.FieldByName('sumcennorm_nds').AsFloat);
+          end
+          else
+          begin
+            s_sumv2 := 0;
+            s_sumvnds2 := 0;
+          end;
+          if (dm1.SumRash_Razd.Locate(('kodraz'), s_raz1, []))then
+          begin
+            s_sumv1 := round(dm1.SumRash_Razd.FieldByName('sumcennorm').AsFloat);
+            s_sumvnds1 := round(dm1.SumRash_Razd.FieldByName('sumcennorm_nds').AsFloat);
+          end
+          else
+          begin
+            s_sumv1 := 0;
+            s_sumvnds1 := 0;
+          end;
+          s_sumv := s_sumv1 - s_sumv2;
+          s_sumvnds := s_sumvnds1 - s_sumvnds2;
+        end;
+      end;
+      if (DM1.p_rashifkraz.asInteger <> 51) and (DM1.p_rashifkraz.asInteger <> 52) then
+        ParValue := s_sumvnds
+      else
+        ParValue := 0;
+    END
+    else
+    begin
+      DM1.p_rashif.Next;
+      if (not DM1.p_rashif.Eof) then
+      begin
+        s_raz1 := (round( (DM1.p_rashifkraz.asInteger - 4) / 10) ) * 10;
+        if (dm1.P_RashifKraz.AsInteger = 55) then
+          s_raz1 := 40;
+        DM1.p_rashif.Prior;
+      end
+      else
+        s_raz1 := 50;
+      IF (S_RAZ2 = 40) and (s_raz1 <> s_raz2) THEN
+      BEGIN
+        IBQuery1.Close;
+        IBQuery1.SQL.Clear;
+        IBQuery1.SQL.Add('SELECT itogi.SUM_it,itogi.sumnds ');
+        IBQuery1.SQL.Add(' FROM norm_itogi itogi ');
+        IBQuery1.SQL.Add(' WHERE itogi.god=' + INTTOSTR(god) + ' and itogi.mes='
+                         + iNTTOSTR(mes));
+        IBQuery1.SQL.Add(' and itogi.pr=' + '''' + DM1.p_rashifprras.asstring
+                         + '''' + ' and itogi.kodp=' + inttoSTR(dm1.P_rashifKodp.AsInteger));
+        IBQuery1.SQL.Add(' and itogi.kraz=' + INTTOSTR(S_raz2) + ' and itogi.datec='
+                         + '''' + s_dat_cen + '''');
+        IBQuery1.Open;
+        IBQuery1.First;
+        if (IBQuery1.RecordCount > 0)
+           or ((kursPrint) and (mem_sumRashRazd.Locate('kraz', s_raz2, []))) then
+        begin
+          s_sumv2 := round(IBQuery1.FieldByName('sum_it').AsFloat);
+          s_sumvnds2 := round(IBQuery1.FieldByName('sumnds').AsFloat);
+          ParValue := s_sumvnds2;
+        end
+        else
+        begin
+          s_sumv2 := 0;
+          s_sumvnds2 := 0;
+          ParValue := 0;
         end;
       END;
     end;
@@ -1410,6 +1625,8 @@ begin
       dm1.Document.Post;
     end;
   end;
+  if (FRazdel = nil) then
+    FRazdel := TFRazdel.Create(Application);
   if (not FRazdel.Razdel.Active) then
     FRazdel.Razdel.Active := true;
   if (Pr_Arx = 0) then
