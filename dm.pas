@@ -1410,6 +1410,8 @@ begin
       dm1.Document.Post;
     end;
   end;
+  if (FRazdel = nil) then
+    FRazdel := TFRazdel.Create(Application);
   if (not FRazdel.Razdel.Active) then
     FRazdel.Razdel.Active := true;
   if (Pr_Arx = 0) then
